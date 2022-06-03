@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import LoginButton from "./Login";
+import LogoutButton from "./Logout";
+import Profile from "./Profile";
 
 const NavBar = ()=>{
  return (
@@ -7,6 +10,9 @@ const NavBar = ()=>{
          <LoonLogo to="/">Loon</LoonLogo>
          <Links>
             <NavBarLink to="/browse">Browse</NavBarLink>
+            <LoginButton />
+            <Profile />
+            <LogoutButton />
          </Links>
      </Wrapper>
  );

@@ -1,4 +1,5 @@
 import bgImage from "../assets/homepage-image.jpg";
+import Footer from "./Footer";
 import NavBar from "./NavBar";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -41,17 +42,38 @@ const Homepage = () => {
           </SearchBar>
         </div>
       </SearchArea>
+      <MainBody>
+      <BodyHeader>Camping made easy</BodyHeader>
+      <BodyText>Browse top-rated campsites across Canada</BodyText>
+      </MainBody>
+      <Footer />
     </Wrapper>
   );
 };
 
 export default Homepage;
 
-const Option = styled.option`
-  &:first-of-type {
-    color: red;
-  }
+const BodyHeader = styled.div`
+  color: var(--color-dark-green);
+  font-family: var(--font-header);
+  font-size: 3rem;
+  margin: 40px 0 20px;
 `;
+
+const BodyText = styled.div`
+  font-family: var(--font-body);
+  font-size: 2rem;
+  margin-bottom: 40px;
+`;
+
+const MainBody = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Option = styled.option``;
 
 const SearchArea = styled.div`
   align-items: center;
@@ -115,4 +137,6 @@ const Select = styled.select`
   }
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: fit-content;
+`;
