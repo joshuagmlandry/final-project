@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { FilterProvider } from "./components/FilterContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -11,7 +12,9 @@ root.render(
       clientId="eqAG8aIEB2DUvkCrSlaOohR0YhYD9a2r"
       redirectUri={window.location.origin}
     >
-      <App />
+      <FilterProvider>
+        <App />
+      </FilterProvider>
     </Auth0Provider>
   </React.StrictMode>
 );

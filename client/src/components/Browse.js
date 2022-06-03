@@ -1,12 +1,34 @@
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import esriConfig from "@arcgis/core/config";
 import styled from "styled-components";
+import { FilterContext } from "./FilterContext";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 const Browse = () => {
+
+  const {filterProvince, setFilterProvince, filterPark, setFilterPark} = useContext(FilterContext);
+  const [coord, setCoord] = useState([-101.674656, 57.951146]);
+  const [zoom, setZoom] = useState(3);
+
+  const provinces = [
+    "Alberta",
+    "British Columbia",
+    "Manitoba",
+    "New Brunswick",
+    "Newfoundland & Labrador",
+    "Northwest Territories",
+    "Nova Scotia",
+    "Nunavut",
+    "Ontario",
+    "Prince Edward Island",
+    "Quebec",
+    "Saskatchewan",
+    "Yukon",
+  ];
+
   useEffect(() => {
     esriConfig.apiKey = REACT_APP_ARCGIS_API;
 
@@ -17,8 +39,8 @@ const Browse = () => {
     const view = new MapView({
       container: "viewDiv",
       map: map,
-      center: [-101.674656, 57.951146],
-      zoom: 3,
+      center: coord,
+      zoom: zoom,
     });
 
     const campsites = new FeatureLayer({
@@ -26,7 +48,7 @@ const Browse = () => {
     });
 
     map.add(campsites);
-  }, []);
+  }, [filterProvince, filterPark]);
 
   return (
     <Wrapper>
@@ -34,7 +56,12 @@ const Browse = () => {
       <MapAndFilter>
         <MapContainer id="viewDiv"></MapContainer>
         <Filter>
-
+          <form>
+            <label>Province: </label>
+            <select>
+              <option></option>
+            </select>
+          </form>
         </Filter>
       </MapAndFilter>
     </Wrapper>

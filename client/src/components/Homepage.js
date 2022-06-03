@@ -1,6 +1,4 @@
 import bgImage from "../assets/homepage-image.jpg";
-import Footer from "./Footer";
-import NavBar from "./NavBar";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 
