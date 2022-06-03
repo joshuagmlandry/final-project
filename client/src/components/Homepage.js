@@ -23,7 +23,6 @@ const Homepage = () => {
 
   return (
     <Wrapper>
-      <NavBar />
       <SearchArea>
         <div>
           <SearchBar>
@@ -46,7 +45,6 @@ const Homepage = () => {
       <BodyHeader>Camping made easy</BodyHeader>
       <BodyText>Browse top-rated campsites across Canada</BodyText>
       </MainBody>
-      <Footer />
     </Wrapper>
   );
 };
