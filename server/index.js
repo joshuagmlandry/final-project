@@ -3,6 +3,8 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const {getProvinceData} = require('./endpointHandlers');
+
 const PORT = 4000;
 
 express()
@@ -25,5 +27,7 @@ express()
 
 // Endpoints
  .get('/bacon', (req, res) => res.status(200).json('🥓'))
+
+ .get('/api/provinces', getProvinceData)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

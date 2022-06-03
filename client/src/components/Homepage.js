@@ -1,25 +1,16 @@
 import bgImage from "../assets/homepage-image.jpg";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useContext } from "react";
+import { FilterContext } from "./FilterContext";
 
 const Homepage = () => {
-  const provinces = [
-    "Alberta",
-    "British Columbia",
-    "Manitoba",
-    "New Brunswick",
-    "Newfoundland & Labrador",
-    "Northwest Territories",
-    "Nova Scotia",
-    "Nunavut",
-    "Ontario",
-    "Prince Edward Island",
-    "Quebec",
-    "Saskatchewan",
-    "Yukon",
-  ];
+
+  const {provinces, provincesLoading} = useContext(FilterContext);
 
   return (
+    <>
+    {provincesLoading !== "loading" ? (
     <Wrapper>
       <SearchArea>
         <div>
@@ -29,8 +20,8 @@ const Homepage = () => {
               <Option disabled value={"blank"}>
                 {" "}
               </Option>
-              {provinces.map((province, index) => {
-                return <Option key={`${province}-${index}`}>{province}</Option>;
+              {provinces.data.map((province, index) => {
+                return <Option key={`${province.name}-${index}`}>{province.name}</Option>;
               })}
             </Select>
             <SearchButton>
@@ -43,7 +34,9 @@ const Homepage = () => {
       <BodyHeader>Camping made easy</BodyHeader>
       <BodyText>Browse top-rated campsites across Canada</BodyText>
       </MainBody>
-    </Wrapper>
+    </Wrapper>      
+    ) : " "}
+    </>
   );
 };
 
