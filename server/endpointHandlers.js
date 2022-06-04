@@ -30,17 +30,24 @@ const postReview = async (req, res)=>{
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("final-project");
+    const rating = req.body.rating.map((entry, index) => {
+      if(entry){
+        return index + 1;
+      }
+    }).filter(value => {
+      return value;
+    });
     const reviewToPost = {
       _id: req.body._id,
       campsite: req.body.campsite,
       title: req.body.title,
-      rating: req.body.rating,
+      rating: rating[0],
       review: req.body.review,
       user: req.body.user,
+      name: req.body.name,
       time: req.body.time
     };
     const postingReview = await db.collection("reviews").insertOne(reviewToPost);
-    console.log(postingReview);
     if(postingReview.acknowledged){
       res.status(200).json({
         status: 200,

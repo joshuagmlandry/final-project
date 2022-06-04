@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const ReviewForm = ({queriedCampsite}) => {
   const { user, isAuthenticated } = useAuth0();
-  const postingUser = isAuthenticated ? user.sub : "guest";
+  const postingUser = isAuthenticated ? user : {sub: "Guest", name: "Guest"};
   const [statusMessage, setStatusMessage] = useState("");
   const id = uuidv4();
 
@@ -29,7 +29,8 @@ const ReviewForm = ({queriedCampsite}) => {
           e.target[5].checked,
         ],
         review: e.target[6].value,
-        user: postingUser,
+        user: postingUser.sub,
+        name: postingUser.name,
         time: moment().format("MMMM Do YYYY, h:mm:ss a"),
       }),
     })
