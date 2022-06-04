@@ -26,7 +26,7 @@ express()
   .use('/', express.static(__dirname + '/'))
 
 // Endpoints
- .get('/bacon', (req, res) => res.status(200).json('🥓'))
+//  .get('/bacon', (req, res) => res.status(200).json('🥓'))
 
  .get('/api/provinces', getProvinceData)
 

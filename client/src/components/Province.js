@@ -39,9 +39,33 @@ const Province = () => {
         });          
       }
 
+      const popupCampsites = {
+        title: "Campsites",
+        content: `<h4>Province/Territory:</h4> {region_name}<br>
+                  <h4>Park/Location:</h4> {place_name}<br>
+                  <h4>Campground/Site:</h4> {area_name}<br>
+                  <h4>Campground/Site Con't:</h4> {facility_name}<br>
+                  <h4>Accommodation Type:</h4> {unit_type_name}<br>
+                  <h4>Accommodation Type Con't:</h4> {Accommodation_Type}<br>
+                  <h4>Site Number:</h4> {Site_Num_Site}<br>
+                  <h4>Reviews:</h4> 4/5 - 5 reviews<br>
+                  <h4>Campsite Page:</h4><a href='http://localhost:3000/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
+      };
+  
       const campsites = new FeatureLayer({
         // url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
         url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
+        outFields: [
+          "Accommodation_Type",
+          "region_name",
+          "place_name",
+          "area_name",
+          "facility_name",
+          "unit_type_name",
+          "Unique_Site_ID",
+          "Site_Num_Site",
+        ],
+        popupTemplate: popupCampsites,
       });
 
       map.add(campsites);

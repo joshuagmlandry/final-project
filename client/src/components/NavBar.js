@@ -18,7 +18,7 @@ const NavBar = () => {
           <LoginButton />
         ) : (
           <LoggedInOptions>
-            <ProfileIcon />
+            <Link to="/profile"><ProfileIcon /></Link>
             <LogoutButton />
           </LoggedInOptions>
         )}            
