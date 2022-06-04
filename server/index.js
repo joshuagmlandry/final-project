@@ -3,7 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const {getProvinceData} = require('./endpointHandlers');
+const {getProvinceData, postReview} = require('./endpointHandlers');
 
 const PORT = 4000;
 
@@ -29,5 +29,7 @@ express()
 //  .get('/bacon', (req, res) => res.status(200).json('🥓'))
 
  .get('/api/provinces', getProvinceData)
+
+ .post('/api/post-review', postReview)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

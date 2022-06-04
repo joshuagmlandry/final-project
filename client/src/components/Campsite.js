@@ -49,7 +49,7 @@ const Campsite = () => {
                 <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.unit_type_name}</CampsiteSubHeaderText>
                 <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Accommodation_Type}</CampsiteSubHeaderText>
                 <CampsiteSubHeader>Site Number:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Site_Num_Site}</CampsiteSubHeaderText>
-                <ReviewForm />
+                <ReviewForm queriedCampsite={queriedCampsite}/>
         </Wrapper>
       ) : (
         <ErrorPage />

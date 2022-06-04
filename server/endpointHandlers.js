@@ -25,4 +25,39 @@ const getProvinceData = (req, res)=>{
   });
 }
 
-module.exports = {getProvinceData};
+const postReview = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const reviewToPost = {
+      _id: req.body._id,
+      campsite: req.body.campsite,
+      title: req.body.title,
+      rating: req.body.rating,
+      review: req.body.review,
+      user: req.body.user,
+      time: req.body.time
+    };
+    const postingReview = await db.collection("reviews").insertOne(reviewToPost);
+    console.log(postingReview);
+    if(postingReview.acknowledged){
+      res.status(200).json({
+        status: 200,
+        data: reviewToPost,
+        message: "Review successfully posted!"
+      });  
+    } else {
+      res.status(400).json({
+        status: 400,
+        data: reviewToPost,
+        message: "Review could not be posted at this time."
+      });
+    }
+    client.close();
+  } catch (err){
+    console.log(err);
+  }
+}
+
+module.exports = {getProvinceData, postReview};
