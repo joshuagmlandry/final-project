@@ -12,11 +12,12 @@ const options = {
   useUnifiedTopology: true,
 };
 
+const {provinces} = require('./data');
+
 // use this package to generate unique ids: https://www.npmjs.com/package/uuid
 const { v4: uuidv4 } = require("uuid");
 
 const getProvinceData = (req, res)=>{
-  const {provinces} = require('./data');
   res.status(200).json({
     status: 200,
     data: provinces,

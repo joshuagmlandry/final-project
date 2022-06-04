@@ -3,10 +3,26 @@ import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useContext } from "react";
 import { FilterContext } from "./FilterContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Homepage = () => {
 
   const {provinces, provincesLoading} = useContext(FilterContext);
+  const [selectedProvince, setSelectedProvince] = useState('');
+  const navigate = useNavigate();
+
+  const changeHandler = (e)=>{
+    setSelectedProvince(e.target.value);
+  }
+
+  const submitHandler = (e)=>{
+    e.preventDefault();
+    const searchedProvince = provinces.data.filter(province => {
+      return province.name === selectedProvince;
+    });
+    navigate(`/province/${searchedProvince[0].abbr}`);
+  }
 
   return (
     <>
@@ -14,9 +30,9 @@ const Homepage = () => {
     <Wrapper>
       <SearchArea>
         <div>
-          <SearchBar>
+          <SearchBar onSubmit={submitHandler}>
             <SearchLabel>Find campsites in:</SearchLabel>
-            <Select defaultValue={"blank"}>
+            <Select defaultValue={"blank"} onChange={changeHandler}>
               <Option disabled value={"blank"}>
                 {" "}
               </Option>
