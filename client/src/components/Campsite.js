@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import esriConfig from "@arcgis/core/config";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import ReviewForm from "./ReviewForm";
+import ErrorPage from "./ErrorPage";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 const { REACT_APP_ARCGIS_API } = process.env;
@@ -35,10 +37,6 @@ const Campsite = () => {
     });
   }, []);
 
-  if (queriedCampsite !== null) {
-    console.log(queriedCampsite);
-  }
-
   return (
     <>
       {queriedCampsite !== null && queriedCampsiteLoading !== "loading" ? (
@@ -51,9 +49,10 @@ const Campsite = () => {
                 <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.unit_type_name}</CampsiteSubHeaderText>
                 <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Accommodation_Type}</CampsiteSubHeaderText>
                 <CampsiteSubHeader>Site Number:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Site_Num_Site}</CampsiteSubHeaderText>
+                <ReviewForm />
         </Wrapper>
       ) : (
-        ""
+        <ErrorPage />
       )}
     </>
   );
