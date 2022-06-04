@@ -1,4 +1,5 @@
 import Browse from "./Browse";
+import ErrorPage from "./ErrorPage";
 import Footer from "./Footer";
 import GlobalStyles from "./GlobalStyles";
 import Homepage from "./Homepage";
@@ -16,8 +17,9 @@ const App = () => {
           <Route exact path ="/" element={<Homepage />}/>
           <Route path="/browse" element={<Browse />} />
           <Route path="province/:abbr" element={<Province />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <Footer />
+        <Footer />        
       </BrowserRouter>
     </>
   );

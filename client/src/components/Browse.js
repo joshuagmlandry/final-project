@@ -5,6 +5,7 @@ import MapView from "@arcgis/core/views/MapView";
 import esriConfig from "@arcgis/core/config";
 import styled from "styled-components";
 import { FilterContext } from "./FilterContext";
+import { useNavigate } from "react-router-dom";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 const Browse = () => {
@@ -38,8 +39,16 @@ const Browse = () => {
       zoom: zoom,
     });
 
+    const popupCampsites = {
+      "title": "Campsites",
+      "content": `<b>Accommodation Type:</b> {Accommodation_Type}<br><b>Test:</b><a href='http://www.google.com'>${zoom}</a><br>`
+    }
+
     const campsites = new FeatureLayer({
-      url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
+        // url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
+        url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
+        outFields: ["Accommodation_Type"],
+        popupTemplate: popupCampsites
     });
 
     map.add(campsites);

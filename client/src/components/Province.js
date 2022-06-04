@@ -1,11 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { FilterContext } from "./FilterContext";
+import ErrorPage from "./ErrorPage";
+import esriConfig from "@arcgis/core/config";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
-import esriConfig from "@arcgis/core/config";
+import styled from "styled-components";
+import { FilterContext } from "./FilterContext";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 const Province = () => {
@@ -39,7 +40,8 @@ const Province = () => {
       }
 
       const campsites = new FeatureLayer({
-        url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
+        // url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
+        url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
       });
 
       map.add(campsites);
@@ -66,7 +68,7 @@ const Province = () => {
         </Filter>
       </MapAndFilter>
     </Wrapper>      
-    ) : " "}    
+    ) : <ErrorPage />}    
     </>
   );
 };
