@@ -1,6 +1,7 @@
 import bgImage from "../assets/homepage-image.jpg";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
+import { GiCampfire, GiCampingTent, GiForestCamp } from "react-icons/gi";
 import { useContext } from "react";
 import { FilterContext } from "./FilterContext";
 import { useNavigate } from "react-router-dom";
@@ -49,6 +50,29 @@ const Homepage = () => {
       <MainBody>
       <BodyHeader>Camping made easy</BodyHeader>
       <BodyText>Browse top-rated campsites across Canada</BodyText>
+      <MainFeatures>
+        <Feature>
+          <FeatureIcon>
+          <GiCampfire />
+          </FeatureIcon>
+          <FeatureHeader>Learn</FeatureHeader>
+          <FeatureText>Read campsite reviews from across the Parks Canada network.</FeatureText>
+        </Feature>
+        <Feature>
+          <FeatureIcon>
+          <GiCampingTent />
+          </FeatureIcon>
+          <FeatureHeader>Contribute</FeatureHeader>
+          <FeatureText>Add your own reviews to share your experience.</FeatureText>
+        </Feature>
+        <Feature>
+          <FeatureIcon>
+          <GiForestCamp/>
+          </FeatureIcon>
+          <FeatureHeader>Engage</FeatureHeader>
+          <FeatureText>Join the Loon community for exclusive features.</FeatureText>
+        </Feature>
+      </MainFeatures>
       </MainBody>
     </Wrapper>      
     ) : " "}
@@ -71,11 +95,46 @@ const BodyText = styled.div`
   margin-bottom: 40px;
 `;
 
+const Feature = styled.div`
+  align-items: center;
+  border-right: 2px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+  width: 250px;
+  &:last-of-type{
+    border: none;
+  }
+`;
+
+const FeatureHeader = styled.div`
+  color: var(--color-dark-green);
+  font-family: var(--font-header);
+  font-size: 3rem;
+  font-weight: bold;
+  padding-bottom: 20px;
+`;
+
+const FeatureIcon = styled.div`
+  color: var(--color-dark-green);
+  font-size: 5rem;
+`;
+
+const FeatureText = styled.div`
+
+`;
+
 const MainBody = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+`;
+
+const MainFeatures = styled.div`
+  display: flex;
+  margin: 50px 0;
 `;
 
 const Option = styled.option``;

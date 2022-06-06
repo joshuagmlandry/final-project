@@ -70,6 +70,7 @@ const getCampsiteReviews = async (req, res)=>{
         message: "No reviews found"
     });
     }
+    client.close();
   } catch(err){
     console.log(err);
   }
@@ -95,6 +96,7 @@ const getUserReviews = async (req, res) => {
         message: "No reviews found"
     });
     }
+    client.close();
   } catch(err){
     console.log(err);
   }
