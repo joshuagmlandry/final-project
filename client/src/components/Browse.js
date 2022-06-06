@@ -76,7 +76,7 @@ const Browse = () => {
         <Wrapper>
           <TextHeader>
             Browse <Bold>all campsites</Bold> or filter by{" "}
-            <Bold>park or province</Bold>
+            <Bold>place and province or territory</Bold>
           </TextHeader>
           <MapAndFilter>
             <MapContainer id="viewDiv"></MapContainer>

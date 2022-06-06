@@ -168,5 +168,5 @@ const TitleInput = styled.input`
 
 const Wrapper = styled.div`
   border: 2px solid black;
-  margin: 50px 0;
+  margin: 40px 0;
 `;

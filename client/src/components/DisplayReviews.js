@@ -1,3 +1,4 @@
+import Loading from "./Loading";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "./FilterContext";
@@ -74,7 +75,7 @@ const DisplayReviews = ({queriedCampsite}) => {
           })}
         </Wrapper>
       ) : (
-        ""
+        <Loading />
       )}
     </>
   );
