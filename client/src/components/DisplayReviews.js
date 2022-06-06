@@ -2,10 +2,28 @@ import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "./FilterContext";
 
-const DisplayReviews = () => {
+const DisplayReviews = ({queriedCampsite}) => {
+
   const { allReviews, allReviewsLoading } = useContext(FilterContext);
   const [randomReviews, setRandomReviews] = useState([]);
+  const [userReviews, setUserReviews] = useState([]);
+  const [userReviewsLoading, setUserReviewsLoading] = useState("loading");
   const randomArray = [];
+  const userReviewArray = [];
+
+  useEffect(() => {
+    fetch(`/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === 200){
+            userReviewArray.push(data.data);
+            setUserReviews(userReviewArray[0]);
+            setUserReviewsLoading("idle");
+        } else{
+            setUserReviewsLoading("idle");
+        }
+    });
+  }, []);
 
   const ratingToStars = (review) => {
     let starRating = "";
@@ -31,11 +49,11 @@ const DisplayReviews = () => {
   };
 
   useEffect(() => {
-    if (allReviewsLoading !== "loading") {
+    if (allReviewsLoading !== "loading" && userReviewsLoading !== "loading") {
       for (let i = 0; i < 5; i++) {
         randomArray.push(allReviews[Math.floor(1000 * Math.random())]);
       }
-      setRandomReviews(randomArray);
+      setRandomReviews([...randomArray, ...userReviews]);
     }
   }, [allReviewsLoading]);
 
@@ -43,9 +61,7 @@ const DisplayReviews = () => {
     <>
       {allReviewsLoading !== "loading" ? (
         <Wrapper>
-            <ReviewsHeader>
-            Reviews
-            </ReviewsHeader>
+          <ReviewsHeader>Reviews</ReviewsHeader>
           {randomReviews.map((review) => {
             return (
               <ReviewWrapper key={review._id}>
@@ -71,7 +87,7 @@ const ReviewAuthor = styled.div`
 `;
 
 const ReviewBody = styled.div`
-    margin: 40px 0 5px 0;
+  margin: 40px 0 5px 0;
 `;
 
 const ReviewsHeader = styled.div`
@@ -81,7 +97,8 @@ const ReviewsHeader = styled.div`
 `;
 
 const ReviewRating = styled.div`
-  margin: 5px 0;`;
+  margin: 5px 0;
+`;
 
 const ReviewTitle = styled.div`
   font-weight: bold;

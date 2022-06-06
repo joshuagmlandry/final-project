@@ -50,6 +50,31 @@ const getAllUserReviews = async (req, res) => {
   }
 }
 
+const getCampsiteReviews = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const query = { "campsite.Unique_Site_ID": req.params.id };
+    const reviews = await db.collection("reviews").find(query).toArray();
+    if(reviews.length !== 0){
+      res.status(200).json({
+        status: 200,
+        data: reviews,
+        message: "Reviews successfully provided"
+    });
+    } else {
+      res.status(400).json({
+        status: 400,
+        data: [{}],
+        message: "No reviews found"
+    });
+    }
+  } catch(err){
+    console.log(err);
+  }
+}
+
 const copyFeatureLayer = async (req, res)=>{
   try{
     const client = new MongoClient(MONGO_URI, options);
@@ -106,4 +131,4 @@ const postReview = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews};
+module.exports = {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews, getCampsiteReviews};
