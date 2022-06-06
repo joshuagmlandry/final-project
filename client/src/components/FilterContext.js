@@ -13,6 +13,7 @@ export const FilterProvider = ({children})=>{
     const [provincesLoading, setProvincesLoading] = useState("loading");
     const [allReviews, setAllReviews] = useState([]);
     const [allReviewsLoading, setAllReviewsLoading] = useState("loading");
+    const [postAdded, setPostAdded] = useState(false);
     // const [allCampsites, setAllCampsites] = useState(null);
     // const [allCampsitesLoading, setAllCampsitesLoading] =
       useState("loading");
@@ -57,7 +58,7 @@ export const FilterProvider = ({children})=>{
     //   }, []);
 
     return(
-        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading}}>
+        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded}}>
             {children}
         </FilterContext.Provider>
     );

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import moment from "moment";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FilterContext } from "./FilterContext";
 const { v4: uuidv4 } = require("uuid");
 
 const ReviewForm = ({queriedCampsite}) => {
   const { user, isAuthenticated } = useAuth0();
+  const {postAdded, setPostAdded} = useContext(FilterContext);
   const postingUser = isAuthenticated ? user : {sub: "Guest", name: "Guest"};
   const [statusMessage, setStatusMessage] = useState("");
   const [postSending, setPostSending] = useState(false);
@@ -40,6 +42,7 @@ const ReviewForm = ({queriedCampsite}) => {
       .then((res) => res.json())
       .then((data) => {
           setPostSending(false);
+          setPostAdded(!postAdded);
           if(data.status === 200){
               id = uuidv4();
               setStatusMessage("Review successfully posted!");

@@ -5,12 +5,13 @@ import { FilterContext } from "./FilterContext";
 
 const DisplayReviews = ({queriedCampsite}) => {
 
-  const { allReviews, allReviewsLoading } = useContext(FilterContext);
+  const { allReviews, allReviewsLoading, postAdded } = useContext(FilterContext);
   const [randomReviews, setRandomReviews] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
   const [userReviewsLoading, setUserReviewsLoading] = useState("loading");
   const randomArray = [];
   const userReviewArray = [];
+  let avgReview = 0;
 
   useEffect(() => {
     fetch(`/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
@@ -56,19 +57,22 @@ const DisplayReviews = ({queriedCampsite}) => {
       }
       setRandomReviews([...randomArray, ...userReviews]);
     }
-  }, [allReviewsLoading]);
+  }, [allReviewsLoading, userReviewsLoading]);
 
   return (
     <>
       {allReviewsLoading !== "loading" ? (
         <Wrapper>
-          <ReviewsHeader>Reviews</ReviewsHeader>
+          {randomReviews.forEach(review => {
+            avgReview += review.rating;
+          })}
+          <ReviewsHeader>Reviews ({randomReviews.length} reviews - {(avgReview/randomReviews.length).toFixed(2)}/5)</ReviewsHeader>
           {randomReviews.map((review) => {
             return (
               <ReviewWrapper key={review._id}>
                 <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewRating>{ratingToStars(review)}</ReviewRating>
-                <ReviewAuthor>by {review.name}</ReviewAuthor>
+                <ReviewAuthor>by <Bold>{review.name}</Bold> ({review.time})</ReviewAuthor>
                 <ReviewBody>{review.review}</ReviewBody>
               </ReviewWrapper>
             );
@@ -82,6 +86,10 @@ const DisplayReviews = ({queriedCampsite}) => {
 };
 
 export default DisplayReviews;
+
+const Bold = styled.span`
+  font-weight: bold;
+`;
 
 const ReviewAuthor = styled.div`
   margin: 5px 0;
@@ -103,6 +111,7 @@ const ReviewRating = styled.div`
 
 const ReviewTitle = styled.div`
   font-weight: bold;
+  font-size: 1.1rem;
 `;
 
 const ReviewWrapper = styled.div`

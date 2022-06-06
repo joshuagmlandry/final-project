@@ -2,6 +2,7 @@ import Loading from "./Loading";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useAuth0();
@@ -58,6 +59,7 @@ const Profile = () => {
           {profileReviews.map((review) => {
             return (
               <ReviewWrapper key={review._id}>
+                <ReviewLocation><StyledLink to={`/campsite/${review.campsite.Unique_Site_ID}`}>{review.campsite.Unique_Site_ID}</StyledLink> ({review.campsite.place_name}, {review.campsite.region_name})</ReviewLocation>
                 <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewRating>{ratingToStars(review)}</ReviewRating>
                 <ReviewAuthor>by {review.name}</ReviewAuthor>
@@ -130,6 +132,10 @@ const ReviewsHeader = styled.div`
   margin-bottom: 20px;
 `;
 
+const ReviewLocation = styled.div`
+  padding: 10px 0;
+`;
+
 const ReviewRating = styled.div`
   margin: 5px 0;
 `;
@@ -146,9 +152,16 @@ const ReviewTitle = styled.div`
 
 const ReviewWrapper = styled.div`
   border-bottom: 1px solid lightgray;
-  padding: 5px 0;
+  padding-bottom: 5px;
   &:last-child{
     border-bottom: none;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:hover{
+    cursor: pointer;
   }
 `;
 
