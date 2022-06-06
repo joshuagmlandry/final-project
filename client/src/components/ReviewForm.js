@@ -8,10 +8,13 @@ const ReviewForm = ({queriedCampsite}) => {
   const { user, isAuthenticated } = useAuth0();
   const postingUser = isAuthenticated ? user : {sub: "Guest", name: "Guest"};
   const [statusMessage, setStatusMessage] = useState("");
-  const id = uuidv4();
+  const [postSending, setPostSending] = useState(false);
+  let id = uuidv4();
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setPostSending(true);
+    setStatusMessage("");
     fetch("/api/post-review", {
       method: "POST",
       headers: {
@@ -36,7 +39,9 @@ const ReviewForm = ({queriedCampsite}) => {
     })
       .then((res) => res.json())
       .then((data) => {
+          setPostSending(false);
           if(data.status === 200){
+              id = uuidv4();
               setStatusMessage("Review successfully posted!");
           }
       });
@@ -72,7 +77,7 @@ const ReviewForm = ({queriedCampsite}) => {
           </RatingWrapper>
           <ReviewText placeholder="Your review here..." required></ReviewText>
           <SubmitAndMessage>
-            <SubmitButton type="submit">Submit</SubmitButton>
+            <SubmitButton type="submit" disabled={postSending}>{postSending ? "Sending..." : "Submit"}</SubmitButton>
             <SubmitMessage>{statusMessage}</SubmitMessage>
           </SubmitAndMessage>
         </StyledForm>
@@ -145,6 +150,9 @@ const SubmitButton = styled.button`
   &:hover {
     background-color: var(--color-green);
     cursor: pointer;
+  }
+  &:disabled{
+    background-color: lightgrey;
   }
 `;
 

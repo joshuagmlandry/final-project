@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import DisplayReviews from "./DisplayReviews";
 import esriConfig from "@arcgis/core/config";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import ReviewForm from "./ReviewForm";
@@ -49,6 +50,7 @@ const Campsite = () => {
                 <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.unit_type_name}</CampsiteSubHeaderText>
                 <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Accommodation_Type}</CampsiteSubHeaderText>
                 <CampsiteSubHeader>Site Number:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Site_Num_Site}</CampsiteSubHeaderText>
+                <DisplayReviews />
                 <ReviewForm queriedCampsite={queriedCampsite}/>
         </Wrapper>
       ) : (
