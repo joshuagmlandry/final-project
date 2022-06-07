@@ -1,3 +1,4 @@
+import About from "./About";
 import Browse from "./Browse";
 import Campsite from "./Campsite";
 import ErrorPage from "./ErrorPage";
@@ -23,6 +24,7 @@ const App = () => {
         <Routes>
           <Route exact path ="/" element={<Homepage />}/>
           <Route path="/browse" element={<Browse />} />
+          <Route path="/about" element={<About />} />
           <Route path="/province/:abbr" element={<Province />} />
           <Route path="/campsite/:id" element={<Campsite />} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <ProfileError />} />

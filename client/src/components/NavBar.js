@@ -12,6 +12,7 @@ const NavBar = () => {
     <Wrapper>
       <LoonLogo to="/">Loon</LoonLogo>
       <Links>
+      <div><NavBarLink to="/about">About</NavBarLink></div>
       <div><NavBarLink to="/browse">Browse</NavBarLink></div>
         <div>
         {!isAuthenticated ? (

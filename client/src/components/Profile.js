@@ -59,7 +59,7 @@ const Profile = () => {
           {profileReviews.map((review) => {
             return (
               <ReviewWrapper key={review._id}>
-                <ReviewLocation><StyledLink to={`/campsite/${review.campsite.Unique_Site_ID}`}>{review.campsite.Unique_Site_ID}</StyledLink> ({review.campsite.place_name}, {review.campsite.region_name})</ReviewLocation>
+                <ReviewLocation><StyledLink target="_blank" to={`/campsite/${review.campsite.Unique_Site_ID}`}>{review.campsite.Unique_Site_ID}</StyledLink> ({review.campsite.place_name}, {review.campsite.region_name})</ReviewLocation>
                 <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewRating>{ratingToStars(review)}</ReviewRating>
                 <ReviewAuthor>by {review.name}</ReviewAuthor>
