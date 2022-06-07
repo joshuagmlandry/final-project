@@ -95,7 +95,9 @@ const ReviewForm = ({ queriedCampsite }) => {
             required
             onChange={changeHandler}
           ></ReviewText>
-          <div><ReCAPTCHA required sitekey={REACT_APP_SITEKEY} /></div>
+          <div>
+            <ReCAPTCHA required sitekey={REACT_APP_SITEKEY} />
+          </div>
           <SubmitAndMessage>
             <SubmitButton
               type="submit"

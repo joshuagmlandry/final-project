@@ -3,7 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions} = require('./endpointHandlers');
+const {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions} = require('./endpointHandlers');
 
 const PORT = 4000;
 
@@ -40,6 +40,6 @@ express()
 
  .post('/api/post-review', postReview)
 
-//  .post('/api/copy-feature-layer', copyFeatureLayer)
+ .delete('/api/delete-review', deleteReview)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

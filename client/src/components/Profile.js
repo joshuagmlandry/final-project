@@ -8,6 +8,7 @@ const Profile = () => {
   const { user } = useAuth0();
   const [profileReviews, setProfileReviews] = useState([]);
   const [profileReviewsLoading, setProfileReviewsLoading] = useState("loading");
+  const [deletedStatus, setDeletedStatus] = useState({});
 
   useEffect(() => {
     fetch(`/api/user-reviews/${user.sub}`)
@@ -20,7 +21,7 @@ const Profile = () => {
           setProfileReviewsLoading("idle");
         }
     });
-  }, []);
+  }, [deletedStatus]);
 
   const ratingToStars = (review) => {
     let starRating = "";
@@ -45,6 +46,25 @@ const Profile = () => {
     }
   };
 
+  const deleteHandler = (e, id)=>{
+    e.preventDefault();
+    fetch("/api/delete-review", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 200){
+        setDeletedStatus({...deletedStatus, _id: id, flag: true});
+      }
+    })
+  }
+
   return (
     <Wrapper>
       <ImageAndGreeting>
@@ -58,13 +78,16 @@ const Profile = () => {
         <ReviewSectionWrapper>
           {profileReviews.map((review) => {
             return (
-              <ReviewWrapper key={review._id}>
-                <ReviewLocation><StyledLink target="_blank" to={`/campsite/${review.campsite.Unique_Site_ID}`}>{review.campsite.Unique_Site_ID}</StyledLink> ({review.campsite.place_name}, {review.campsite.region_name})</ReviewLocation>
-                <ReviewTitle>{review.title}</ReviewTitle>
-                <ReviewRating>{ratingToStars(review)}</ReviewRating>
-                <ReviewAuthor>by {review.name}</ReviewAuthor>
-                <ReviewBody>{review.review}</ReviewBody>
-              </ReviewWrapper>
+              <IndividualReview>
+                <ReviewWrapper key={review._id}>
+                  <ReviewLocation><StyledLink target="_blank" to={`/campsite/${review.campsite.Unique_Site_ID}`}>{review.campsite.Unique_Site_ID}</StyledLink> ({review.campsite.place_name}, {review.campsite.region_name})</ReviewLocation>
+                  <ReviewTitle>{review.title}</ReviewTitle>
+                  <ReviewRating>{ratingToStars(review)}</ReviewRating>
+                  <ReviewAuthor>by {review.name}</ReviewAuthor>
+                  <ReviewBody>{review.review}</ReviewBody>
+                </ReviewWrapper>
+                <DeleteButton disabled={deletedStatus._id === review._id} onClick={(e)=>{deleteHandler(e, review._id)}}>{deletedStatus._id === review._id ? "Deleting" : "Delete"}</DeleteButton>    
+              </IndividualReview>
             );
           })}
         </ReviewSectionWrapper>
@@ -81,6 +104,27 @@ const Profile = () => {
 
 export default Profile;
 
+const DeleteButton = styled.button`
+  background-color: darkred;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100px;
+  transition: 200ms;
+  &:hover {
+    background-color: red;
+    cursor: pointer;
+  }
+  &:disabled{
+    background-color: lightgrey;
+    cursor: not-allowed;
+  }
+`;
+
 const Email = styled.div`
     font-size: 1.5rem;
 `;
@@ -96,6 +140,13 @@ const ImageAndGreeting = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+`;
+
+const IndividualReview = styled.div`
+  align-items: flex-start;
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  justify-content: space-between;
 `;
 
 const LoadingWrapper = styled.div`
@@ -125,6 +176,7 @@ const ReviewAuthor = styled.div`
 const ReviewBody = styled.div`
   margin: 40px 0 5px 0;
   word-wrap: break-word;
+  width: 800px;
 `;
 
 const ReviewsHeader = styled.div`
@@ -152,7 +204,7 @@ const ReviewTitle = styled.div`
 `;
 
 const ReviewWrapper = styled.div`
-  border-bottom: 1px solid lightgray;
+  
   padding-bottom: 5px;
   &:last-child{
     border-bottom: none;

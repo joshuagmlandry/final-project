@@ -112,16 +112,24 @@ const getUserReviews = async (req, res) => {
   }
 }
 
-const copyFeatureLayer = async (req, res)=>{
+const deleteReview = async (req, res)=>{
   try{
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("final-project");
-    // console.log(req.body);
-    // const importFeatureLayer = await db
-    // .collection("feature-layer")
-    // .insertMany(req.body);
-  } catch (err){
+    const deleteStatus = await db.collection("reviews").deleteOne({_id: req.body._id});
+    if (deleteStatus.deletedCount !== 0){
+      res.status(200).json({
+        status: 200,
+        message: "Review deleted!"
+      });
+    } else {
+      res.status(400).json({
+        status: 400,
+        message: "Review could not be deleted."
+      });
+    }
+  } catch(err){
     console.log(err);
   }
 }
@@ -197,4 +205,4 @@ const postReview = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions};
+module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions};
