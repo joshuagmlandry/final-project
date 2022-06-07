@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 const Browse = () => {
+
   const [coord, setCoord] = useState([-101.674656, 57.951146]);
   const [zoom, setZoom] = useState(3);
 

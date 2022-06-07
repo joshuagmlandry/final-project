@@ -4,6 +4,7 @@ import moment from "moment";
 import { useContext, useState } from "react";
 import { FilterContext } from "./FilterContext";
 import ReCAPTCHA from "react-google-recaptcha";
+const { REACT_APP_SITEKEY } = process.env;
 const { v4: uuidv4 } = require("uuid");
 
 const ReviewForm = ({ queriedCampsite }) => {
@@ -41,6 +42,7 @@ const ReviewForm = ({ queriedCampsite }) => {
           e.target[5].checked,
         ],
         review: e.target[6].value,
+        captcha: e.target[7].value,
         user: postingUser.sub,
         name: postingUser.name,
         time: moment().format("MMMM Do YYYY, h:mm:ss a"),
@@ -53,6 +55,9 @@ const ReviewForm = ({ queriedCampsite }) => {
         if (data.status === 200) {
           id = uuidv4();
           setStatusMessage("Review successfully posted!");
+        } else {
+          console.log(data);
+          setStatusMessage("Please validate with reCAPTCHA.");
         }
       });
   };
@@ -90,8 +95,8 @@ const ReviewForm = ({ queriedCampsite }) => {
             required
             onChange={changeHandler}
           ></ReviewText>
+          <ReCAPTCHA required sitekey={REACT_APP_SITEKEY} />
           <SubmitAndMessage>
-          {/* <ReCAPTCHA required sitekey=""/> */}
             <SubmitButton
               type="submit"
               disabled={postSending || typedReview.length > 500}

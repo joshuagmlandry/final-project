@@ -3,9 +3,11 @@
 "use strict";
 
 const { MongoClient } = require("mongodb");
+const fetch = require('node-fetch');
+const { stringify } = require('querystring');
 
 require("dotenv").config();
-const { MONGO_URI } = process.env;
+const { MONGO_URI, SECRET_KEY } = process.env;
 
 const options = {
   useNewUrlParser: true,
@@ -126,6 +128,35 @@ const copyFeatureLayer = async (req, res)=>{
 
 const postReview = async (req, res)=>{
   try{
+
+    //CAPTCHA verification
+
+    if(!req.body.captcha){
+      return res.status(400).json({
+        status: 400,
+        message: "Captcha not checked"
+      });
+    }
+
+    const query = stringify({
+      secret: SECRET_KEY,
+      response: req.body.captcha,
+      remoteip: req.connection.remoteAddress
+    });
+
+    const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
+
+    const captchaResponse = await fetch(verifyURL).then(res => res.json());
+
+    if (captchaResponse.success !== undefined && !captchaResponse.success){
+      return res.status(400).json({
+        status: 400,
+        message: "Captcha did not pass verification"
+      });
+    }
+
+    //MongoDB and posting the review
+
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("final-project");
