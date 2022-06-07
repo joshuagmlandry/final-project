@@ -12,6 +12,7 @@ const { REACT_APP_ARCGIS_API } = process.env;
 const Province = () => {
   const { provinces, provincesLoading } = useContext(FilterContext);
   const [validProvince, setValidProvince] = useState({prov: "", valid: false});
+  let defEx = (validProvince.valid) ? `Name_EN = '${validProvince.prov.name}'` : "1=0";
 
   const params = useParams();
 
@@ -68,7 +69,14 @@ const Province = () => {
         popupTemplate: popupCampsites,
       });
 
+      const provOutline = new FeatureLayer({
+        url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Provinces_and_Territories/FeatureServer/0",
+        opacity: 0.2,
+        definitionExpression: defEx
+      });
+
       map.add(campsites);
+      map.add(provOutline);
     }
   }, [provincesLoading, validProvince.valid]);
 

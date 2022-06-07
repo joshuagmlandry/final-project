@@ -9,21 +9,35 @@ import { useNavigate } from "react-router-dom";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 const Browse = () => {
-
   const [coord, setCoord] = useState([-101.674656, 57.951146]);
   const [zoom, setZoom] = useState(3);
+  const [provinceSelected, setProvinceSelected] = useState({prov: "", flag: false});
+  const [parkSelected, setParkSelected] = useState(null);
+  const [provinceSelectedLoading, setProvinceSelectedLoading] = useState("loading");
+  let defEx = (parkSelected !== null) ? `place_name = '${parkSelected}'` : "1=1";
 
   const { provinces, provincesLoading } = useContext(FilterContext);
 
   const changeHandler = (e) => {
+    setParkSelected(null);
     if (provincesLoading !== "loading") {
       const selectedProvince = provinces.data.filter((province) => {
         return province.name === e.target.value;
       });
+      if (selectedProvince.length !== 0) {
+        setProvinceSelected({prov: selectedProvince[0], flag: true});
+        setProvinceSelectedLoading("idle");
+      }
       setCoord(selectedProvince[0].coord);
       setZoom(selectedProvince[0].zoom);
     }
   };
+
+  const parkHandler = (e)=>{
+    e.stopPropagation();
+    setParkSelected(e.target.value);
+    // campsites.definitionExpression = `place_name: '${e.target.value}'`
+  }
 
   useEffect(() => {
     esriConfig.apiKey = REACT_APP_ARCGIS_API;
@@ -66,10 +80,14 @@ const Browse = () => {
         "Site_Num_Site",
       ],
       popupTemplate: popupCampsites,
+      definitionExpression: defEx,
     });
 
     map.add(campsites);
-  }, [coord, zoom, provincesLoading]);
+
+
+  }, [coord, zoom, provincesLoading, parkSelected]);
+
 
   return (
     <>
@@ -82,19 +100,46 @@ const Browse = () => {
           <MapAndFilter>
             <MapContainer id="viewDiv"></MapContainer>
             <Filter>
-              <form onChange={changeHandler}>
-                <label>Province: </label>
-                <StyledSelect defaultValue={"blank"}>
-                  <option disabled value="blank"></option>
-                  {provinces.data.map((province, index) => {
-                    return (
-                      <option key={`${index}${province.name}`}>
-                        {province.name}
-                      </option>
-                    );
-                  })}
-                </StyledSelect>
-              </form>
+              <StyledForm onChange={changeHandler}>
+                <BothFilters>
+                <FilterOptions>
+                  <label>Province/Territory: </label>
+                  <StyledSelect defaultValue={"blank"}>
+                    <option disabled value="blank"></option>
+                    {provinces.data.map((province, index) => {
+                      return (
+                        <option key={`${index}${province.name}`}>
+                          {province.name}
+                        </option>
+                      );
+                    })}
+                  </StyledSelect>
+                </FilterOptions>
+                <FilterOptions>
+                  {provinceSelectedLoading !== "loading" ? (
+                    <ParkSelector>
+                  <label>Place/Park: </label>
+                  <StyledSelect
+                    defaultValue={"blank2"}
+                    disabled={!provinceSelected.flag}
+                    onChange={parkHandler}
+                  >
+                    <option disabled value="blank2"></option>
+                    {provinceSelected.prov.place.map((park, index) => {
+                      return (
+                        <option key={`${index}${park}`}>
+                          {park}
+                        </option>
+                      );
+                    })}
+                  </StyledSelect>                         
+                    </ParkSelector>
+                  ) : ""}
+                </FilterOptions>                  
+                </BothFilters>
+
+                <div><ResetButton type="submit">Reset</ResetButton></div>
+              </StyledForm>
             </Filter>
           </MapAndFilter>
         </Wrapper>
@@ -111,13 +156,26 @@ const Bold = styled.span`
   font-weight: bold;
 `;
 
+const BothFilters = styled.div`
+  height: 150px;
+`;
+
 const Filter = styled.div`
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-body);
   font-size: 1.5rem;
-  margin: 40px;
+  margin: 0 40px;
+  width:300px;
+`;
+
+const FilterOptions = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const MapAndFilter = styled.div`
+  align-items: center;
   display: flex;
   justify-content: center;
 `;
@@ -131,9 +189,38 @@ const MapContainer = styled.div`
   width: 900px;
 `;
 
+const ParkSelector = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+`;
+
+const ResetButton = styled.button`
+  background-color: var(--color-dark-green);
+  border: none;
+  border-radius: 5px;
+  color: var(--color-light-beige);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin-top: 10px;
+  padding: 10px;
+  width: 100px;
+  &:hover {
+    background-color: var(--color-green);
+    cursor: pointer;
+  }
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 const StyledSelect = styled.select`
   font-family: var(--font-body);
   font-size: 1.25rem;
+  margin-top: 5px;
 `;
 
 const TextHeader = styled.div`
