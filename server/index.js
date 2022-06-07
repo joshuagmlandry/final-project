@@ -3,7 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews, getCampsiteReviews, getUserReviews} = require('./endpointHandlers');
+const {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions} = require('./endpointHandlers');
 
 const PORT = 4000;
 
@@ -29,6 +29,8 @@ express()
 //  .get('/bacon', (req, res) => res.status(200).json('🥓'))
 
  .get('/api/provinces', getProvinceData)
+
+ .get('/api/park-descriptions', getParkDescriptions)
 
  .get('/api/all-reviews', getAllUserReviews)
 

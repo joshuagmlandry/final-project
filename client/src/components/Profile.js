@@ -124,6 +124,7 @@ const ReviewAuthor = styled.div`
 
 const ReviewBody = styled.div`
   margin: 40px 0 5px 0;
+  word-wrap: break-word;
 `;
 
 const ReviewsHeader = styled.div`

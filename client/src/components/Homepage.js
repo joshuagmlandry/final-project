@@ -1,4 +1,5 @@
 import bgImage from "../assets/homepage-image.jpg";
+import FeaturedHomepage from "./FeaturedHomepage";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import { GiCampfire, GiCampingTent, GiForestCamp } from "react-icons/gi";
@@ -74,6 +75,7 @@ const Homepage = () => {
         </Feature>
       </MainFeatures>
       </MainBody>
+      <FeaturedHomepage />
     </Wrapper>      
     ) : " "}
     </>
@@ -134,7 +136,7 @@ const MainBody = styled.div`
 
 const MainFeatures = styled.div`
   display: flex;
-  margin: 50px 0;
+  margin: 100px 0;
 `;
 
 const Option = styled.option``;

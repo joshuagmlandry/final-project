@@ -3,15 +3,22 @@ import { useAuth0 } from "@auth0/auth0-react";
 import moment from "moment";
 import { useContext, useState } from "react";
 import { FilterContext } from "./FilterContext";
+import ReCAPTCHA from "react-google-recaptcha";
 const { v4: uuidv4 } = require("uuid");
 
-const ReviewForm = ({queriedCampsite}) => {
+const ReviewForm = ({ queriedCampsite }) => {
   const { user, isAuthenticated } = useAuth0();
-  const {postAdded, setPostAdded} = useContext(FilterContext);
-  const postingUser = isAuthenticated ? user : {sub: "Guest", name: "Guest"};
+  const { postAdded, setPostAdded } = useContext(FilterContext);
+  const postingUser = isAuthenticated ? user : { sub: "Guest", name: "Guest" };
   const [statusMessage, setStatusMessage] = useState("");
+  const [typedReview, setTypedReview] = useState("");
   const [postSending, setPostSending] = useState(false);
   let id = uuidv4();
+
+  const changeHandler = (e) => {
+    setTypedReview(e.target.value);
+    setStatusMessage(500 - e.target.value.length);
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -41,12 +48,12 @@ const ReviewForm = ({queriedCampsite}) => {
     })
       .then((res) => res.json())
       .then((data) => {
-          setPostSending(false);
-          setPostAdded(!postAdded);
-          if(data.status === 200){
-              id = uuidv4();
-              setStatusMessage("Review successfully posted!");
-          }
+        setPostSending(false);
+        setPostAdded(!postAdded);
+        if (data.status === 200) {
+          id = uuidv4();
+          setStatusMessage("Review successfully posted!");
+        }
       });
   };
 
@@ -78,10 +85,22 @@ const ReviewForm = ({queriedCampsite}) => {
               <RatingCheckbox type="radio" name="rating" />
             </Rating>
           </RatingWrapper>
-          <ReviewText placeholder="Your review here..." required></ReviewText>
+          <ReviewText
+            placeholder="Your review here..."
+            required
+            onChange={changeHandler}
+          ></ReviewText>
           <SubmitAndMessage>
-            <SubmitButton type="submit" disabled={postSending}>{postSending ? "Sending..." : "Submit"}</SubmitButton>
-            <SubmitMessage>{statusMessage}</SubmitMessage>
+          {/* <ReCAPTCHA required sitekey=""/> */}
+            <SubmitButton
+              type="submit"
+              disabled={postSending || typedReview.length > 500}
+            >
+              {postSending ? "Sending..." : "Submit"}
+            </SubmitButton>
+            <SubmitMessage typedReview={typedReview}>
+              {statusMessage}
+            </SubmitMessage>
           </SubmitAndMessage>
         </StyledForm>
       </ReviewWrapper>
@@ -136,8 +155,8 @@ const StyledForm = styled.form`
 `;
 
 const SubmitAndMessage = styled.div`
-    align-items: center;
-    display: flex;
+  align-items: center;
+  display: flex;
 `;
 
 const SubmitButton = styled.button`
@@ -154,13 +173,15 @@ const SubmitButton = styled.button`
     background-color: var(--color-green);
     cursor: pointer;
   }
-  &:disabled{
+  &:disabled {
     background-color: lightgrey;
+    cursor: not-allowed;
   }
 `;
 
 const SubmitMessage = styled.div`
-    margin: 0 20px;
+  color: ${(props) => (props.typedReview.length > 500 ? "red" : "black")};
+  margin: 0 20px;
 `;
 
 const TitleInput = styled.input`

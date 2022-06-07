@@ -66,7 +66,7 @@ const DisplayReviews = ({queriedCampsite}) => {
           {randomReviews.forEach(review => {
             avgReview += review.rating;
           })}
-          <ReviewsHeader>Reviews ({randomReviews.length} reviews - {(avgReview/randomReviews.length).toFixed(2)}/5)</ReviewsHeader>
+          {randomReviews.length !== 0 ? (<ReviewsHeader>Reviews ({randomReviews.length} reviews - {(avgReview/randomReviews.length).toFixed(2)}/5)</ReviewsHeader>) : <Loading />}
           {randomReviews.map((review) => {
             return (
               <ReviewWrapper key={review._id}>
@@ -97,6 +97,7 @@ const ReviewAuthor = styled.div`
 
 const ReviewBody = styled.div`
   margin: 40px 0 5px 0;
+  word-wrap: break-word;
 `;
 
 const ReviewsHeader = styled.div`

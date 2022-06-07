@@ -12,7 +12,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const {provinces} = require('./data');
+const {provinces, placeDescriptions} = require('./data');
 
 // use this package to generate unique ids: https://www.npmjs.com/package/uuid
 const { v4: uuidv4 } = require("uuid");
@@ -22,6 +22,14 @@ const getProvinceData = (req, res)=>{
     status: 200,
     data: provinces,
     message: "Province data successfully acquired!"
+  });
+}
+
+const getParkDescriptions = (req, res)=>{
+  res.status(200).json({
+    status: 200,
+    data: placeDescriptions,
+    message: "Park data successfully acquired!"
   });
 }
 
@@ -158,4 +166,4 @@ const postReview = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews, getCampsiteReviews, getUserReviews};
+module.exports = {getProvinceData, postReview, copyFeatureLayer, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions};

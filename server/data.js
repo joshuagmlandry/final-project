@@ -8459,4 +8459,4 @@ const mockData = [
   },
 ];
 
-module.exports = { provinces, mockData };
+module.exports = { provinces, mockData, placeDescriptions };
