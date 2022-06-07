@@ -211,7 +211,6 @@ const addFavourite = async (req, res)=>{
     await client.connect();
     const db = client.db("final-project");
     const newFav = await db.collection("favourites").insertOne(req.body);
-    console.log(newFav);
     if (newFav.acknowledged){
       res.status(200).json({
         status: 200,

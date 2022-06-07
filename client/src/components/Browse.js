@@ -40,6 +40,7 @@ const Browse = () => {
   }
 
   useEffect(() => {
+
     esriConfig.apiKey = REACT_APP_ARCGIS_API;
 
     const map = new Map({
@@ -62,7 +63,7 @@ const Browse = () => {
                 <h4>Accommodation Type:</h4> {unit_type_name}<br>
                 <h4>Accommodation Type Con't:</h4> {Accommodation_Type}<br>
                 <h4>Site Number:</h4> {Site_Num_Site}<br>
-                <h4>Reviews:</h4> 4/5 - 5 reviews<br>
+                <h4>Reviews:</h4> Highly rated (10 reviews) <br>
                 <h4>Campsite Page:</h4><a href='http://localhost:3000/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
     };
 

@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const AddToFavourites = ({ user, queriedCampsite }) => {
   let id = uuidv4();
-  const { favourites, favouritesLoading } = useContext(FilterContext);
+  const { favourites, favouritesLoading, newFav, setNewFav } = useContext(FilterContext);
 
   if (favouritesLoading !== "loading") {
     console.log(favourites);
@@ -33,6 +33,7 @@ const AddToFavourites = ({ user, queriedCampsite }) => {
       .then((data) => {
         if (data.status === 200) {
           setAddedToFav(true);
+          setNewFav(!newFav);
         }
       });
   };

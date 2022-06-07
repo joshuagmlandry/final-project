@@ -16,6 +16,7 @@ export const FilterProvider = ({children})=>{
     const [provincesLoading, setProvincesLoading] = useState("loading");
     const [favourites, setFavourites] = useState([]);
     const [favouritesLoading, setFavouritesLoading] = useState("loading");
+    const [newFav, setNewFav] = useState(false);
     const [parkDescriptions, setParkDescriptions] = useState([]);
     const [parkDescriptionsLoading, setParkDescriptionsLoading] = useState("loading");
     const [allReviews, setAllReviews] = useState([]);
@@ -40,7 +41,7 @@ export const FilterProvider = ({children})=>{
                 setFavouritesLoading("idle");
             });
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, newFav]);
 
 
     useEffect(()=>{
@@ -63,7 +64,7 @@ export const FilterProvider = ({children})=>{
 
 
     return(
-        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded, parkDescriptions, parkDescriptionsLoading, favourites, favouritesLoading}}>
+        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded, parkDescriptions, parkDescriptionsLoading, favourites, favouritesLoading, newFav, setNewFav}}>
             {children}
         </FilterContext.Provider>
     );
