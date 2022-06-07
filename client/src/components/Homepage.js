@@ -124,7 +124,7 @@ const FeatureIcon = styled.div`
 `;
 
 const FeatureText = styled.div`
-
+  font-family: var(--font-body);
 `;
 
 const MainBody = styled.div`

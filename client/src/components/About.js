@@ -18,6 +18,7 @@ const About = ()=>{
 export default About;
 
 const AboutBody = styled.div`
+    font-family: var(--font-body);
     font-size: 1.25rem;
     line-height: 1.5;
     margin: 40px 60px;

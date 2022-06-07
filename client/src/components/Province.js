@@ -1,6 +1,7 @@
 import ErrorPage from "./ErrorPage";
 import esriConfig from "@arcgis/core/config";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import Loading from "./Loading";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import styled from "styled-components";
@@ -82,7 +83,8 @@ const Province = () => {
 
   return (
     <>
-    {provincesLoading !== "loading" && validProvince.valid ? (
+    {provincesLoading !== "loading" ? (
+    validProvince.valid ? (
     <Wrapper>
       <TextHeader>Browse campsites in <Bold>{validProvince.prov.name}</Bold></TextHeader>
       <MapAndFilter>
@@ -100,7 +102,8 @@ const Province = () => {
         </Filter>
       </MapAndFilter>
     </Wrapper>      
-    ) : <ErrorPage />}    
+    ) : <ErrorPage />      
+    ) : <Loading />}
     </>
   );
 };

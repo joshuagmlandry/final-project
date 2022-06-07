@@ -8,8 +8,11 @@ const FeaturedHomepage = ()=>{
     const featuredParks = [];
 
     if(parkDescriptionsLoading !== "loading"){
+        const parkDescriptionsCopy = [...parkDescriptions];
         for(let i=0; i<5; i++){
-            featuredParks.push(parkDescriptions[Math.floor(parkDescriptions.length * Math.random())]);
+            let randomIndex = Math.floor(parkDescriptionsCopy.length * Math.random())
+            featuredParks.push(parkDescriptionsCopy[randomIndex]);
+            parkDescriptionsCopy.splice(randomIndex, 1);
         }
     }
 
@@ -43,6 +46,7 @@ const MainHeader = styled.div`
 `;
 
 const ParkDescription = styled.div`
+    font-family: var(--font-body);
     font-size: 0.9rem;
     text-align: justify;
 `;
@@ -56,6 +60,7 @@ const ParkImg = styled.img`
 `;
 
 const ParkHeader = styled.div`
+    font-family: var(--font-body);
     font-size: 1.25rem;
     font-weight: bold;
 `;

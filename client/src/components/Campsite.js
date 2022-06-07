@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import DisplayReviews from "./DisplayReviews";
 import esriConfig from "@arcgis/core/config";
+import Loading from "./Loading";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import ReviewForm from "./ReviewForm";
 import ErrorPage from "./ErrorPage";
@@ -40,21 +41,46 @@ const Campsite = () => {
 
   return (
     <>
-      {queriedCampsite !== null && queriedCampsiteLoading !== "loading" ? (
-        <Wrapper>
+      {queriedCampsiteLoading !== "loading" ? (
+        queriedCampsite !== null ? (
+          <Wrapper>
             <CampsiteHeader>{params.id}</CampsiteHeader>
-            <CampsiteSubHeader>Province/Territory:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.region_name}</CampsiteSubHeaderText>
-                <CampsiteSubHeader>Park/Location:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.place_name}</CampsiteSubHeaderText>
-                <CampsiteSubHeader>Campground/Site:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.area_name}</CampsiteSubHeaderText>
-                <CampsiteSubHeader>Campground/Site Con't:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.facility_name}</CampsiteSubHeaderText>
-                <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.unit_type_name}</CampsiteSubHeaderText>
-                <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Accommodation_Type}</CampsiteSubHeaderText>
-                <CampsiteSubHeader>Site Number:</CampsiteSubHeader> <CampsiteSubHeaderText>{queriedCampsite.Site_Num_Site}</CampsiteSubHeaderText>
-                <DisplayReviews queriedCampsite={queriedCampsite}/>
-                <ReviewForm queriedCampsite={queriedCampsite}/>
-        </Wrapper>
+            <CampsiteSubHeader>Province/Territory:</CampsiteSubHeader>{" "}
+            <CampsiteSubHeaderText>
+              {queriedCampsite.region_name}
+            </CampsiteSubHeaderText>
+            <CampsiteSubHeader>Park/Location:</CampsiteSubHeader>{" "}
+            <CampsiteSubHeaderText>
+              {queriedCampsite.place_name}
+            </CampsiteSubHeaderText>
+            <CampsiteSubHeader>Campground/Site:</CampsiteSubHeader>{" "}
+            <CampsiteSubHeaderText>
+              {queriedCampsite.area_name}
+            </CampsiteSubHeaderText>
+            <CampsiteSubHeader>Campground/Site Con't:</CampsiteSubHeader>{" "}
+            <CampsiteSubHeaderText>
+              {queriedCampsite.facility_name}
+            </CampsiteSubHeaderText>
+            <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader>{" "}
+            <CampsiteSubHeaderText>
+              {queriedCampsite.unit_type_name}
+            </CampsiteSubHeaderText>
+            <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader>{" "}
+            <CampsiteSubHeaderText>
+              {queriedCampsite.Accommodation_Type}
+            </CampsiteSubHeaderText>
+            <CampsiteSubHeader>Site Number:</CampsiteSubHeader>{" "}
+            <CampsiteSubHeaderText>
+              {queriedCampsite.Site_Num_Site}
+            </CampsiteSubHeaderText>
+            <DisplayReviews queriedCampsite={queriedCampsite} />
+            <ReviewForm queriedCampsite={queriedCampsite} />
+          </Wrapper>
+        ) : (
+          <ErrorPage />
+        )
       ) : (
-        <ErrorPage />
+        <Loading />
       )}
     </>
   );
@@ -63,20 +89,18 @@ const Campsite = () => {
 export default Campsite;
 
 const CampsiteHeader = styled.div`
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 `;
 
 const CampsiteSubHeader = styled.span`
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin: 10px 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 10px 0;
 `;
 
-const CampsiteSubHeaderText = styled.p`
-
-`;
+const CampsiteSubHeaderText = styled.p``;
 
 const Wrapper = styled.div`
   display: flex;

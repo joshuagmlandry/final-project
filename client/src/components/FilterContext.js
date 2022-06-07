@@ -48,27 +48,6 @@ export const FilterProvider = ({children})=>{
         });
     }, []);
 
-    // useEffect(() => {
-    //     esriConfig.apiKey = REACT_APP_ARCGIS_API;
-    //     const campsites = new FeatureLayer({
-    //       // url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
-    //       url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
-    //     });
-    //     const query = campsites.createQuery();
-    //     // query.where = `Unique_Site_ID = *`;
-    //     query.outFields = [
-    //       "region_name",
-    //       "place_name",
-    //       "Unique_Site_ID",
-    //     ];
-    //     campsites.queryFeatures(query).then(async (data) => {
-    //       await setAllCampsites(data.features.map(entry => {
-    //           return entry.attributes;
-    //       }));
-    //       setAllCampsitesLoading("idle");
-    //     });
-    //   }, []);
-
     return(
         <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded, parkDescriptions, parkDescriptionsLoading}}>
             {children}
