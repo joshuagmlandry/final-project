@@ -1,3 +1,4 @@
+import AddToFavourites from "./AddToFavourites";
 import styled from "styled-components";
 import DisplayReviews from "./DisplayReviews";
 import esriConfig from "@arcgis/core/config";
@@ -7,6 +8,7 @@ import ReviewForm from "./ReviewForm";
 import ErrorPage from "./ErrorPage";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 const Campsite = () => {
@@ -14,6 +16,8 @@ const Campsite = () => {
   const [queriedCampsiteLoading, setQueriedCampsiteLoading] =
     useState("loading");
   const params = useParams();
+
+  const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     esriConfig.apiKey = REACT_APP_ARCGIS_API;
@@ -73,6 +77,7 @@ const Campsite = () => {
             <CampsiteSubHeaderText>
               {queriedCampsite.Site_Num_Site}
             </CampsiteSubHeaderText>
+            {isAuthenticated && <AddToFavourites user={user} queriedCampsite={queriedCampsite}/>}
             <DisplayReviews queriedCampsite={queriedCampsite} />
             <ReviewForm queriedCampsite={queriedCampsite} />
           </Wrapper>

@@ -205,4 +205,54 @@ const postReview = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions};
+const addFavourite = async (req, res)=>{
+  try{ 
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const newFav = await db.collection("favourites").insertOne(req.body);
+    console.log(newFav);
+    if (newFav.acknowledged){
+      res.status(200).json({
+        status: 200,
+        message: "Favourite added"
+      });
+    } else {
+      res.status(400).json({
+        status: 400,
+        message: "Favourite could not be added"
+      });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
+}
+
+const getFavourites = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const query = {user: req.params.id };
+    const userFavs = await db.collection("favourites").find(query).toArray();
+    if(userFavs.length !== 0){
+      res.status(200).json({
+        status: 200,
+        data: userFavs,
+        message: "Favourites successfully provided"
+    });
+    } else {
+      res.status(400).json({
+        status: 400,
+        data: [],
+        message: "No favourites found"
+    });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
+}
+
+module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites};

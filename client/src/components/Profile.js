@@ -1,7 +1,8 @@
 import Loading from "./Loading";
 import styled from "styled-components";
+import { FilterContext } from "./FilterContext";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
@@ -9,6 +10,7 @@ const Profile = () => {
   const [profileReviews, setProfileReviews] = useState([]);
   const [profileReviewsLoading, setProfileReviewsLoading] = useState("loading");
   const [deletedStatus, setDeletedStatus] = useState({});
+  const { favourites, favouritesLoading } = useContext(FilterContext);
 
   useEffect(() => {
     fetch(`/api/user-reviews/${user.sub}`)
@@ -73,7 +75,27 @@ const Profile = () => {
       </ImageAndGreeting>
       <Name>{user.name}</Name>
       <Email>{user.email}</Email>
-      <Reviews>Reviews</Reviews>
+      <ReviewsAndFavourites>Favourites</ReviewsAndFavourites>
+      {favouritesLoading !== "loading" ? (favourites.length !== 0 ? (
+        <FavSectionWrapper>
+          {favourites.map((fav) => {
+            return (
+              <IndividualReview>
+                <ReviewWrapper key={fav._id}>
+                  <ReviewLocation><StyledLink target="_blank" to={`/campsite/${fav.campsite.Unique_Site_ID}`}>{fav.campsite.Unique_Site_ID}</StyledLink> ({fav.campsite.place_name}, {fav.campsite.region_name})</ReviewLocation>
+                </ReviewWrapper> 
+              </IndividualReview>
+            );
+          })}
+        </FavSectionWrapper>
+      ) : (
+        <NoReviews>No reviews to display</NoReviews>
+      )) : (
+      <LoadingWrapper>
+       <Loading/>
+      </LoadingWrapper>
+      )}
+      <ReviewsAndFavourites>Reviews</ReviewsAndFavourites>
       {profileReviewsLoading !== "loading" ? (profileReviews.length !== 0 ? (
         <ReviewSectionWrapper>
           {profileReviews.map((review) => {
@@ -129,6 +151,12 @@ const Email = styled.div`
     font-size: 1.5rem;
 `;
 
+const FavSectionWrapper = styled.div`
+  border: 2px solid black;
+  margin: 30px 0 0;
+  padding: 10px 20px 0 20px;
+`;
+
 const Greeting = styled.div`
     color: var(--color-dark-green);
     font-family: var(--font-header);
@@ -163,7 +191,7 @@ const NoReviews = styled.div`
   margin: 20px 0;
 `;
 
-const Reviews = styled.div`
+const ReviewsAndFavourites = styled.div`
     font-size: 1.75rem;
     font-weight: bold;
     margin-top: 50px;

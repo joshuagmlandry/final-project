@@ -1,16 +1,21 @@
 import esriConfig from "@arcgis/core/config";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import { createContext, useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 export const FilterContext = createContext(null);
 
 export const FilterProvider = ({children})=>{
 
+    const { user, isAuthenticated } = useAuth0();
+
     const [filterProvince, setFilterProvince] = useState("");
     const [filterPark, setFilterPark] = useState("");
     const [provinces, setProvinces] = useState([]);
     const [provincesLoading, setProvincesLoading] = useState("loading");
+    const [favourites, setFavourites] = useState([]);
+    const [favouritesLoading, setFavouritesLoading] = useState("loading");
     const [parkDescriptions, setParkDescriptions] = useState([]);
     const [parkDescriptionsLoading, setParkDescriptionsLoading] = useState("loading");
     const [allReviews, setAllReviews] = useState([]);
@@ -26,8 +31,16 @@ export const FilterProvider = ({children})=>{
         .then(data => {
             setProvinces(data);
             setProvincesLoading("idle");
-        })
-    }, []);
+        });
+        if(isAuthenticated){
+            fetch(`/api/get-favourites/${user.sub}`)
+            .then(res => res.json())
+            .then(data => {
+                setFavourites(data.data);
+                setFavouritesLoading("idle");
+            });
+        }
+    }, [isAuthenticated]);
 
 
     useEffect(()=>{
@@ -48,8 +61,9 @@ export const FilterProvider = ({children})=>{
         });
     }, []);
 
+
     return(
-        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded, parkDescriptions, parkDescriptionsLoading}}>
+        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded, parkDescriptions, parkDescriptionsLoading, favourites, favouritesLoading}}>
             {children}
         </FilterContext.Provider>
     );
