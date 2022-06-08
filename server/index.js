@@ -3,7 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites} = require('./endpointHandlers');
+const {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite} = require('./endpointHandlers');
 
 const PORT = 4000;
 
@@ -45,5 +45,7 @@ express()
  .post('/api/add-to-favourites', addFavourite)
 
  .delete('/api/delete-review', deleteReview)
+
+ .delete('/api/delete-favourite', deleteFavourite)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

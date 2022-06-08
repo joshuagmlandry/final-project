@@ -1,8 +1,5 @@
-import esriConfig from "@arcgis/core/config";
-import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import { createContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-const { REACT_APP_ARCGIS_API } = process.env;
 
 export const FilterContext = createContext(null);
 
@@ -22,6 +19,7 @@ export const FilterProvider = ({children})=>{
     const [allReviews, setAllReviews] = useState([]);
     const [allReviewsLoading, setAllReviewsLoading] = useState("loading");
     const [postAdded, setPostAdded] = useState(false);
+    const [deletedFavStatus, setDeletedFavStatus] = useState({});
     // const [allCampsites, setAllCampsites] = useState(null);
     // const [allCampsitesLoading, setAllCampsitesLoading] =
       useState("loading");
@@ -33,6 +31,9 @@ export const FilterProvider = ({children})=>{
             setProvinces(data);
             setProvincesLoading("idle");
         });
+    }, []);
+
+    useEffect(()=>{
         if(isAuthenticated){
             fetch(`/api/get-favourites/${user.sub}`)
             .then(res => res.json())
@@ -41,8 +42,7 @@ export const FilterProvider = ({children})=>{
                 setFavouritesLoading("idle");
             });
         }
-    }, [isAuthenticated, newFav]);
-
+    }, [isAuthenticated, newFav, deletedFavStatus]);
 
     useEffect(()=>{
         fetch("/api/park-descriptions")
@@ -64,7 +64,7 @@ export const FilterProvider = ({children})=>{
 
 
     return(
-        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded, parkDescriptions, parkDescriptionsLoading, favourites, favouritesLoading, newFav, setNewFav}}>
+        <FilterContext.Provider value={{filterProvince, setFilterProvince, filterPark, setFilterPark, provinces, setProvinces, provincesLoading, setProvincesLoading, allReviews, allReviewsLoading, postAdded, setPostAdded, parkDescriptions, parkDescriptionsLoading, favourites, favouritesLoading, newFav, setNewFav, deletedFavStatus, setDeletedFavStatus}}>
             {children}
         </FilterContext.Provider>
     );

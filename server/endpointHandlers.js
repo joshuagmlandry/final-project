@@ -129,6 +129,7 @@ const deleteReview = async (req, res)=>{
         message: "Review could not be deleted."
       });
     }
+    client.close();
   } catch(err){
     console.log(err);
   }
@@ -254,4 +255,27 @@ const getFavourites = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites};
+const deleteFavourite = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const deleteStatus = await db.collection("favourites").deleteOne({_id: req.body._id});
+    if (deleteStatus.deletedCount !== 0){
+      res.status(200).json({
+        status: 200,
+        message: "Favourite deleted!"
+      });
+    } else {
+      res.status(400).json({
+        status: 400,
+        message: "Favourite could not be deleted."
+      });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
+}
+
+module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite};

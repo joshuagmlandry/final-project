@@ -10,7 +10,7 @@ const Profile = () => {
   const [profileReviews, setProfileReviews] = useState([]);
   const [profileReviewsLoading, setProfileReviewsLoading] = useState("loading");
   const [deletedStatus, setDeletedStatus] = useState({});
-  const { favourites, favouritesLoading } = useContext(FilterContext);
+  const { favourites, favouritesLoading, deletedFavStatus, setDeletedFavStatus } = useContext(FilterContext);
 
   useEffect(() => {
     fetch(`/api/user-reviews/${user.sub}`)
@@ -67,6 +67,26 @@ const Profile = () => {
     })
   }
 
+  const deleteFavHandler = (e, id)=>{
+    e.preventDefault();
+    fetch("/api/delete-favourite", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 200){
+        setDeletedFavStatus({...deletedFavStatus, _id: id, flag: true});
+      }
+    })
+  }
+
+
   return (
     <Wrapper>
       <ImageAndGreeting>
@@ -80,10 +100,11 @@ const Profile = () => {
         <FavSectionWrapper>
           {favourites.map((fav) => {
             return (
-              <IndividualReview>
-                <ReviewWrapper key={fav._id}>
+              <IndividualReview key={fav._id}>
+                {/* <ReviewWrapper > */}
                   <ReviewLocation><StyledLink target="_blank" to={`/campsite/${fav.campsite.Unique_Site_ID}`}>{fav.campsite.Unique_Site_ID}</StyledLink> ({fav.campsite.place_name}, {fav.campsite.region_name})</ReviewLocation>
-                </ReviewWrapper> 
+                  <DeleteButton disabled={deletedFavStatus._id === fav._id} onClick={(e)=>{deleteFavHandler(e, fav._id)}}>{deletedFavStatus._id === fav._id ? "Deleting" : "Delete"}</DeleteButton>
+                {/* </ReviewWrapper>  */}
               </IndividualReview>
             );
           })}
@@ -100,8 +121,8 @@ const Profile = () => {
         <ReviewSectionWrapper>
           {profileReviews.map((review) => {
             return (
-              <IndividualReview>
-                <ReviewWrapper key={review._id}>
+              <IndividualReview key={review._id}>
+                <ReviewWrapper >
                   <ReviewLocation><StyledLink target="_blank" to={`/campsite/${review.campsite.Unique_Site_ID}`}>{review.campsite.Unique_Site_ID}</StyledLink> ({review.campsite.place_name}, {review.campsite.region_name})</ReviewLocation>
                   <ReviewTitle>{review.title}</ReviewTitle>
                   <ReviewRating>{ratingToStars(review)}</ReviewRating>
@@ -133,7 +154,7 @@ const DeleteButton = styled.button`
   color: white;
   font-family: var(--font-body);
   font-size: 1rem;
-  margin: 10px 0;
+  /* margin-bottom: 10px; */
   padding: 10px;
   width: 100px;
   transition: 200ms;
@@ -154,7 +175,7 @@ const Email = styled.div`
 const FavSectionWrapper = styled.div`
   border: 2px solid black;
   margin: 30px 0 0;
-  padding: 10px 20px 0 20px;
+  padding: 0px 20px;
 `;
 
 const Greeting = styled.div`
@@ -171,10 +192,11 @@ const ImageAndGreeting = styled.div`
 `;
 
 const IndividualReview = styled.div`
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   border-bottom: 1px solid lightgray;
   justify-content: space-between;
+  padding: 20px 0;
 `;
 
 const LoadingWrapper = styled.div`
@@ -214,7 +236,7 @@ const ReviewsHeader = styled.div`
 `;
 
 const ReviewLocation = styled.div`
-  padding: 10px 0;
+  /* padding: 10px 0; */
 `;
 
 const ReviewRating = styled.div`
@@ -224,7 +246,7 @@ const ReviewRating = styled.div`
 const ReviewSectionWrapper = styled.div`
   border: 2px solid black;
   margin: 30px 0;
-  padding: 30px 20px 0 20px;
+  padding: 0 20px;
 `;
 
 const ReviewTitle = styled.div`
