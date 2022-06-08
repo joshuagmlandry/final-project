@@ -18,6 +18,7 @@ const {provinces, placeDescriptions} = require('./data');
 
 // use this package to generate unique ids: https://www.npmjs.com/package/uuid
 const { v4: uuidv4 } = require("uuid");
+const { log } = require("console");
 
 const getProvinceData = (req, res)=>{
   res.status(200).json({
@@ -33,6 +34,30 @@ const getParkDescriptions = (req, res)=>{
     data: placeDescriptions,
     message: "Park data successfully acquired!"
   });
+}
+
+const addUser = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const query = {"sub": req.body.user.sub}
+    const existingUserCheck = await db.collection("users").find(query).toArray();
+    let id = uuidv4();
+    const userToAdd = {...req.body.user, _id: id}
+    if(existingUserCheck.length === 0){
+      const newUser = await db.collection("users").insertOne(userToAdd);
+    } else {
+      res.status(400).json({
+        status: 400,
+        data: existingUserCheck,
+        message: "User already in database"
+      });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
 }
 
 const getAllUserReviews = async (req, res) => {
@@ -278,4 +303,4 @@ const deleteFavourite = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite};
+module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite, addUser};

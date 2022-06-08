@@ -21,8 +21,7 @@ export const FilterProvider = ({children})=>{
     const [postAdded, setPostAdded] = useState(false);
     const [deletedFavStatus, setDeletedFavStatus] = useState({});
     // const [allCampsites, setAllCampsites] = useState(null);
-    // const [allCampsitesLoading, setAllCampsitesLoading] =
-      useState("loading");
+    // const [allCampsitesLoading, setAllCampsitesLoading] = useState("loading");
 
     useEffect(()=>{
         fetch("/api/provinces")
@@ -32,6 +31,22 @@ export const FilterProvider = ({children})=>{
             setProvincesLoading("idle");
         });
     }, []);
+    
+    useEffect(()=>{
+        if (isAuthenticated){
+        fetch("/api/add-user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user: user
+            }),
+          })
+          .then(res => res.json())
+          .then(data => {})           
+        }
+    }, [isAuthenticated]);
 
     useEffect(()=>{
         if(isAuthenticated){
