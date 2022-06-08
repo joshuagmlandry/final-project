@@ -1,5 +1,6 @@
 import ErrorPage from "./ErrorPage";
 import esriConfig from "@arcgis/core/config";
+import FeaturedProvince from "./FeaturedProvince";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Loading from "./Loading";
 import Map from "@arcgis/core/Map";
@@ -90,17 +91,10 @@ const Province = () => {
       <MapAndFilter>
         <MapContainer id="viewDiv"></MapContainer>
         <Filter>
-          {/* <form onChange={changeHandler}>
-            <label>Province: </label>
-            <StyledSelect defaultValue={'blank'}>
-              <option disabled value="blank"></option>
-              {provinces.data.map((province, index) => {
-                return (<option key={`${index}${province.name}`}>{province.name}</option>);
-              })}
-            </StyledSelect>
-          </form> */}
         </Filter>
+        <FeaturedProvince prov={validProvince.prov}/>
       </MapAndFilter>
+      
     </Wrapper>      
     ) : <ErrorPage />      
     ) : <Loading />}
@@ -122,6 +116,7 @@ const Filter = styled.div`
 `;
 
 const MapAndFilter = styled.div`
+  align-items: flex-start;
   display: flex;
   justify-content: center;
 `;
@@ -132,7 +127,7 @@ const MapContainer = styled.div`
   padding: 0;
   margin-bottom: 50px;
   height: 500px;
-  width: 900px;
+  width: 700px;
 `;
 
 const StyledSelect = styled.select`
@@ -151,4 +146,5 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 40px;
 `;

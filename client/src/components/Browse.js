@@ -43,14 +43,12 @@ const Browse = () => {
   const parkHandler = (e) => {
     e.stopPropagation();
     setParkSelected(e.target.value);
-    // campsites.definitionExpression = `place_name: '${e.target.value}'`
   };
 
   const campsiteHandler = (e) => {
     e.stopPropagation();
     setCampsiteSelected(e.target.value);
     console.log(campsiteSelected);
-    // campsites.definitionExpression = `place_name: '${e.target.value}'`
   };
 
   useEffect(() => {
