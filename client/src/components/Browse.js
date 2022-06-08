@@ -11,10 +11,17 @@ const { REACT_APP_ARCGIS_API } = process.env;
 const Browse = () => {
   const [coord, setCoord] = useState([-101.674656, 57.951146]);
   const [zoom, setZoom] = useState(3);
-  const [provinceSelected, setProvinceSelected] = useState({prov: "", flag: false});
+  const [provinceSelected, setProvinceSelected] = useState({
+    prov: "",
+    flag: false,
+  });
   const [parkSelected, setParkSelected] = useState(null);
-  const [provinceSelectedLoading, setProvinceSelectedLoading] = useState("loading");
-  let defEx = (parkSelected !== null) ? `place_name = '${parkSelected}'` : "1=1";
+  const [allCampsiteTypes, setAllCampsiteTypes] = useState(null);
+  const [allCampsiteTypesLoading, setAllCampsiteTypesLoading] = useState("loading");
+  const [campsiteSelected, setCampsiteSelected] = useState(null);
+  const [provinceSelectedLoading, setProvinceSelectedLoading] =
+    useState("loading");
+  let defEx = parkSelected !== null ? (campsiteSelected !== null ? (`place_name = '${parkSelected}' AND unit_type_name = '${campsiteSelected}'`) : `place_name = '${parkSelected}'`)  : "1=1";
 
   const { provinces, provincesLoading } = useContext(FilterContext);
 
@@ -25,7 +32,7 @@ const Browse = () => {
         return province.name === e.target.value;
       });
       if (selectedProvince.length !== 0) {
-        setProvinceSelected({prov: selectedProvince[0], flag: true});
+        setProvinceSelected({ prov: selectedProvince[0], flag: true });
         setProvinceSelectedLoading("idle");
       }
       setCoord(selectedProvince[0].coord);
@@ -33,14 +40,20 @@ const Browse = () => {
     }
   };
 
-  const parkHandler = (e)=>{
+  const parkHandler = (e) => {
     e.stopPropagation();
     setParkSelected(e.target.value);
     // campsites.definitionExpression = `place_name: '${e.target.value}'`
-  }
+  };
+
+  const campsiteHandler = (e) => {
+    e.stopPropagation();
+    setCampsiteSelected(e.target.value);
+    console.log(campsiteSelected);
+    // campsites.definitionExpression = `place_name: '${e.target.value}'`
+  };
 
   useEffect(() => {
-
     esriConfig.apiKey = REACT_APP_ARCGIS_API;
 
     const map = new Map({
@@ -84,11 +97,22 @@ const Browse = () => {
       definitionExpression: defEx,
     });
 
+    if (parkSelected !== null) {
+      const query = campsites.createQuery();
+      query.where = `place_name = '${parkSelected}'`;
+      query.outFields = ["unit_type_name"];
+      query.returnDistinctValues = true;
+      campsites.queryFeatures(query).then((data) => {
+        const allAttributes = data.features.map((entry) => {
+          return entry.attributes.unit_type_name;
+        });
+        setAllCampsiteTypes([...new Set(allAttributes)]);
+        setAllCampsiteTypesLoading("idle");
+      });
+    }
+
     map.add(campsites);
-
-
-  }, [coord, zoom, provincesLoading, parkSelected]);
-
+  }, [coord, zoom, provincesLoading, parkSelected, campsiteSelected]);
 
   return (
     <>
@@ -103,43 +127,64 @@ const Browse = () => {
             <Filter>
               <StyledForm onChange={changeHandler}>
                 <BothFilters>
-                <FilterOptions>
-                  <label>Province/Territory: </label>
-                  <StyledSelect defaultValue={"blank"}>
-                    <option disabled value="blank"></option>
-                    {provinces.data.map((province, index) => {
-                      return (
-                        <option key={`${index}${province.name}`}>
-                          {province.name}
-                        </option>
-                      );
-                    })}
-                  </StyledSelect>
-                </FilterOptions>
-                <FilterOptions>
-                  {provinceSelectedLoading !== "loading" ? (
-                    <ParkSelector>
-                  <label>Place/Park: </label>
-                  <StyledSelect
-                    defaultValue={"blank2"}
-                    disabled={!provinceSelected.flag}
-                    onChange={parkHandler}
-                  >
-                    <option disabled value="blank2"></option>
-                    {provinceSelected.prov.place.map((park, index) => {
-                      return (
-                        <option key={`${index}${park}`}>
-                          {park}
-                        </option>
-                      );
-                    })}
-                  </StyledSelect>                         
-                    </ParkSelector>
-                  ) : ""}
-                </FilterOptions>                  
+                  <FilterOptions>
+                    <label>Province/Territory: </label>
+                    <StyledSelect defaultValue={"blank"}>
+                      <option disabled value="blank"></option>
+                      {provinces.data.map((province, index) => {
+                        return (
+                          <option key={`${index}${province.name}`}>
+                            {province.name}
+                          </option>
+                        );
+                      })}
+                    </StyledSelect>
+                  </FilterOptions>
+                  <FilterOptions>
+                    {provinceSelectedLoading !== "loading" ? (
+                      <ParkSelector>
+                        <label>Place/Park: </label>
+                        <StyledSelect
+                          defaultValue={"blank2"}
+                          disabled={!provinceSelected.flag}
+                          onChange={parkHandler}
+                        >
+                          <option disabled value="blank2"></option>
+                          {provinceSelected.prov.place.map((park, index) => {
+                            return (
+                              <option key={`${index}${park}`}>{park}</option>
+                            );
+                          })}
+                        </StyledSelect>
+                      </ParkSelector>
+                    ) : (
+                      ""
+                    )}
+                    {allCampsiteTypesLoading !== "loading" ? (
+                      <ParkSelector>
+                        <label>Campsite Type: </label>
+                        <StyledSelect
+                          defaultValue={"blank2"}
+                          disabled={!provinceSelected.flag}
+                          onChange={campsiteHandler}
+                        >
+                          <option disabled value="blank2"></option>
+                          {allCampsiteTypes.map((type, index) => {
+                            return (
+                              <option key={`${index}${type}`}>{type}</option>
+                            );
+                          })}
+                        </StyledSelect>
+                      </ParkSelector>
+                    ) : (
+                      " "
+                    )}
+                  </FilterOptions>
                 </BothFilters>
 
-                <div><ResetButton type="submit">Reset</ResetButton></div>
+                <div>
+                  <ResetButton type="submit">Reset</ResetButton>
+                </div>
               </StyledForm>
             </Filter>
           </MapAndFilter>
@@ -158,7 +203,7 @@ const Bold = styled.span`
 `;
 
 const BothFilters = styled.div`
-  height: 150px;
+  height: 250px;
 `;
 
 const Filter = styled.div`
@@ -167,7 +212,7 @@ const Filter = styled.div`
   font-family: var(--font-body);
   font-size: 1.5rem;
   margin: 0 40px;
-  width:300px;
+  width: 300px;
 `;
 
 const FilterOptions = styled.div`
@@ -176,7 +221,7 @@ const FilterOptions = styled.div`
 `;
 
 const MapAndFilter = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: center;
 `;
