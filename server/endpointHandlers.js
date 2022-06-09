@@ -209,7 +209,8 @@ const postReview = async (req, res)=>{
       review: req.body.review,
       user: req.body.user,
       name: req.body.name,
-      time: req.body.time
+      time: req.body.time,
+      media: req.body.media
     };
     const postingReview = await db.collection("reviews").insertOne(reviewToPost);
     if(postingReview.acknowledged){

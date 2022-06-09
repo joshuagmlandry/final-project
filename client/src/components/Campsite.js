@@ -15,6 +15,9 @@ const Campsite = () => {
   const [queriedCampsite, setQueriedCampsite] = useState(null);
   const [queriedCampsiteLoading, setQueriedCampsiteLoading] =
     useState("loading");
+  const [userReviews, setUserReviews] = useState([]);
+  const [userReviewsLoading, setUserReviewsLoading] = useState("loading");
+  const userReviewArray = [];
   const params = useParams();
 
   const { user, isAuthenticated } = useAuth0();
@@ -43,44 +46,103 @@ const Campsite = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (queriedCampsiteLoading !== "loading" && queriedCampsite !== null) {
+      fetch(`/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) {
+            userReviewArray.push(data.data);
+            setUserReviews(userReviewArray[0]);
+            setUserReviewsLoading("idle");
+          } else {
+            setUserReviewsLoading("idle");
+          }
+        });
+    }
+  }, [queriedCampsiteLoading]);
+
   return (
     <>
       {queriedCampsiteLoading !== "loading" ? (
         queriedCampsite !== null ? (
-          <Wrapper>
-            <CampsiteHeader>{params.id}</CampsiteHeader>
-            <CampsiteSubHeader>Province/Territory:</CampsiteSubHeader>{" "}
-            <CampsiteSubHeaderText>
-              {queriedCampsite.region_name}
-            </CampsiteSubHeaderText>
-            <CampsiteSubHeader>Park/Location:</CampsiteSubHeader>{" "}
-            <CampsiteSubHeaderText>
-              {queriedCampsite.place_name}
-            </CampsiteSubHeaderText>
-            <CampsiteSubHeader>Campground/Site:</CampsiteSubHeader>{" "}
-            <CampsiteSubHeaderText>
-              {queriedCampsite.area_name}
-            </CampsiteSubHeaderText>
-            <CampsiteSubHeader>Campground/Site Con't:</CampsiteSubHeader>{" "}
-            <CampsiteSubHeaderText>
-              {queriedCampsite.facility_name}
-            </CampsiteSubHeaderText>
-            <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader>{" "}
-            <CampsiteSubHeaderText>
-              {queriedCampsite.unit_type_name}
-            </CampsiteSubHeaderText>
-            <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader>{" "}
-            <CampsiteSubHeaderText>
-              {queriedCampsite.Accommodation_Type}
-            </CampsiteSubHeaderText>
-            <CampsiteSubHeader>Site Number:</CampsiteSubHeader>{" "}
-            <CampsiteSubHeaderText>
-              {queriedCampsite.Site_Num_Site}
-            </CampsiteSubHeaderText>
-            {isAuthenticated && <AddToFavourites user={user} queriedCampsite={queriedCampsite}/>}
-            <DisplayReviews queriedCampsite={queriedCampsite} />
+          <PageWrapper>
+            <TopWrapper>
+              <CampsiteWrapper>
+                <MainHeader>{params.id}</MainHeader>
+                <CampsiteSubHeader>Province/Territory:</CampsiteSubHeader>{" "}
+                <CampsiteSubHeaderText>
+                  {queriedCampsite.region_name}
+                </CampsiteSubHeaderText>
+                <CampsiteSubHeader>Park/Location:</CampsiteSubHeader>{" "}
+                <CampsiteSubHeaderText>
+                  {queriedCampsite.place_name}
+                </CampsiteSubHeaderText>
+                <CampsiteSubHeader>Campground/Site:</CampsiteSubHeader>{" "}
+                <CampsiteSubHeaderText>
+                  {queriedCampsite.area_name}
+                </CampsiteSubHeaderText>
+                <CampsiteSubHeader>Campground/Site Con't:</CampsiteSubHeader>{" "}
+                <CampsiteSubHeaderText>
+                  {queriedCampsite.facility_name}
+                </CampsiteSubHeaderText>
+                <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader>{" "}
+                <CampsiteSubHeaderText>
+                  {queriedCampsite.unit_type_name}
+                </CampsiteSubHeaderText>
+                <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader>{" "}
+                <CampsiteSubHeaderText>
+                  {queriedCampsite.Accommodation_Type}
+                </CampsiteSubHeaderText>
+                <CampsiteSubHeader>Site Number:</CampsiteSubHeader>{" "}
+                <CampsiteSubHeaderText>
+                  {queriedCampsite.Site_Num_Site}
+                </CampsiteSubHeaderText>
+                {isAuthenticated && (
+                  <AddToFavourites
+                    user={user}
+                    queriedCampsite={queriedCampsite}
+                  />
+                )}
+              </CampsiteWrapper>
+              <div>
+                {userReviewsLoading !== "loading" &&
+                userReviews.length !== 0 ? (
+                  userReviews.filter((review) => {
+                    return review.media !== null;
+                  }).length !== 0 ? (
+                    <FeaturedWrapper>
+                      <MainHeader>Featured Photo</MainHeader>
+                      <FeaturedPhoto
+                        src={
+                          userReviews.filter((review) => {
+                            return review.media !== null;
+                          })[
+                            Math.floor(
+                              userReviews.filter((review) => {
+                                return review.media !== null;
+                              }).length * Math.random()
+                            )
+                          ].media.url
+                        }
+                        alt={"User uploaded image"}
+                      />
+                    </FeaturedWrapper>
+                  ) : (
+                    ""
+                  )
+                ) : (
+                  ""
+                )}
+              </div>
+            </TopWrapper>
+            <DisplayReviews
+              userReviews={userReviews}
+              userReviewsLoading={userReviewsLoading}
+              queriedCampsite={queriedCampsite}
+            />
             <ReviewForm queriedCampsite={queriedCampsite} />
-          </Wrapper>
+          </PageWrapper>
         ) : (
           <ErrorPage />
         )
@@ -93,7 +155,7 @@ const Campsite = () => {
 
 export default Campsite;
 
-const CampsiteHeader = styled.div`
+const MainHeader = styled.div`
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
@@ -107,7 +169,32 @@ const CampsiteSubHeader = styled.span`
 
 const CampsiteSubHeaderText = styled.p``;
 
-const Wrapper = styled.div`
+const FeaturedHeader = styled.div`
+  font-family: var(--font-body);
+`;
+
+const FeaturedPhoto = styled.img`
+  border: 4px solid var(--color-dark-green);
+  border-radius: 4px;
+  max-width: 500px;
+`;
+
+const FeaturedWrapper = styled.div`
+  text-align: right;
+  margin: 50px 75px;
+`;
+
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TopWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CampsiteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: var(--font-body);

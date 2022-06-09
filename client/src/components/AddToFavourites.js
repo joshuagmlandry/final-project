@@ -9,10 +9,6 @@ const AddToFavourites = ({ user, queriedCampsite }) => {
   let id = uuidv4();
   const { favourites, favouritesLoading, newFav, setNewFav } = useContext(FilterContext);
 
-  if (favouritesLoading !== "loading") {
-    console.log(favourites);
-  }
-
   const [addedToFav, setAddedToFav] = useState(false);
 
   const favouriteHandler = (e) => {

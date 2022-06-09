@@ -3,29 +3,29 @@ import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "./FilterContext";
 
-const DisplayReviews = ({queriedCampsite}) => {
+const DisplayReviews = ({userReviews, userReviewsLoading, queriedCampsite}) => {
 
   const { allReviews, allReviewsLoading, postAdded } = useContext(FilterContext);
   const [randomReviews, setRandomReviews] = useState([]);
-  const [userReviews, setUserReviews] = useState([]);
-  const [userReviewsLoading, setUserReviewsLoading] = useState("loading");
+  // const [userReviews, setUserReviews] = useState([]);
+  // const [userReviewsLoading, setUserReviewsLoading] = useState("loading");
   const randomArray = [];
-  const userReviewArray = [];
+  // const userReviewArray = [];
   let avgReview = 0;
 
-  useEffect(() => {
-    fetch(`/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
-    .then(res => res.json())
-    .then(data => {
-        if(data.status === 200){
-            userReviewArray.push(data.data);
-            setUserReviews(userReviewArray[0]);
-            setUserReviewsLoading("idle");
-        } else{
-            setUserReviewsLoading("idle");
-        }
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //       if(data.status === 200){
+  //           userReviewArray.push(data.data);
+  //           setUserReviews(userReviewArray[0]);
+  //           setUserReviewsLoading("idle");
+  //       } else{
+  //           setUserReviewsLoading("idle");
+  //       }
+  //   });
+  // }, []);
 
   const ratingToStars = (review) => {
     let starRating = "";
@@ -74,6 +74,7 @@ const DisplayReviews = ({queriedCampsite}) => {
                 <ReviewRating>{ratingToStars(review)}</ReviewRating>
                 <ReviewAuthor>by <Bold>{review.name}</Bold> ({review.time})</ReviewAuthor>
                 <ReviewBody>{review.review}</ReviewBody>
+                {review.media !== null && review.media !== undefined ? <ReviewImg src={review.media.url} alt={"User uploaded image"}/> : ""}
               </ReviewWrapper>
             );
           })}
@@ -106,6 +107,11 @@ const ReviewsHeader = styled.div`
   margin-bottom: 20px;
 `;
 
+const ReviewImg = styled.img`
+  margin: 10px 0;
+  max-width: 300px;
+`;
+
 const ReviewRating = styled.div`
   margin: 5px 0;
 `;
@@ -122,6 +128,7 @@ const ReviewWrapper = styled.div`
 
 const Wrapper = styled.div`
   border: 2px solid black;
-  margin: 30px 0;
+  margin: 10px 75px;
   padding: 30px 20px 0 20px;
+  width: 80%;
 `;

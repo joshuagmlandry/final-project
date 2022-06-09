@@ -128,6 +128,7 @@ const Profile = () => {
                   <ReviewRating>{ratingToStars(review)}</ReviewRating>
                   <ReviewAuthor>by {review.name}</ReviewAuthor>
                   <ReviewBody>{review.review}</ReviewBody>
+                  {review.media !== null && review.media !== undefined ? <ReviewImg src={review.media.url} alt={"User uploaded image"}/> : ""}
                 </ReviewWrapper>
                 <DeleteButton disabled={deletedStatus._id === review._id} onClick={(e)=>{deleteHandler(e, review._id)}}>{deletedStatus._id === review._id ? "Deleting" : "Delete"}</DeleteButton>    
               </IndividualReview>
@@ -233,6 +234,11 @@ const ReviewsHeader = styled.div`
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 20px;
+`;
+
+const ReviewImg = styled.img`
+  margin: 10px 0;
+  max-width: 300px;
 `;
 
 const ReviewLocation = styled.div`
