@@ -3,6 +3,7 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import esriConfig from "@arcgis/core/config";
+import Locate from "@arcgis/core/widgets/Locate";
 import styled from "styled-components";
 import { FilterContext } from "./FilterContext";
 import { useNavigate } from "react-router-dom";
@@ -64,6 +65,16 @@ const Browse = () => {
       center: coord,
       zoom: zoom,
     });
+
+    const locate = new Locate({
+      view: view,
+      useHeadingEnabled: false,
+      goToOverride: (view, options)=>{
+        options.target.scale = 5000000;
+        return view.goTo(options.target);
+      }
+    });
+    view.ui.add(locate, "top-left");
 
     const popupCampsites = {
       title: "Campsites",

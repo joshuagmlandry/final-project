@@ -3,6 +3,7 @@ import esriConfig from "@arcgis/core/config";
 import FeaturedProvince from "./FeaturedProvince";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Loading from "./Loading";
+import Locate from "@arcgis/core/widgets/Locate";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import styled from "styled-components";
@@ -39,7 +40,18 @@ const Province = () => {
             map: map,
             center: provinceToDisplay[0].coord,
             zoom: provinceToDisplay[0].zoom,
-        });          
+        });
+        
+        const locate = new Locate({
+          view: view,
+          useHeadingEnabled: false,
+          goToOverride: (view, options)=>{
+            options.target.scale = 5000000;
+            return view.goTo(options.target);
+          }
+        });
+        view.ui.add(locate, "top-left");
+
       }
 
       const popupCampsites = {
