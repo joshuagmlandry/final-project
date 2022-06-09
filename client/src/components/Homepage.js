@@ -1,4 +1,3 @@
-import bgImage from "../assets/homepage-image.jpg";
 import FeaturedHomepage from "./FeaturedHomepage";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -143,7 +142,7 @@ const Option = styled.option``;
 
 const SearchArea = styled.div`
   align-items: center;
-  background-image: url(${bgImage});
+  background-image: url("https://res.cloudinary.com/dlfu6niut/image/upload/v1654815014/homepage-image_zhq6bw.jpg");
   background-position: 0 -130px;
   background-size: 100%;
   display: flex;

@@ -1,4 +1,3 @@
-import profileError from "../assets/profile-error.jpg";
 import styled from "styled-components";
 
 const ProfileError = ()=>{
@@ -27,7 +26,7 @@ const ErrorMessage = styled.div`
 
 const Wrapper = styled.div`
   align-items: center;
-  background-image: url(${profileError});
+  background-image: url("https://res.cloudinary.com/dlfu6niut/image/upload/v1654815014/profile-error_cijhyy.jpg");
   background-position: 0 -130px;
   background-size: 100%;
   display: flex;

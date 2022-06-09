@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import aboutImage from "../assets/about-image.jpg";
 
 const About = ()=>{
     return (
@@ -38,7 +37,7 @@ const AboutHeader = styled.div`
 
 const ImageWrapper = styled.div`
   align-items: center;
-  background-image: url(${aboutImage});
+  background-image: url("https://res.cloudinary.com/dlfu6niut/image/upload/v1654815011/about-image_cteguy.jpg");
   background-position: 0 -130px;
   background-size: 100%;
   display: flex;

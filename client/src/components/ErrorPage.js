@@ -1,4 +1,3 @@
-import errorImage from "../assets/error-image.jpg";
 import styled from "styled-components";
 
 const ErrorPage = ()=>{
@@ -27,7 +26,7 @@ const ErrorMessage = styled.div`
 
 const Wrapper = styled.div`
   align-items: center;
-  background-image: url(${errorImage});
+  background-image: url("https://res.cloudinary.com/dlfu6niut/image/upload/v1654815015/error-image_jyocjs.jpg");
   background-position: 0 -130px;
   background-size: 100%;
   display: flex;
