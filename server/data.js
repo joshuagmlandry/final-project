@@ -127,6 +127,7 @@ const placeDescriptions = [
       "Founded in 1885, Banff is Canada’s first national park and part of the first national park system in the world. With its soaring peaks, azure lakes and abundant wildlife, this Rocky Mountain park attracts millions of visitors every year.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/ab/banff/WET4/modules/np-banff-180x90.jpg?modified=20170529161247",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/ab/banff",
   },
   {
     name: "Banff, Kootenay & Yoho",
@@ -134,6 +135,7 @@ const placeDescriptions = [
       "With diverse terrain embracing everything from arid grasslands to glaciers, Kootenay National Park offers the full Rocky Mountain experience along the historic Banff-Windermere Highway. Take a scenic drive or stay and explore the park’s treasures.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/bc/kootenay/WET4/modules/np-kootenay-180x90.jpg?modified=20170201183930",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/bc/kootenay",
   },
   {
     name: "Elk Island",
@@ -141,6 +143,7 @@ const placeDescriptions = [
       "Experience first-hand the story of the bison and how it was saved from near extinction at Elk Island National Park, where an active conservation program replenishes herds around the world.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/ab/elkisland/WET4/modules/np-elkisland-190x90.jpg?modified=20170106165929",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/ab/elkisland",
   },
   {
     name: "Jasper",
@@ -148,6 +151,7 @@ const placeDescriptions = [
       "Jasper astonishes visitors with its vast wilderness, dotted with glaciers, lakes, waterfalls, rivers, mountains and deep-cut canyons. Hike, paddle, swim, ski, fish, and take in soothing hot springs, scenic drives and extraordinary wildlife.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/ab/jasper/WET4/modules/np-jasper-180x90.jpg?modified=20170106165521",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/ab/jasper",
   },
   {
     name: "Rocky Mountain House",
@@ -155,6 +159,7 @@ const placeDescriptions = [
       "Two centuries ago trappers, traders and the First Nation Peoples shared the rugged western frontier of Canada. At Rocky Mountain House National Historic Site - be a part of the story. Explore, hike, camp and discover their challenges and triumphs.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/lhn-nhs/ab/rockymountain/WET4/modules/nhs-rockymountain-180x90.jpg?modified=20170106195921",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/ab/rockymountain",
   },
   {
     name: "Waterton Lakes",
@@ -162,6 +167,7 @@ const placeDescriptions = [
       "The prairies of Alberta meet the peaks of the Rocky Mountains in Waterton Lakes National Park.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/ab/waterton/WET4/modules/waterton-180.jpg?modified=20211104162658",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/ab/waterton",
   },
   {
     name: "Fort Langley",
@@ -169,6 +175,7 @@ const placeDescriptions = [
       "Experience life as a 19th century voyageur at Fort Langley, where the colony of British Columbia was born. Mingle with fur traders, pan for gold, learn the blacksmith’s art and camp in an HBC-themed oTENTik.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/FortLangley-site,-d-,jpg.jpg?modified=20161208230544",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/bc/langley",
   },
   {
     name: "Fort Rodd Hill",
@@ -176,6 +183,7 @@ const placeDescriptions = [
       "Tour through secret bunkers, military command posts and original 19th century buildings at Fort Rodd Hill, a west coast artillery fortress on active duty from 1895 to 1956. Be touched by the personal stories of soldiers and their families. Camp overnight in a group-friendly oTENTik.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/FortRoddHill-site,-d-,jpg.jpg?modified=20161208230542",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/bc/fortroddhill",
   },
   {
     name: "Glacier",
@@ -183,6 +191,7 @@ const placeDescriptions = [
       "Glacier is known for steep alpine hikes, lush cedar forests and unparalleled backcountry skiing. At the heart of the park, history comes alive at Rogers Pass, the key to completion of Canada’s transcontinental railway.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/bc/glacier/WET4/modules/np-glacier-180x90.jpg?modified=20170106170227",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/bc/glacier",
   },
   {
     name: "Gulf Islands",
@@ -190,6 +199,7 @@ const placeDescriptions = [
       "Scattered throughout the Salish Sea, the Gulf Islands teem with wildlife, a haven for rare species and threatened eco-systems and a playground for hikers, campers, cyclists, boaters and kayakers.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/GulfIslands-site,-d-,jpg.jpg?modified=20161208230515",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/bc/gulf",
   },
   {
     name: "Mount Revelstoke",
@@ -197,6 +207,7 @@ const placeDescriptions = [
       "Stroll through brilliant wildflower meadows, or lie back in awe atop a mountain peak. From lush green valley to mountain summit, all is within a leisurely day’s drive at Mount Revelstoke National Park.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/bc/revelstoke/WET4/modules/np-revelstoke-180x90.jpg?modified=20170106170349",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/bc/revelstoke",
   },
   {
     name: "Pacific Rim",
@@ -204,6 +215,7 @@ const placeDescriptions = [
       "Catch a wave, or spread a blanket and watch the sun dip below the horizon. From rainforests on land to marine kelp forests at sea, Pacific Rim National Park Reserve embodies the rich natural and cultural heritage of Canada’s west coast.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/bc/pacificrim/WET4/modules/np-pacificrim-180x90.jpg?modified=20170106171433",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/bc/pacificrim",
   },
   {
     name: "Yoho",
@@ -211,6 +223,7 @@ const placeDescriptions = [
       "In the shadow of the Great Divide, Yoho’s towering rockwalls, spectacular waterfalls and soaring peaks reveal the secrets of ancient life, the power of ice and water and the stories of plants and animals that continue to evolve today.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/bc/yoho/WET4/modules/np-yoho-180x90.jpg?modified=20170221181359",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/bc/yoho",
   },
   {
     name: "Riding Mountain",
@@ -218,6 +231,7 @@ const placeDescriptions = [
       "Explore 3000 km2 of thrilling outdoor possibilities in Riding Mountain National Park where the boreal forest, aspen parkland and fescue prairie meet.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/mb/riding/WET4/modules/np-ridingmountain-180x90.jpg?modified=20170106173040",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/mb/riding",
   },
   {
     name: "Fort Beauséjour - Fort Cumberland",
@@ -225,6 +239,7 @@ const placeDescriptions = [
       "Discover a time when Britain and France were caught in a tug-of-war for dominance in Acadie, and be moved by the stories of soldiers and settlers who lived and died around the historic star-shaped fort.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/lhn-nhs/nb/beausejour/WET4/images/nhs-fortbeausejour-cumberland-180x90.jpg?modified=20200127182743",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/nb/beausejour",
   },
   {
     name: "Fundy",
@@ -232,6 +247,7 @@ const placeDescriptions = [
       "The world’s highest tides await visitors at Fundy National Park. Kayak on the Bay of Fundy, explore the seafloor when the tide recedes, hike or bike through native Acadian forests and more at one of Canada’s best-known national parks.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/nb/fundy/WET4/images/plage-beach-fundy.jpg?modified=20200211154329",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/nb/fundy",
   },
   {
     name: "Kouchibouguac",
@@ -239,6 +255,7 @@ const placeDescriptions = [
       "Golden sand dunes, estuaries brimming with life, warm ocean beaches, Mi’kmaq and Acadian culture, the starry spectacle of a Dark Sky Preserve and snowbound winter activities weave together the compelling tapestry of Kouchibouguac National Park.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/nb/kouchibouguac/WET4/images-510x275/np-kouchibouguac-510.jpg?modified=20200221200024",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/nb/kouchibouguac",
   },
   {
     name: "Gros Morne",
@@ -246,6 +263,7 @@ const placeDescriptions = [
       "Cruise sheer-walled fjords and hike diverse landscapes from windswept shorelines to sub-Arctic summits. Explore rare geological oddities that earned Gros Morne UNESCO World Heritage status, and relax amid the culture of Newfoundland’s coastal communities.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/nl/grosmorne/activ/GM-2011_07_19-7125--S-Stone-180x90px.jpg?modified=20150629120214",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/nl/grosmorne",
   },
   {
     name: "Terra Nova",
@@ -253,6 +271,7 @@ const placeDescriptions = [
       "A dramatic Atlantic shoreline, fringed in long headlands and fjords with views of whales and icebergs, gives way to marshland, tranquil ponds and wildlife-filled boreal forest – Terra Nova is accessible, wild Newfoundland for outdoor enthusiasts and nature-lovers of every age.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/nl/terranova/WET4/modules/np-terra-nova-180x90.jpg?modified=20170106173604",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/nl/terranova",
   },
   {
     name: "Cape Breton Highlands",
@@ -260,6 +279,7 @@ const placeDescriptions = [
       "A third of the world-famous Cabot Trail winds through Cape Breton Highlands National Park, renowned for stunning ocean vistas, deep-cut canyons, 26 diverse hiking trails, spectacular campsites and glorious sandy beaches.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/ns/cbreton/WET4/modules/CBH1.jpg?modified=20190531173346",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/ns/cbreton",
   },
   {
     name: "Grand Pré",
@@ -267,6 +287,7 @@ const placeDescriptions = [
       "Discover powerful Acadian stories within a picturesque landscape. Successes and struggles are illuminated through multimedia presentation and engaging displays, a splendid Victorian garden and a Memorial Church. This is Grand-Pré National Historic Site, monument to Acadian culture and deportation.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/lhn-nhs/ns/grandpre/WET4/images/nhs-grand-pre-180x90.jpg?modified=20200120173432",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/ns/grandpre",
   },
   {
     name: "Kejimkujik",
@@ -274,6 +295,7 @@ const placeDescriptions = [
       "Explore 4,000 years of Mi’kmaw heritage. Camp lakeside amidst Acadian forest. Spot harbour seals from a singing beach. Be enthralled by a Dark Sky Preserve. There are many sides to Kejimkujik and you can discover them all.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/ns/kejimkujik/WET4/modules/SNB-Keji.jpg?modified=20170411171510",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/ns/kejimkujik",
   },
   {
     name: "Bruce Peninsula",
@@ -281,6 +303,7 @@ const placeDescriptions = [
       "Bruce Peninsula National Park beckons hikers to travel woodland trails, swimmers to refresh in clear waters, explorers to discover the rugged limestone coast and campers to revel at a stunning night sky.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/bruce,-d-,jpg.jpg?modified=20161208230452",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/on/bruce",
   },
   {
     name: "Fathom Five",
@@ -288,6 +311,7 @@ const placeDescriptions = [
       "Fascinating limestone flowerpots, pristine freshwater, lush cliff-edge woodland, serene backcountry campsites, historic lightstations and exciting scuba-sites make Fathom Five National Marine Park an awe-inspiring Great Lake escape.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/fathom,-d-,jpg.jpg?modified=20161208230429",
+    parksCanLink: "https://www.pc.gc.ca/en/amnc-nmca/on/fathomfive",
   },
   {
     name: "Georgian Bay Islands",
@@ -295,6 +319,7 @@ const placeDescriptions = [
       "Swim in Lake Huron’s clear waters. Cycle wooded island trails. Hike paths that meander between ecosystems. Unwind at a cosy cabin. Welcome to an inspiring and beautiful place. Welcome to Georgian Bay Islands National Park.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/on/georg/WET4/modules/np-georg-180x90.jpg?modified=20170106171822",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/on/georg",
   },
   {
     name: "Point Pelee",
@@ -302,6 +327,7 @@ const placeDescriptions = [
       "Canada’s second smallest but most diverse national park, Point Pelee’s forest hosts diverse habitats that provide a sanctuary for plants and animals rarely found elsewhere in the country and the nature lovers who enjoy it.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/PointPelee-180x90,-d-,jpg.jpg?modified=20161208230509",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/on/pelee",
   },
   {
     name: "Pukaskwa",
@@ -309,6 +335,7 @@ const placeDescriptions = [
       "This is Ontario’s only wilderness national park, defined by pink-and-slate granite shores, Great Lake temperaments and near-endless stretches of spruce, fir, pine and hardwoods. Biodiverse coastal regions—where wetland, lake and forest meet—are home to iconic Canadian species like bald eagles...",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/on/pukaskwa/WET4/fttd_180_90/PUK_FTTD_BCPBCPH_180_90.jpg?modified=20200401184549",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/on/pukaskwa",
   },
   {
     name: "Rideau Canal",
@@ -316,6 +343,7 @@ const placeDescriptions = [
       "An historic 19th century military waterway linking rivers and lakes across Eastern Ontario’s countryside, the Rideau Canal is now a popular natural playground, perfect for boating, paddling, fishing, camping, hiking and cycling the canal’s wooded pathways.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/lhn-nhs/on/rideau/WET4/modules/on-rideau-180x90.jpg?modified=20170118190842",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/on/rideau",
   },
   {
     name: "Thousand Islands",
@@ -323,6 +351,7 @@ const placeDescriptions = [
       "Granite islands speckle the St. Lawrence River in a transition zone between Canadian Shield and Adirondack Mountains. Explore by boating, paddling, or hiking. Awesome Thousand Islands National Park awaits, a few hours from Toronto or Montreal.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/on/1000/WET4/modules/on-1000-180x90.jpg?modified=20170118172038",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/on/1000",
   },
   {
     name: "Trent-Severn Waterway",
@@ -330,6 +359,7 @@ const placeDescriptions = [
       "Discover a newfound fascination with engineering along the Trent-Severn Waterway. This navigational wonder adds up to 44 locks, 104 operable dams and six heritage lockstations along a 386-km scenic string of canals and waterways.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/trent,-d-,jpg.jpg?modified=20161208230438",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/on/trentsevern",
   },
   {
     name: "Prince Edward Island",
@@ -337,6 +367,7 @@ const placeDescriptions = [
       "Cliff and dune-lined beaches, woodlands and wetlands rich with wildlife, and all levels of outdoor activities make Prince Edward Island National Park a diverse and accessible natural destination for a seaside escape, restful or active.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/GatherContent/Banff-Park-Museum/Image/sandcastles,-d-,jpg.jpg?modified=20161208230448",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/pe/pei-ipe",
   },
   {
     name: "Forillon",
@@ -344,6 +375,7 @@ const placeDescriptions = [
       "Forillon is a place where you can paddle with seals, watch passing whales and swim off a magnificent sandy beach all on the same day. You may even see a beaver on a walk through the forest.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/qc/forillon/WET4/modules/np-forillon-2-proximite-nearby.jpg?modified=20201104220731",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/qc/forillon",
   },
   {
     name: "La Mauricie",
@@ -351,6 +383,7 @@ const placeDescriptions = [
       "With its 536 km2 area, La Mauricie National Park is the ideal place for an outdoor escape. Hills, forests and streams are accessible any season of the year.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/qc/mauricie/WET4/modules/np-mauricie-180x90.jpg?modified=20170210154218",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/qc/mauricie",
   },
   {
     name: "Mingan Archipelago",
@@ -358,6 +391,7 @@ const placeDescriptions = [
       "The first word that springs to mind at the mention of the Mingan Archipelago is “remote”. Far from the hustle and bustle of everyday life, Mother Nature enchants with limestone sculptures, prolific marine and bird life, and the seductive sound of the sea.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/qc/mingan/WET4/modules/np-mingan-180x90.jpg?modified=20170106184111",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/qc/mingan",
   },
   {
     name: "St-Ours Canal",
@@ -365,6 +399,7 @@ const placeDescriptions = [
       "Stroll through Darvard Island and enjoy recognizing many species of trees and birds. Have a family picnic while watching the lockage of pleasure craft. Children will be fascinated by the fish ladder, a structure unlike anything else in the world.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/lhn-nhs/qc/saintours/WET4/modules/nhs-saintours-180x90.jpg?modified=20170106215509",
+    parksCanLink: "https://www.pc.gc.ca/en/lhn-nhs/qc/saintours",
   },
   {
     name: "Grasslands",
@@ -372,6 +407,7 @@ const placeDescriptions = [
       "At Grasslands National Park, expanses of dinosaur fossils harken back to a time before history. Tipi rings are testament to First Nations communities, and ruins of prairie homesteads tell of settlers intent on taming the prairie.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/sk/grasslands/WET4/modules/np-grasslands-180x90.jpg?modified=20170106184228",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/sk/grasslands",
   },
   {
     name: "Prince Albert",
@@ -379,6 +415,7 @@ const placeDescriptions = [
       "Prince Albert National Park offers accessible wilderness and extensive outdoor recreation in central Saskatchewan. Hike boreal forests, canoe pristine lakes and see free-range bison, with the town of Waskesiu as a convenient base.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/sk/princealbert/WET4/modules/np-albert-180x90.jpg?modified=20170106184258",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/sk/princealbert",
   },
   {
     name: "Kluane",
@@ -386,6 +423,7 @@ const placeDescriptions = [
       "With vast icefields and 17 of Canada’s 20 highest peaks, Kluane offers outstanding alpine scenery, rich First Nations culture and history, and a mix of extreme adventure and accessible outdoor recreation.",
     imgSrc:
       "https://pcweb.azureedge.net/-/media/pn-np/yt/kluane/WET4/modules/np-kluane-180x90.jpg?modified=20170106184659",
+    parksCanLink: "https://www.pc.gc.ca/en/pn-np/yt/kluane",
   },
 ];
 

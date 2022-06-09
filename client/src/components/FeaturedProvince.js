@@ -51,7 +51,7 @@ const FeaturedProvince = ({ prov }) => {
         <Wrapper>
           {parkDescriptionsLoading !== "loading" ? (
             <FeaturedPark>
-              <FeaturedParkHeader>{randomFeaturedPlace}</FeaturedParkHeader>
+              <FeaturedParkLink target={"_blank"} href={matchedParkInfo.parksCanLink}>{randomFeaturedPlace}</FeaturedParkLink>
               <FeaturedParkImg
                 src={matchedParkInfo.imgSrc}
                 alt={`Image of ${randomFeaturedPlace}`}
@@ -108,6 +108,19 @@ const FeaturedParkHeader = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   margin: 10px 0;
+`;
+
+const FeaturedParkLink = styled.a`
+  color: black;
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+  text-decoration: none;
+    &:hover{
+        color: var(--color-green);
+        cursor: pointer;
+    }
 `;
 
 const FeaturedParkImg = styled.img`

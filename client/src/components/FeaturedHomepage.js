@@ -23,7 +23,7 @@ const FeaturedHomepage = ()=>{
             {featuredParks.map((park, index) => {
                 return (
                     <ParkWrapper key={`${index}${park}`}>
-                    <ParkHeader>{park.name}</ParkHeader>
+                        <div><ParkHeader target={"_blank"} href={park.parksCanLink}>{park.name}</ParkHeader></div>
                     <ParkImg src={park.imgSrc}/>
                     <ParkDescription>{park.description}</ParkDescription>                        
                     </ParkWrapper>
@@ -59,10 +59,16 @@ const ParkImg = styled.img`
     width: 180px;
 `;
 
-const ParkHeader = styled.div`
+const ParkHeader = styled.a`
+    color: black;
     font-family: var(--font-body);
     font-size: 1.25rem;
     font-weight: bold;
+    text-decoration: none;
+    &:hover{
+        color: var(--color-green);
+        cursor: pointer;
+    }
 `;
 
 const ParkWrapper = styled.div`
