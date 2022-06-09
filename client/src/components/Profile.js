@@ -242,7 +242,7 @@ const ReviewImg = styled.img`
 `;
 
 const ReviewLocation = styled.div`
-  /* padding: 10px 0; */
+  margin-bottom: 5px;
 `;
 
 const ReviewRating = styled.div`

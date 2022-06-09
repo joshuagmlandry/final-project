@@ -176,6 +176,7 @@ const FeaturedHeader = styled.div`
 const FeaturedPhoto = styled.img`
   border: 4px solid var(--color-dark-green);
   border-radius: 4px;
+  max-height: 450px;
   max-width: 500px;
 `;
 
