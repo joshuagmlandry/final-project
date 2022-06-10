@@ -3,29 +3,13 @@ import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "./FilterContext";
 
-const DisplayReviews = ({userReviews, userReviewsLoading, queriedCampsite}) => {
+// Display all reviews, which includes user submitted reviews as well as five random mock reviews.
 
-  const { allReviews, allReviewsLoading, postAdded } = useContext(FilterContext);
+const DisplayReviews = ({ userReviews, userReviewsLoading }) => {
+  const { allReviews, allReviewsLoading } = useContext(FilterContext);
   const [randomReviews, setRandomReviews] = useState([]);
-  // const [userReviews, setUserReviews] = useState([]);
-  // const [userReviewsLoading, setUserReviewsLoading] = useState("loading");
   const randomArray = [];
-  // const userReviewArray = [];
   let avgReview = 0;
-
-  // useEffect(() => {
-  //   fetch(`/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //       if(data.status === 200){
-  //           userReviewArray.push(data.data);
-  //           setUserReviews(userReviewArray[0]);
-  //           setUserReviewsLoading("idle");
-  //       } else{
-  //           setUserReviewsLoading("idle");
-  //       }
-  //   });
-  // }, []);
 
   const ratingToStars = (review) => {
     let starRating = "";
@@ -63,18 +47,34 @@ const DisplayReviews = ({userReviews, userReviewsLoading, queriedCampsite}) => {
     <>
       {allReviewsLoading !== "loading" ? (
         <Wrapper>
-          {randomReviews.forEach(review => {
+          {randomReviews.forEach((review) => {
             avgReview += review.rating;
           })}
-          {randomReviews.length !== 0 ? (<ReviewsHeader>Reviews ({randomReviews.length} reviews - {(avgReview/randomReviews.length).toFixed(2)}/5)</ReviewsHeader>) : <Loading />}
+          {randomReviews.length !== 0 ? (
+            <ReviewsHeader>
+              Reviews ({randomReviews.length} reviews -{" "}
+              {(avgReview / randomReviews.length).toFixed(2)}/5)
+            </ReviewsHeader>
+          ) : (
+            <Loading />
+          )}
           {randomReviews.map((review) => {
             return (
               <ReviewWrapper key={review._id}>
                 <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewRating>{ratingToStars(review)}</ReviewRating>
-                <ReviewAuthor>by <Bold>{review.name}</Bold> ({review.time})</ReviewAuthor>
+                <ReviewAuthor>
+                  by <Bold>{review.name}</Bold> ({review.time})
+                </ReviewAuthor>
                 <ReviewBody>{review.review}</ReviewBody>
-                {review.media !== null && review.media !== undefined ? <ReviewImg src={review.media.url} alt={"User uploaded image"}/> : ""}
+                {review.media !== null && review.media !== undefined ? (
+                  <ReviewImg
+                    src={review.media.url}
+                    alt={"User uploaded image"}
+                  />
+                ) : (
+                  ""
+                )}
               </ReviewWrapper>
             );
           })}

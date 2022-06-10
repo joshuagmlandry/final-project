@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
-const ErrorPage = ()=>{
-    return (
-        <Wrapper>
-            <ErrorMessage>
-                Error: the page you are looking for cannot be found
-            </ErrorMessage>
-
-        </Wrapper>
-    );
-}
+const ErrorPage = () => {
+  return (
+    <Wrapper>
+      <ErrorMessage>
+        Error: the page you are looking for cannot be found
+      </ErrorMessage>
+    </Wrapper>
+  );
+};
 
 export default ErrorPage;
 

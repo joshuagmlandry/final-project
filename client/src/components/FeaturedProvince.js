@@ -1,7 +1,9 @@
-import { useContext } from "react";
 import Loading from "./Loading";
 import styled from "styled-components";
 import { FilterContext } from "./FilterContext";
+import { useContext } from "react";
+
+// Shows a random park, description, and mock review for the selected province
 
 const FeaturedProvince = ({ prov }) => {
   const {
@@ -48,10 +50,15 @@ const FeaturedProvince = ({ prov }) => {
     return (
       <FeatureWrapper>
         <MainHeader>Featured Park or Place</MainHeader>
-        <Wrapper>
+        <div>
           {parkDescriptionsLoading !== "loading" ? (
             <FeaturedPark>
-              <FeaturedParkLink target={"_blank"} href={matchedParkInfo.parksCanLink}>{randomFeaturedPlace}</FeaturedParkLink>
+              <FeaturedParkLink
+                target={"_blank"}
+                href={matchedParkInfo.parksCanLink}
+              >
+                {randomFeaturedPlace}
+              </FeaturedParkLink>
               <FeaturedParkImg
                 src={matchedParkInfo.imgSrc}
                 alt={`Image of ${randomFeaturedPlace}`}
@@ -63,8 +70,8 @@ const FeaturedProvince = ({ prov }) => {
           ) : (
             <Loading />
           )}
-        </Wrapper>
-        <Wrapper>
+        </div>
+        <div>
           {allReviewsLoading !== "loading" ? (
             <FeaturedPark>
               <FeaturedParkHeader>Top Review</FeaturedParkHeader>
@@ -78,11 +85,16 @@ const FeaturedProvince = ({ prov }) => {
           ) : (
             <Loading />
           )}
-        </Wrapper>
+        </div>
       </FeatureWrapper>
     );
   } else {
-    return <NoCampsites>There are unfortunately no campsites available in this province/territory.</NoCampsites>;
+    return (
+      <NoCampsites>
+        There are unfortunately no campsites available in this
+        province/territory.
+      </NoCampsites>
+    );
   }
 };
 
@@ -110,6 +122,14 @@ const FeaturedParkHeader = styled.div`
   margin: 10px 0;
 `;
 
+const FeaturedParkImg = styled.img`
+  border: 2px solid var(--color-dark-green);
+  border-radius: 2px;
+  height: 90px;
+  margin: 10px 0;
+  width: 180px;
+`;
+
 const FeaturedParkLink = styled.a`
   color: black;
   font-family: var(--font-body);
@@ -117,18 +137,10 @@ const FeaturedParkLink = styled.a`
   font-weight: bold;
   margin: 10px 0;
   text-decoration: none;
-    &:hover{
-        color: var(--color-green);
-        cursor: pointer;
-    }
-`;
-
-const FeaturedParkImg = styled.img`
-  border: 2px solid var(--color-dark-green);
-  border-radius: 2px;
-  height: 90px;
-  margin: 10px 0;
-  width: 180px;
+  &:hover {
+    color: var(--color-green);
+    cursor: pointer;
+  }
 `;
 
 const FeatureWrapper = styled.div`
@@ -147,10 +159,10 @@ const MainHeader = styled.div`
 `;
 
 const NoCampsites = styled.div`
-    font-family: var(--font-body);
-    font-size: 2.5rem;
-    text-align: justify;
-    width: 500px;
+  font-family: var(--font-body);
+  font-size: 2.5rem;
+  text-align: justify;
+  width: 500px;
 `;
 
 const ReviewAuthor = styled.div`
