@@ -56,7 +56,6 @@ const Browse = () => {
   const campsiteHandler = (e) => {
     e.stopPropagation();
     setCampsiteSelected(e.target.value);
-    console.log(campsiteSelected);
   };
 
   useEffect(() => {

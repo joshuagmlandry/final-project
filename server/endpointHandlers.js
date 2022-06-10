@@ -36,6 +36,32 @@ const getParkDescriptions = (req, res)=>{
   });
 }
 
+const getUser = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const query = {"sub": req.params.id}
+    const currentUser = await db.collection("users").findOne(query);
+    if(currentUser){
+      res.status(200).json({
+        status: 200,
+        data: currentUser,
+        message: "Current user successfully acquired!"
+      });
+    } else {
+      res.status(400).json({
+        status: 400,
+        data: null,
+        message: "Current user not found"
+      });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
+}
+
 const addUser = async (req, res)=>{
   try{
     const client = new MongoClient(MONGO_URI, options);
@@ -44,7 +70,7 @@ const addUser = async (req, res)=>{
     const query = {"sub": req.body.user.sub}
     const existingUserCheck = await db.collection("users").find(query).toArray();
     let id = uuidv4();
-    const userToAdd = {...req.body.user, _id: id}
+    const userToAdd = {...req.body.user, _id: id, bio: null}
     if(existingUserCheck.length === 0){
       const newUser = await db.collection("users").insertOne(userToAdd);
     } else {
@@ -52,6 +78,34 @@ const addUser = async (req, res)=>{
         status: 400,
         data: existingUserCheck,
         message: "User already in database"
+      });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
+}
+
+const postBio = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const query = {"sub": req.body.user.sub};
+    const newValues = {
+      $set: { bio: req.body.newBio },
+    };
+    const updateBio = await db.collection("users").updateOne(query, newValues);
+    if (updateBio.modifiedCount === 1){
+      res.status(200).json({
+        status: 200,
+        message: "Bio updated"
+      });
+    }
+    else {
+      res.status(400).json({
+        status: 400,
+        message: "Bio could not be updated"
       });
     }
     client.close();
@@ -304,4 +358,4 @@ const deleteFavourite = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite, addUser};
+module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite, addUser, getUser, postBio};

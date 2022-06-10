@@ -3,7 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite, addUser} = require('./endpointHandlers');
+const {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite, addUser, getUser, postBio} = require('./endpointHandlers');
 
 const PORT = 4000;
 
@@ -40,9 +40,13 @@ express()
 
  .get('/api/user-reviews/:id', getUserReviews)
 
+ .get('/api/get-user/:id', getUser)
+
  .post('/api/add-user', addUser)
 
  .post('/api/post-review', postReview)
+
+ .patch('/api/post-bio', postBio)
 
  .post('/api/add-to-favourites', addFavourite)
 

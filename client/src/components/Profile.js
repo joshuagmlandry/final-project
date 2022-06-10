@@ -1,5 +1,6 @@
 import Loading from "./Loading";
 import styled from "styled-components";
+import UserBio from "./UserBio";
 import { FilterContext } from "./FilterContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useContext, useEffect, useState } from "react";
@@ -9,8 +10,20 @@ const Profile = () => {
   const { user } = useAuth0();
   const [profileReviews, setProfileReviews] = useState([]);
   const [profileReviewsLoading, setProfileReviewsLoading] = useState("loading");
+  const [loggedInUser, setLoggedInUser] = useState([]);
+  const [loggedInUserLoading, setLoggedInUserLoading] = useState("loading");
+  const [bioUpdate, setBioUpdate] = useState(false);
   const [deletedStatus, setDeletedStatus] = useState({});
   const { favourites, favouritesLoading, deletedFavStatus, setDeletedFavStatus } = useContext(FilterContext);
+
+  useEffect(()=>{
+    fetch(`/api/get-user/${user.sub}`)
+    .then(res => res.json())
+    .then(data => {
+        setLoggedInUser(data.data);
+        setLoggedInUserLoading("idle");
+    });
+}, [bioUpdate]);
 
   useEffect(() => {
     fetch(`/api/user-reviews/${user.sub}`)
@@ -86,7 +99,6 @@ const Profile = () => {
     })
   }
 
-
   return (
     <Wrapper>
       <ImageAndGreeting>
@@ -95,6 +107,7 @@ const Profile = () => {
       </ImageAndGreeting>
       <Name>{user.name}</Name>
       <Email>{user.email}</Email>
+      <Bio>{loggedInUserLoading !== "loading" ? ((<UserBio bioUpdate={bioUpdate} setBioUpdate={setBioUpdate} user={loggedInUser}/>)) : ""}</Bio>
       <ReviewsAndFavourites>Favourites</ReviewsAndFavourites>
       {favouritesLoading !== "loading" ? (favourites.length !== 0 ? (
         <FavSectionWrapper>
@@ -147,6 +160,11 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const Bio = styled.div`
+  font-size: 1.5rem;
+  margin: 10px 0;
+`;
 
 const DeleteButton = styled.button`
   background-color: darkred;
