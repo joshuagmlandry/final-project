@@ -1,13 +1,15 @@
-import Loading from "./Loading";
 import styled from "styled-components";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { useContext, useState } from "react";
 import { FilterContext } from "./FilterContext";
+import { useContext, useState } from "react";
 const { v4: uuidv4 } = require("uuid");
+
+// Button that allows logged in users to add campsites to their list of favourites
 
 const AddToFavourites = ({ user, queriedCampsite }) => {
   let id = uuidv4();
-  const { favourites, favouritesLoading, newFav, setNewFav } = useContext(FilterContext);
+  const { favourites, favouritesLoading, newFav, setNewFav } =
+    useContext(FilterContext);
 
   const [addedToFav, setAddedToFav] = useState(false);
 

@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import esriConfig from "@arcgis/core/config";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import Locate from "@arcgis/core/widgets/Locate";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
-import esriConfig from "@arcgis/core/config";
-import Locate from "@arcgis/core/widgets/Locate";
 import styled from "styled-components";
 import { FilterContext } from "./FilterContext";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 const { REACT_APP_ARCGIS_API } = process.env;
+
+// Browse page which features a map with all campsites plotted.  Additionally, there is a filter where users can specify which province, park/place, and type of campsite that they are looking for.  There is a reset button to start the query over again.
 
 const Browse = () => {
   const [coord, setCoord] = useState([-101.674656, 57.951146]);
@@ -18,11 +19,17 @@ const Browse = () => {
   });
   const [parkSelected, setParkSelected] = useState(null);
   const [allCampsiteTypes, setAllCampsiteTypes] = useState(null);
-  const [allCampsiteTypesLoading, setAllCampsiteTypesLoading] = useState("loading");
+  const [allCampsiteTypesLoading, setAllCampsiteTypesLoading] =
+    useState("loading");
   const [campsiteSelected, setCampsiteSelected] = useState(null);
   const [provinceSelectedLoading, setProvinceSelectedLoading] =
     useState("loading");
-  let defEx = parkSelected !== null ? (campsiteSelected !== null ? (`place_name = '${parkSelected}' AND unit_type_name = '${campsiteSelected}'`) : `place_name = '${parkSelected}'`)  : "1=1";
+  let defEx =
+    parkSelected !== null
+      ? campsiteSelected !== null
+        ? `place_name = '${parkSelected}' AND unit_type_name = '${campsiteSelected}'`
+        : `place_name = '${parkSelected}'`
+      : "1=1";
 
   const { provinces, provincesLoading } = useContext(FilterContext);
 
@@ -69,10 +76,10 @@ const Browse = () => {
     const locate = new Locate({
       view: view,
       useHeadingEnabled: false,
-      goToOverride: (view, options)=>{
+      goToOverride: (view, options) => {
         options.target.scale = 5000000;
         return view.goTo(options.target);
-      }
+      },
     });
     view.ui.add(locate, "top-left");
 
@@ -90,7 +97,6 @@ const Browse = () => {
     };
 
     const campsites = new FeatureLayer({
-      // url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
       url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
       outFields: [
         "Accommodation_Type",
