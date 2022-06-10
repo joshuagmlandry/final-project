@@ -2,6 +2,7 @@ import AddToFavourites from "./AddToFavourites";
 import styled from "styled-components";
 import DisplayReviews from "./DisplayReviews";
 import esriConfig from "@arcgis/core/config";
+import ImageGallery from 'react-image-gallery';
 import Loading from "./Loading";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import ReviewForm from "./ReviewForm";
@@ -9,6 +10,7 @@ import ErrorPage from "./ErrorPage";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import "react-image-gallery/styles/css/image-gallery.css";
 const { REACT_APP_ARCGIS_API } = process.env;
 
 const Campsite = () => {
@@ -112,8 +114,16 @@ const Campsite = () => {
                     return review.media !== null;
                   }).length !== 0 ? (
                     <FeaturedWrapper>
-                      <MainHeader>Featured Photo</MainHeader>
-                      <FeaturedPhoto
+                      <MainHeader>Photo Gallery</MainHeader>
+                      <StyledImageGallery>
+                        <ImageGallery showPlayButton={false} items={userReviews.filter((review) => {
+                              return review.media !== null;
+                            }).map(entry => {
+                              return {original: entry.media.url,
+                              thumbnail: entry.media.thumbnail_url};
+                            })}/>                        
+                      </StyledImageGallery>
+                      {/* <FeaturedPhoto
                         src={
                           userReviews.filter((review) => {
                             return review.media !== null;
@@ -126,7 +136,7 @@ const Campsite = () => {
                           ].media.url
                         }
                         alt={"User uploaded image"}
-                      />
+                      /> */}
                     </FeaturedWrapper>
                   ) : (
                     ""
@@ -188,6 +198,11 @@ const FeaturedWrapper = styled.div`
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledImageGallery = styled.div`
+  height: 500px;
+  max-width: 300px;
 `;
 
 const TopWrapper = styled.div`
