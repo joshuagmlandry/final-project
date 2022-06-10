@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import GlobalStyles from "./GlobalStyles";
 import Homepage from "./Homepage";
 import NavBar from "./NavBar";
+import OtherUserProfile from "./OtherUserProfile";
 import Profile from "./Profile";
 import ProfileError from "./ProfileError";
 import Province from "./Province";
@@ -27,7 +28,8 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/province/:abbr" element={<Province />} />
           <Route path="/campsite/:id" element={<Campsite />} />
-          <Route path="/profile" element={isAuthenticated ? <Profile /> : <ProfileError />} />
+          <Route exact path="/profile" element={isAuthenticated ? <Profile /> : <ProfileError />} />
+          <Route path="/profile/:id" element={isAuthenticated ? <OtherUserProfile /> : <ProfileError />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />        

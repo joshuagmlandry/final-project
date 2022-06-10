@@ -4,7 +4,7 @@ const ProfileError = () => {
   return (
     <Wrapper>
       <ErrorMessage>
-        Error: you must sign up or sign in to view your profile
+        Error: you must sign up or sign in to view user profiles
       </ErrorMessage>
     </Wrapper>
   );

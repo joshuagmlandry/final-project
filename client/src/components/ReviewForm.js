@@ -12,7 +12,7 @@ const { v4: uuidv4 } = require("uuid");
 const ReviewForm = ({ queriedCampsite }) => {
   const { user, isAuthenticated } = useAuth0();
   const { postAdded, setPostAdded } = useContext(FilterContext);
-  const postingUser = isAuthenticated ? user : { sub: "Guest", name: "Guest" };
+  const postingUser = isAuthenticated ? user : { sub: "Guest", name: "Guest", nickname: "Guest" };
   const [statusMessage, setStatusMessage] = useState("");
   const [typedReview, setTypedReview] = useState("");
   const [postSending, setPostSending] = useState(false);
@@ -104,6 +104,7 @@ const ReviewForm = ({ queriedCampsite }) => {
         captcha: e.target[7].value,
         user: postingUser.sub,
         name: postingUser.name,
+        nickname: postingUser.nickname,
         time: moment().format("MMMM Do YYYY, h:mm:ss a"),
         media: photoUploadSuccess !== null ? photoUploadSuccess : null,
       }),

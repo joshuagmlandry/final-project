@@ -2,13 +2,17 @@ import Loading from "./Loading";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "./FilterContext";
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // Display all reviews, which includes user submitted reviews as well as five random mock reviews.
 
 const DisplayReviews = ({ userReviews, userReviewsLoading }) => {
-  const { allReviews, allReviewsLoading, postAdded } = useContext(FilterContext);
+  const { allReviews, allReviewsLoading, postAdded } =
+    useContext(FilterContext);
   const [randomReviews, setRandomReviews] = useState([]);
   const randomArray = [];
+  const { user, isAuthenticated } = useAuth0();
   let avgReview = 0;
 
   const ratingToStars = (review) => {
@@ -64,7 +68,22 @@ const DisplayReviews = ({ userReviews, userReviewsLoading }) => {
                 <ReviewTitle>{review.title}</ReviewTitle>
                 <ReviewRating>{ratingToStars(review)}</ReviewRating>
                 <ReviewAuthor>
-                  by <Bold>{review.name}</Bold> ({review.time})
+                  by{" "}
+                  <Bold>
+                    {review.nickname !== undefined &&
+                    review.nickname !== "Guest" ? (
+                      isAuthenticated && review.nickname === user.nickname ? (
+                        <StyledLink to={`/profile`}>{review.name}</StyledLink>
+                      ) : (
+                        <StyledLink to={`/profile/${review.nickname}`}>
+                          {review.name}
+                        </StyledLink>
+                      )
+                    ) : (
+                      review.name
+                    )}
+                  </Bold>{" "}
+                  ({review.time})
                 </ReviewAuthor>
                 <ReviewBody>{review.review}</ReviewBody>
                 {review.media !== null && review.media !== undefined ? (
@@ -124,6 +143,11 @@ const ReviewTitle = styled.div`
 const ReviewWrapper = styled.div`
   border-top: 1px solid lightgray;
   padding: 5px 0;
+`;
+
+const StyledLink = styled(Link)`
+  color: var(--color-green);
+  text-decoration: none;
 `;
 
 const Wrapper = styled.div`

@@ -62,6 +62,32 @@ const getUser = async (req, res)=>{
   }
 }
 
+const getOtherUser = async (req, res)=>{
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const query = {"nickname": req.params.id}
+    const currentUser = await db.collection("users").findOne(query);
+    if(currentUser){
+      res.status(200).json({
+        status: 200,
+        data: currentUser,
+        message: "Current user successfully acquired!"
+      });
+    } else {
+      res.status(400).json({
+        status: 400,
+        data: null,
+        message: "Current user not found"
+      });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
+}
+
 const addUser = async (req, res)=>{
   try{
     const client = new MongoClient(MONGO_URI, options);
@@ -191,6 +217,32 @@ const getUserReviews = async (req, res) => {
   }
 }
 
+const getOtherUserReviews = async (req, res) => {
+  try{
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("final-project");
+    const query = { "nickname": req.params.id };
+    const reviews = await db.collection("reviews").find(query).toArray();
+    if(reviews.length !== 0){
+      res.status(200).json({
+        status: 200,
+        data: reviews,
+        message: "Reviews successfully provided"
+    });
+    } else {
+      res.status(400).json({
+        status: 400,
+        data: [{}],
+        message: "No reviews found"
+    });
+    }
+    client.close();
+  } catch(err){
+    console.log(err);
+  }
+}
+
 const deleteReview = async (req, res)=>{
   try{
     const client = new MongoClient(MONGO_URI, options);
@@ -263,6 +315,7 @@ const postReview = async (req, res)=>{
       review: req.body.review,
       user: req.body.user,
       name: req.body.name,
+      nickname: req.body.nickname,
       time: req.body.time,
       media: req.body.media
     };
@@ -358,4 +411,4 @@ const deleteFavourite = async (req, res)=>{
   }
 }
 
-module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite, addUser, getUser, postBio};
+module.exports = {getProvinceData, postReview, deleteReview, getAllUserReviews, getCampsiteReviews, getUserReviews, getParkDescriptions, addFavourite, getFavourites, deleteFavourite, addUser, getUser, postBio, getOtherUser, getOtherUserReviews};
