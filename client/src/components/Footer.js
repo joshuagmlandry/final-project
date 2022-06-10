@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
+// Footer that appears on all pages
+
 const Footer = () => {
   return (
     <Wrapper>
@@ -16,53 +18,52 @@ const Footer = () => {
 
 export default Footer;
 
-
 const Copyright = styled.div`
-    margin: 5px;
+  margin: 5px;
 `;
 
 const Facebook = styled(FaFacebook)`
-    border-radius: 50%;
-    font-size: 1.5rem;
-    margin: 4px;
-    padding: 5px;
-    transition: 200ms;
-    &:hover{
-        background-color: var(--color-green);
-        cursor: pointer;
-    }
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin: 4px;
+  padding: 5px;
+  transition: 200ms;
+  &:hover {
+    background-color: var(--color-green);
+    cursor: pointer;
+  }
 `;
 
 const Instagram = styled(FaInstagram)`
-    border-radius: 50%;
-    font-size: 1.5rem;
-    margin: 4px;
-    padding: 5px;
-    transition: 200ms;
-    &:hover{
-        background-color: var(--color-green);
-        cursor: pointer;
-    }
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin: 4px;
+  padding: 5px;
+  transition: 200ms;
+  &:hover {
+    background-color: var(--color-green);
+    cursor: pointer;
+  }
 `;
 
 const SocialIcons = styled.div`
-    margin: 5px;
+  margin: 5px;
 `;
 
 const Twitter = styled(FaTwitter)`
-    border-radius: 50%;
-    font-size: 1.5rem;
-    margin: 4px;
-    padding: 5px;
-    transition: 200ms;
-    &:hover{
-        background-color: var(--color-green);
-        cursor: pointer;
-    }
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin: 4px;
+  padding: 5px;
+  transition: 200ms;
+  &:hover {
+    background-color: var(--color-green);
+    cursor: pointer;
+  }
 `;
 
 const Wrapper = styled.div`
-    align-items: center;
+  align-items: center;
   background-color: var(--color-dark-green);
   color: var(--color-light-beige);
   display: flex;

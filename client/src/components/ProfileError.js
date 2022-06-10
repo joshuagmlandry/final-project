@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
-const ProfileError = ()=>{
-    return (
-        <Wrapper>
-            <ErrorMessage>
-                Error: you must sign up or sign in to view your profile
-            </ErrorMessage>
-
-        </Wrapper>
-    );
-}
+const ProfileError = () => {
+  return (
+    <Wrapper>
+      <ErrorMessage>
+        Error: you must sign up or sign in to view your profile
+      </ErrorMessage>
+    </Wrapper>
+  );
+};
 
 export default ProfileError;
 

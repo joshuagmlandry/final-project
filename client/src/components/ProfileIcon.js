@@ -1,5 +1,5 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ProfileIcon = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -12,8 +12,6 @@ const ProfileIcon = () => {
     isAuthenticated && (
       <Wrapper>
         <UserImage src={user.picture} alt={user.name} />
-        {/* <h2>{user.name}</h2>
-        <p>{user.email}</p> */}
       </Wrapper>
     )
   );
@@ -26,15 +24,15 @@ const UserImage = styled.img`
   border: 2px solid var(--color-light-beige);
   border-radius: 50%;
   height: 50px;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 `;
 
 const Wrapper = styled.div`
   border-radius: 50%;
-  padding:10px;
-  &:hover{
+  padding: 10px;
+  &:hover {
     background-color: var(--color-green);
   }
 `;

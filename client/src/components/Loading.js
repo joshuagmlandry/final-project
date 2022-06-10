@@ -1,6 +1,8 @@
 import { AiOutlineLoading } from "react-icons/ai";
 import styled, { keyframes } from "styled-components";
 
+// Loading animation that is used throughout the site
+
 const Loading = () => {
   return (
     <Wrapper>

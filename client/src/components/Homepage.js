@@ -1,82 +1,95 @@
 import FeaturedHomepage from "./FeaturedHomepage";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
+import { FilterContext } from "./FilterContext";
 import { GiCampfire, GiCampingTent, GiForestCamp } from "react-icons/gi";
 import { useContext } from "react";
-import { FilterContext } from "./FilterContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Homepage = () => {
+// Homepage which includes a search bar and the application's mission statement
 
-  const {provinces, provincesLoading} = useContext(FilterContext);
-  const [selectedProvince, setSelectedProvince] = useState('');
+const Homepage = () => {
+  const { provinces, provincesLoading } = useContext(FilterContext);
+  const [selectedProvince, setSelectedProvince] = useState("");
   const navigate = useNavigate();
 
-  const changeHandler = (e)=>{
+  const changeHandler = (e) => {
     setSelectedProvince(e.target.value);
-  }
+  };
 
-  const submitHandler = (e)=>{
+  const submitHandler = (e) => {
     e.preventDefault();
-    const searchedProvince = provinces.data.filter(province => {
+    const searchedProvince = provinces.data.filter((province) => {
       return province.name === selectedProvince;
     });
     navigate(`/province/${searchedProvince[0].abbr}`);
-  }
+  };
 
   return (
     <>
-    {provincesLoading !== "loading" ? (
-    <Wrapper>
-      <SearchArea>
-        <div>
-          <SearchBar onSubmit={submitHandler}>
-            <SearchLabel>Find campsites in:</SearchLabel>
-            <Select defaultValue={"blank"} onChange={changeHandler}>
-              <Option disabled value={"blank"}>
-                {" "}
-              </Option>
-              {provinces.data.map((province, index) => {
-                return <Option key={`${province.name}-${index}`}>{province.name}</Option>;
-              })}
-            </Select>
-            <SearchButton>
-              <SearchIcon />
-            </SearchButton>
-          </SearchBar>
-        </div>
-      </SearchArea>
-      <MainBody>
-      <BodyHeader>Camping made easy</BodyHeader>
-      <BodyText>Browse top-rated campsites across Canada</BodyText>
-      <MainFeatures>
-        <Feature>
-          <FeatureIcon>
-          <GiCampfire />
-          </FeatureIcon>
-          <FeatureHeader>Learn</FeatureHeader>
-          <FeatureText>Read campsite reviews from across the Parks Canada network.</FeatureText>
-        </Feature>
-        <Feature>
-          <FeatureIcon>
-          <GiCampingTent />
-          </FeatureIcon>
-          <FeatureHeader>Contribute</FeatureHeader>
-          <FeatureText>Add your own reviews to share your experience.</FeatureText>
-        </Feature>
-        <Feature>
-          <FeatureIcon>
-          <GiForestCamp/>
-          </FeatureIcon>
-          <FeatureHeader>Engage</FeatureHeader>
-          <FeatureText>Join the Loon community for exclusive features.</FeatureText>
-        </Feature>
-      </MainFeatures>
-      </MainBody>
-      <FeaturedHomepage />
-    </Wrapper>      
-    ) : " "}
+      {provincesLoading !== "loading" ? (
+        <Wrapper>
+          <SearchArea>
+            <div>
+              <SearchBar onSubmit={submitHandler}>
+                <SearchLabel>Find campsites in:</SearchLabel>
+                <Select defaultValue={"blank"} onChange={changeHandler}>
+                  <option disabled value={"blank"}>
+                    {" "}
+                  </option>
+                  {provinces.data.map((province, index) => {
+                    return (
+                      <option key={`${province.name}-${index}`}>
+                        {province.name}
+                      </option>
+                    );
+                  })}
+                </Select>
+                <SearchButton>
+                  <SearchIcon />
+                </SearchButton>
+              </SearchBar>
+            </div>
+          </SearchArea>
+          <MainBody>
+            <BodyHeader>Camping made easy</BodyHeader>
+            <BodyText>Browse top-rated campsites across Canada</BodyText>
+            <MainFeatures>
+              <Feature>
+                <FeatureIcon>
+                  <GiCampfire />
+                </FeatureIcon>
+                <FeatureHeader>Learn</FeatureHeader>
+                <FeatureText>
+                  Read campsite reviews from across the Parks Canada network.
+                </FeatureText>
+              </Feature>
+              <Feature>
+                <FeatureIcon>
+                  <GiCampingTent />
+                </FeatureIcon>
+                <FeatureHeader>Contribute</FeatureHeader>
+                <FeatureText>
+                  Add your own reviews to share your experience.
+                </FeatureText>
+              </Feature>
+              <Feature>
+                <FeatureIcon>
+                  <GiForestCamp />
+                </FeatureIcon>
+                <FeatureHeader>Engage</FeatureHeader>
+                <FeatureText>
+                  Join the Loon community for exclusive features.
+                </FeatureText>
+              </Feature>
+            </MainFeatures>
+          </MainBody>
+          <FeaturedHomepage />
+        </Wrapper>
+      ) : (
+        " "
+      )}
     </>
   );
 };
@@ -104,7 +117,7 @@ const Feature = styled.div`
   padding: 20px;
   text-align: center;
   width: 250px;
-  &:last-of-type{
+  &:last-of-type {
     border: none;
   }
 `;
@@ -137,8 +150,6 @@ const MainFeatures = styled.div`
   display: flex;
   margin: 100px 0;
 `;
-
-const Option = styled.option``;
 
 const SearchArea = styled.div`
   align-items: center;
