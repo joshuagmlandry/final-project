@@ -111,10 +111,10 @@ const ReviewForm = ({ queriedCampsite }) => {
       .then((res) => res.json())
       .then((data) => {
         setPostSending(false);
-        setPostAdded(!postAdded);
         if (data.status === 200) {
           id = uuidv4();
           setStatusMessage("Review successfully posted!");
+          setPostAdded(!postAdded);
         } else {
           console.log(data);
           setStatusMessage("Please validate with reCAPTCHA.");

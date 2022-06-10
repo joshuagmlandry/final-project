@@ -7,7 +7,8 @@ import ImageGallery from "react-image-gallery";
 import Loading from "./Loading";
 import ReviewForm from "./ReviewForm";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { FilterContext } from "./FilterContext";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -24,6 +25,7 @@ const Campsite = () => {
   const userReviewArray = [];
   const params = useParams();
   const { user, isAuthenticated } = useAuth0();
+  const {postAdded} = useContext(FilterContext);
 
   useEffect(() => {
     // Query the feature layer for the details of the requested campsite
@@ -66,7 +68,7 @@ const Campsite = () => {
           }
         });
     }
-  }, [queriedCampsiteLoading]);
+  }, [queriedCampsiteLoading, postAdded]);
 
   return (
     // Show all campsite details, allow the logged in user to favourite the campsite, create a photo gallery from all images that were submitted with reviews, display the user submitted reviews as well as five random mock reviews, and show the review form (with CAPTCHA verification).

@@ -6,7 +6,7 @@ import { FilterContext } from "./FilterContext";
 // Display all reviews, which includes user submitted reviews as well as five random mock reviews.
 
 const DisplayReviews = ({ userReviews, userReviewsLoading }) => {
-  const { allReviews, allReviewsLoading } = useContext(FilterContext);
+  const { allReviews, allReviewsLoading, postAdded } = useContext(FilterContext);
   const [randomReviews, setRandomReviews] = useState([]);
   const randomArray = [];
   let avgReview = 0;
@@ -41,7 +41,7 @@ const DisplayReviews = ({ userReviews, userReviewsLoading }) => {
       }
       setRandomReviews([...randomArray, ...userReviews]);
     }
-  }, [allReviewsLoading, userReviewsLoading]);
+  }, [allReviewsLoading, userReviewsLoading, postAdded]);
 
   return (
     <>
