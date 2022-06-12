@@ -47,8 +47,8 @@ const Campsite = () => {
       "Site_Num_Site",
     ];
     campsites.queryFeatures(query).then((data) => {
-      setQueriedCampsite(data.features[0].attributes);
       setQueriedCampsiteLoading("idle");
+      setQueriedCampsite(data.features[0].attributes);
     });
   }, []);
 
