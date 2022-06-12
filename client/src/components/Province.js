@@ -101,7 +101,7 @@ const Province = () => {
 
   return (
     <>
-      {provincesLoading !== "loading" ? (
+      {provincesLoading !== "loading" && validProvince.valid ? (
         validProvince.valid ? (
           <Wrapper>
             <TextHeader>
