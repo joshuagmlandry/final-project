@@ -12,10 +12,17 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 const { REACT_APP_ARCGIS_API } = process.env;
 
+// Displays a map for the queried province/territory.  Additionally, there is a featured park/place section that shows a random park and random mock review.
+
 const Province = () => {
   const { provinces, provincesLoading } = useContext(FilterContext);
-  const [validProvince, setValidProvince] = useState({prov: "", valid: false});
-  let defEx = (validProvince.valid) ? `Name_EN = '${validProvince.prov.name}'` : "1=0";
+  const [validProvince, setValidProvince] = useState({
+    prov: "",
+    valid: false,
+  });
+  let defEx = validProvince.valid
+    ? `Name_EN = '${validProvince.prov.name}'`
+    : "1=0";
 
   const params = useParams();
 
@@ -25,7 +32,7 @@ const Province = () => {
         return province.abbr === params.abbr;
       });
       if (provinceToDisplay.length !== 0) {
-        setValidProvince({prov: provinceToDisplay[0], valid: true});
+        setValidProvince({ prov: provinceToDisplay[0], valid: true });
       }
 
       esriConfig.apiKey = REACT_APP_ARCGIS_API;
@@ -34,24 +41,23 @@ const Province = () => {
         basemap: "arcgis-topographic",
       });
 
-      if(validProvince.valid){
+      if (validProvince.valid) {
         const view = new MapView({
-            container: "viewDiv",
-            map: map,
-            center: provinceToDisplay[0].coord,
-            zoom: provinceToDisplay[0].zoom,
+          container: "viewDiv",
+          map: map,
+          center: provinceToDisplay[0].coord,
+          zoom: provinceToDisplay[0].zoom,
         });
-        
+
         const locate = new Locate({
           view: view,
           useHeadingEnabled: false,
-          goToOverride: (view, options)=>{
+          goToOverride: (view, options) => {
             options.target.scale = 5000000;
             return view.goTo(options.target);
-          }
+          },
         });
         view.ui.add(locate, "top-left");
-
       }
 
       const popupCampsites = {
@@ -66,9 +72,8 @@ const Province = () => {
                   <h4>Reviews:</h4> Poorly rated (17 reviews)<br>
                   <h4>Campsite Page:</h4><a href='http://localhost:3000/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
       };
-  
+
       const campsites = new FeatureLayer({
-        // url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Accommodation_Hebergement_V2_2/FeatureServer/0",
         url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
         outFields: [
           "Accommodation_Type",
@@ -86,7 +91,7 @@ const Province = () => {
       const provOutline = new FeatureLayer({
         url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Provinces_and_Territories/FeatureServer/0",
         opacity: 0.2,
-        definitionExpression: defEx
+        definitionExpression: defEx,
       });
 
       map.add(campsites);
@@ -96,26 +101,29 @@ const Province = () => {
 
   return (
     <>
-    {provincesLoading !== "loading" ? (
-    validProvince.valid ? (
-    <Wrapper>
-      <TextHeader>Browse campsites in <Bold>{validProvince.prov.name}</Bold></TextHeader>
-      <MapAndFilter>
-        <MapContainer id="viewDiv"></MapContainer>
-        <Filter>
-        </Filter>
-        <FeaturedProvince prov={validProvince.prov}/>
-      </MapAndFilter>
-      
-    </Wrapper>      
-    ) : <ErrorPage />      
-    ) : <Loading />}
+      {provincesLoading !== "loading" ? (
+        validProvince.valid ? (
+          <Wrapper>
+            <TextHeader>
+              Browse campsites in <Bold>{validProvince.prov.name}</Bold>
+            </TextHeader>
+            <MapAndFilter>
+              <MapContainer id="viewDiv"></MapContainer>
+              <Filter></Filter>
+              <FeaturedProvince prov={validProvince.prov} />
+            </MapAndFilter>
+          </Wrapper>
+        ) : (
+          <ErrorPage />
+        )
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };
 
 export default Province;
-
 
 const Bold = styled.span`
   font-weight: bold;
@@ -140,11 +148,6 @@ const MapContainer = styled.div`
   margin-bottom: 50px;
   height: 500px;
   width: 700px;
-`;
-
-const StyledSelect = styled.select`
-  font-family: var(--font-body);
-  font-size: 1.25rem;
 `;
 
 const TextHeader = styled.div`

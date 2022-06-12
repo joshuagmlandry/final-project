@@ -15,13 +15,14 @@ export const FilterProvider = ({ children }) => {
   const [favourites, setFavourites] = useState([]);
   const [favouritesLoading, setFavouritesLoading] = useState("loading");
   const [newFav, setNewFav] = useState(false);
+  const [deletedFavStatus, setDeletedFavStatus] = useState({});
   const [parkDescriptions, setParkDescriptions] = useState([]);
   const [parkDescriptionsLoading, setParkDescriptionsLoading] =
     useState("loading");
   const [allReviews, setAllReviews] = useState([]);
   const [allReviewsLoading, setAllReviewsLoading] = useState("loading");
   const [postAdded, setPostAdded] = useState(false);
-  const [deletedFavStatus, setDeletedFavStatus] = useState({});
+
 
   useEffect(() => {
     fetch("/api/provinces")

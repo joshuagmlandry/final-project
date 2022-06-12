@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// Error message that shows up when you try to access user profiles when not authenticated
+
 const ProfileError = () => {
   return (
     <Wrapper>

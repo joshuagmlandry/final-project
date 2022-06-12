@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
+// User image avatar that appears in the navigation bar once you are authenticated
+
 const ProfileIcon = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 

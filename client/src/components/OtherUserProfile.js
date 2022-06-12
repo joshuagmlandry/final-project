@@ -76,41 +76,43 @@ const OtherUserProfile = () => {
         <Loading />
       )}
 
-      <ReviewsAndFavourites>Reviews</ReviewsAndFavourites>
       {profileReviewsLoading !== "loading" ? (
         profileReviews.length !== 0 ? (
-          <ReviewSectionWrapper>
-            {profileReviews.map((review) => {
-              return (
-                <IndividualReview key={review._id}>
-                  <ReviewWrapper>
-                    <ReviewLocation>
-                      <StyledLink
-                        target="_blank"
-                        to={`/campsite/${review.campsite.Unique_Site_ID}`}
-                      >
-                        {review.campsite.Unique_Site_ID}
-                      </StyledLink>{" "}
-                      ({review.campsite.place_name},{" "}
-                      {review.campsite.region_name})
-                    </ReviewLocation>
-                    <ReviewTitle>{review.title}</ReviewTitle>
-                    <ReviewRating>{ratingToStars(review)}</ReviewRating>
-                    <ReviewAuthor>by {review.name}</ReviewAuthor>
-                    <ReviewBody>{review.review}</ReviewBody>
-                    {review.media !== null && review.media !== undefined ? (
-                      <ReviewImg
-                        src={review.media.url}
-                        alt={"User uploaded image"}
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </ReviewWrapper>
-                </IndividualReview>
-              );
-            })}
-          </ReviewSectionWrapper>
+          <>
+            <ReviewsAndFavourites>Reviews</ReviewsAndFavourites>
+            <ReviewSectionWrapper>
+              {profileReviews.map((review) => {
+                return (
+                  <IndividualReview key={review._id}>
+                    <ReviewWrapper>
+                      <ReviewLocation>
+                        <StyledLink
+                          target="_blank"
+                          to={`/campsite/${review.campsite.Unique_Site_ID}`}
+                        >
+                          {review.campsite.Unique_Site_ID}
+                        </StyledLink>{" "}
+                        ({review.campsite.place_name},{" "}
+                        {review.campsite.region_name})
+                      </ReviewLocation>
+                      <ReviewTitle>{review.title}</ReviewTitle>
+                      <ReviewRating>{ratingToStars(review)}</ReviewRating>
+                      <ReviewAuthor>by {review.name}</ReviewAuthor>
+                      <ReviewBody>{review.review}</ReviewBody>
+                      {review.media !== null && review.media !== undefined ? (
+                        <ReviewImg
+                          src={review.media.url}
+                          alt={"User uploaded image"}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </ReviewWrapper>
+                  </IndividualReview>
+                );
+              })}
+            </ReviewSectionWrapper>
+          </>
         ) : (
           <NoReviews>No reviews to display</NoReviews>
         )

@@ -1,18 +1,22 @@
 import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
 import moment from "moment";
-import { useContext, useState } from "react";
-import { FilterContext } from "./FilterContext";
-import { FiCamera } from "react-icons/fi"
 import ReCAPTCHA from "react-google-recaptcha";
+import { FiCamera } from "react-icons/fi";
+import { FilterContext } from "./FilterContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useContext, useState } from "react";
 const { REACT_APP_SITEKEY, REACT_APP_CLOUDNAME, REACT_APP_UPLOAD_PRESET } =
   process.env;
 const { v4: uuidv4 } = require("uuid");
 
+// Review form where users can leave reviews of campsites.  They can upload photos via Cloudinary and they must validate with reCAPTCHA to be able to submit the review.
+
 const ReviewForm = ({ queriedCampsite }) => {
   const { user, isAuthenticated } = useAuth0();
   const { postAdded, setPostAdded } = useContext(FilterContext);
-  const postingUser = isAuthenticated ? user : { sub: "Guest", name: "Guest", nickname: "Guest" };
+  const postingUser = isAuthenticated
+    ? user
+    : { sub: "Guest", name: "Guest", nickname: "Guest" };
   const [statusMessage, setStatusMessage] = useState("");
   const [typedReview, setTypedReview] = useState("");
   const [postSending, setPostSending] = useState(false);
@@ -60,15 +64,15 @@ const ReviewForm = ({ queriedCampsite }) => {
             error: "#F44235",
             inProgress: "#0078FF",
             complete: "#20B832",
-            sourceBg: "#F3EFCC"
-        },
-        fonts: {
-          default: null,
-          "'IBM Plex Sans', sans-serif": {
+            sourceBg: "#F3EFCC",
+          },
+          fonts: {
+            default: null,
+            "'IBM Plex Sans', sans-serif": {
               url: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400&display=swap",
-              active: true
-          }
-      },
+              active: true,
+            },
+          },
         },
       },
       (err, info) => {
@@ -117,7 +121,6 @@ const ReviewForm = ({ queriedCampsite }) => {
           setStatusMessage("Review successfully posted!");
           setPostAdded(!postAdded);
         } else {
-          console.log(data);
           setStatusMessage("Please validate with reCAPTCHA.");
         }
       });
@@ -131,24 +134,24 @@ const ReviewForm = ({ queriedCampsite }) => {
           <TitleInput placeholder="Title" required></TitleInput>
           <RatingWrapper>
             <Rating>
-              <RatingTitle>⭐</RatingTitle>
-              <RatingCheckbox type="radio" name="rating" required />
+              <div>⭐</div>
+              <input type="radio" name="rating" required />
             </Rating>
             <Rating>
-              <RatingTitle>⭐⭐</RatingTitle>
-              <RatingCheckbox type="radio" name="rating" />
+              <div>⭐⭐</div>
+              <input type="radio" name="rating" />
             </Rating>
             <Rating>
-              <RatingTitle>⭐⭐⭐</RatingTitle>
-              <RatingCheckbox type="radio" name="rating" />
+              <div>⭐⭐⭐</div>
+              <input type="radio" name="rating" />
             </Rating>
             <Rating>
-              <RatingTitle>⭐⭐⭐⭐</RatingTitle>
-              <RatingCheckbox type="radio" name="rating" />
+              <div>⭐⭐⭐⭐</div>
+              <input type="radio" name="rating" />
             </Rating>
             <Rating>
-              <RatingTitle>⭐⭐⭐⭐⭐</RatingTitle>
-              <RatingCheckbox type="radio" name="rating" />
+              <div>⭐⭐⭐⭐⭐</div>
+              <input type="radio" name="rating" />
             </Rating>
           </RatingWrapper>
           <ReviewText
@@ -161,12 +164,11 @@ const ReviewForm = ({ queriedCampsite }) => {
           </div>
           <SubmitAndMessage>
             <ButtonWrapper>
-            <SubmitButton onClick={photoUploadWidget}>
-              <div>Upload photos</div> <FiCamera style={{marginLeft: "7px"}}/>
-            </SubmitButton>
-            <div style={{margin: "0 20px"}}>
-                {photoUploadStatusMessage}
-              </div>              
+              <SubmitButton onClick={photoUploadWidget}>
+                <div>Upload photos</div>{" "}
+                <FiCamera style={{ marginLeft: "7px" }} />
+              </SubmitButton>
+              <div style={{ margin: "0 20px" }}>{photoUploadStatusMessage}</div>
             </ButtonWrapper>
 
             <ButtonWrapper>
@@ -194,10 +196,6 @@ const ButtonWrapper = styled.div`
   display: flex;
 `;
 
-const Header = styled.div`
-  margin: 10px 0;
-`;
-
 const Rating = styled.div`
   align-items: center;
   display: flex;
@@ -205,10 +203,6 @@ const Rating = styled.div`
   justify-content: center;
   margin-right: 20px;
 `;
-
-const RatingCheckbox = styled.input``;
-
-const RatingTitle = styled.div``;
 
 const RatingWrapper = styled.div`
   display: flex;
@@ -266,7 +260,7 @@ const SubmitButton = styled.button`
     background-color: lightgrey;
     cursor: not-allowed;
   }
-  &:first-of-type{
+  &:first-of-type {
     margin: 5px 0;
   }
 `;

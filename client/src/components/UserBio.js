@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+// Component that shows the user bio.  If the bio is null, it will prompt the user to add a bio.  When you click on the bio, you can edit and submit an updated bio.
+
 const UserBio = ({ bioUpdate, setBioUpdate, user }) => {
   const [editFlag, setEditFlag] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState("");
   const editBio = (e) => {
     setEditFlag(!editFlag);
   };
