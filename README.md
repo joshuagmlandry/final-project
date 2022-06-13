@@ -26,6 +26,10 @@ Users can sign up/log in via Auth0.  Once a member, a bio can be added (and upda
 
 ![User profile](https://res.cloudinary.com/dlfu6niut/image/upload/v1655145869/Screen_Shot_2022-06-13_at_14.43.19_PM_v8vdhy.png)
 
+Logged in, verified users are also able to view the profiles, which displays the name, bio, and reviews, of other verified users.
+
+![User profile](https://res.cloudinary.com/dlfu6niut/image/upload/v1655146498/Screen_Shot_2022-06-13_at_14.54.36_PM_sweocj.png)
+
 ### Post reviews
 
 Users can post reviews and ratings for all campsites.  Photos can be uploaded along with the review and the user must complete a reCAPTCHA validation prior to posting their review.
