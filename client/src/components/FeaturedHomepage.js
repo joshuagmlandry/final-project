@@ -21,6 +21,7 @@ const FeaturedHomepage = () => {
   return (
     <Wrapper>
       <MainHeader>Featured Parks and Places</MainHeader>
+      <Subheader>(images and descriptions from Parks Canada)</Subheader>
       <FeaturedParkWrapper>
         {featuredParks.map((park, index) => {
           return (
@@ -42,12 +43,19 @@ const FeaturedHomepage = () => {
 
 export default FeaturedHomepage;
 
+const FeaturedParkWrapper = styled.div`
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+`;
+
 const MainHeader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
   font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-bottom: 5px;
 `;
 
 const ParkDescription = styled.div`
@@ -81,11 +89,12 @@ const ParkWrapper = styled.div`
   width: 250px;
 `;
 
-const FeaturedParkWrapper = styled.div`
-  align-items: flex-start;
-  display: flex;
-  justify-content: center;
-  text-align: center;
+const Subheader = styled.div`
+  color: var(--color-dark-green);
+  font-family: var(--font-header);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 50px;
 `;
 
 const Wrapper = styled.div`

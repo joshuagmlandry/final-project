@@ -50,6 +50,7 @@ const FeaturedProvince = ({ prov }) => {
     return (
       <FeatureWrapper>
         <MainHeader>Featured Park or Place</MainHeader>
+        <Subheader>(images and descriptions from Parks Canada)</Subheader>
         <div>
           {parkDescriptionsLoading !== "loading" ? (
             <FeaturedPark>
@@ -161,7 +162,7 @@ const MainHeader = styled.div`
   font-family: var(--font-header);
   font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-bottom: 5px;
   text-align: center;
 `;
 
@@ -191,4 +192,11 @@ const ReviewTitle = styled.div`
   margin-top: 10px;
 `;
 
-const Wrapper = styled.div``;
+const Subheader = styled.div`
+  color: var(--color-dark-green);
+  font-family: var(--font-header);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 50px;
+  text-align: center;
+`;
