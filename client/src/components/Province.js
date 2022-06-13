@@ -139,8 +139,23 @@ const Province = () => {
             <ParksAndCampgrounds>
               <TextHeader>All Parks and Places</TextHeader>
               <SubHeader>(images and descriptions from Parks Canada)</SubHeader>
+              {validProvince.prov.place.length === 0 ? (
+                <NoCampsites>
+                  There are unfortunately no campsites available in this
+                  province/territory.
+                </NoCampsites>
+              ) : (
+                ""
+              )}
               <BottomWrapper>
                 <AllPlaces>
+                  {validProvince.prov.place.length !== 0 ? (
+                    <ClickToView>
+                      Click a park or place to view all campgrounds
+                    </ClickToView>
+                  ) : (
+                    ""
+                  )}
                   {validProvince.prov.place.map((place, index) => {
                     return (
                       <div key={`${place}`}>
@@ -166,10 +181,14 @@ const Province = () => {
                     );
                   })}
                 </AllPlaces>
-                <FeaturedProvince
-                  prov={validProvince.prov}
-                  index={selectedIndex}
-                />
+                {validProvince.prov.place.length !== 0 ? (
+                  <FeaturedProvince
+                    prov={validProvince.prov}
+                    index={selectedIndex}
+                  />
+                ) : (
+                  ""
+                )}
               </BottomWrapper>
             </ParksAndCampgrounds>
           </Wrapper>
@@ -208,6 +227,11 @@ const CampgroundName = styled.div`
   transition: 200ms;
 `;
 
+const ClickToView = styled.div`
+  margin: 10px 0 20px;
+  text-align: center;
+`;
+
 const Filter = styled.div`
   font-family: var(--font-body);
   font-size: 1.5rem;
@@ -230,6 +254,14 @@ const MapContainer = styled.div`
   margin-bottom: 50px;
   height: 600px;
   width: 1000px;
+`;
+
+const NoCampsites = styled.div`
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  margin: 0 40px;
+  text-align: justify;
+  width: 700px;
 `;
 
 const ParkButton = styled.div`

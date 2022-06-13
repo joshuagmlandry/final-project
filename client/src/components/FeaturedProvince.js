@@ -91,12 +91,7 @@ const FeaturedProvince = ({ prov, index }) => {
       parkDescriptionsLoading !== "loading" &&
       allReviewsLoading !== "loading"
     ) {
-      return (
-        <NoCampsites>
-          There are unfortunately no campsites available in this
-          province/territory.
-        </NoCampsites>
-      );
+      return "";
     } else {
       return <Loading />;
     }
