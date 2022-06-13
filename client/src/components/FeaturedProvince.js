@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 // Shows a random park, description, and mock review for the selected province
 
-const FeaturedProvince = ({ prov }) => {
+const FeaturedProvince = ({ prov, index }) => {
   const {
     allReviews,
     allReviewsLoading,
@@ -41,16 +41,13 @@ const FeaturedProvince = ({ prov }) => {
     parkDescriptionsLoading !== "loading" &&
     allReviewsLoading !== "loading"
   ) {
-    const randomFeaturedPlace =
-      prov.place[Math.floor(prov.place.length * Math.random())];
+    const randomFeaturedPlace = prov.place[index];
     const matchedParkInfo = parkDescriptions.filter((park) => {
       return park.name === randomFeaturedPlace;
     })[0];
     const randomReview = allReviews[Math.floor(1000 * Math.random())];
     return (
       <FeatureWrapper>
-        <MainHeader>Featured Park or Place</MainHeader>
-        <Subheader>(images and descriptions from Parks Canada)</Subheader>
         <div>
           {parkDescriptionsLoading !== "loading" ? (
             <FeaturedPark>
@@ -152,18 +149,9 @@ const FeaturedParkLink = styled.a`
 `;
 
 const FeatureWrapper = styled.div`
-  border: 3px solid var(--color-dark-green);
   border-radius: 4px;
-  padding: 40px 40px 10px;
-`;
-
-const MainHeader = styled.div`
-  color: var(--color-dark-green);
-  font-family: var(--font-header);
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-align: center;
+  height: 550px;
+  padding: 20px 40px 10px;
 `;
 
 const NoCampsites = styled.div`
@@ -190,13 +178,4 @@ const ReviewTitle = styled.div`
   font-weight: bold;
   font-size: 1.1rem;
   margin-top: 10px;
-`;
-
-const Subheader = styled.div`
-  color: var(--color-dark-green);
-  font-family: var(--font-header);
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 50px;
-  text-align: center;
 `;

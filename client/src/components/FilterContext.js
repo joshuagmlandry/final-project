@@ -22,7 +22,7 @@ export const FilterProvider = ({ children }) => {
   const [allReviews, setAllReviews] = useState([]);
   const [allReviewsLoading, setAllReviewsLoading] = useState("loading");
   const [postAdded, setPostAdded] = useState(false);
-
+  const [campgrounds, setCampgrounds] = useState({ name: null, array: null });
 
   useEffect(() => {
     fetch("/api/provinces")
@@ -101,6 +101,8 @@ export const FilterProvider = ({ children }) => {
         setNewFav,
         deletedFavStatus,
         setDeletedFavStatus,
+        campgrounds,
+        setCampgrounds,
       }}
     >
       {children}
