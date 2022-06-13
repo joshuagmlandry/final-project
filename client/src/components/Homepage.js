@@ -50,7 +50,7 @@ const Homepage = () => {
             <div hidden={tabFlag.prov}>
               <SearchBar onSubmit={submitHandler}>
                 <SelectionTabs>
-                  <Tab onClick={tabHandlerProv}>By province</Tab>
+                  <Tab onClick={tabHandlerProv}>By province/territory</Tab>
                   <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
                 </SelectionTabs>
                 <SearchField>
@@ -76,7 +76,7 @@ const Homepage = () => {
             <div hidden={tabFlag.campsite}>
               <SearchBar onSubmit={campsiteSearchHandler}>
                 <SelectionTabs>
-                  <Tab onClick={tabHandlerProv}>By province</Tab>
+                  <Tab onClick={tabHandlerProv}>By province/territory</Tab>
                   <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
                 </SelectionTabs>
                 <SearchField>
