@@ -11,6 +11,7 @@ import { useState } from "react";
 
 const Homepage = () => {
   const { provinces, provincesLoading } = useContext(FilterContext);
+  const [tabFlag, setTabFlag] = useState({ prov: false, campsite: true });
   const [selectedProvince, setSelectedProvince] = useState("");
   const navigate = useNavigate();
 
@@ -26,32 +27,69 @@ const Homepage = () => {
     navigate(`/province/${searchedProvince[0].abbr}`);
   };
 
+  const campsiteSearchHandler = (e) => {
+    e.preventDefault();
+    navigate(`/campsite/${e.target[2].value.toUpperCase()}`);
+  };
+
+  const tabHandlerProv = (e) => {
+    e.preventDefault();
+    setTabFlag({ prov: false, campsite: true });
+  };
+
+  const tabHandlerCampsite = (e) => {
+    e.preventDefault();
+    setTabFlag({ prov: true, campsite: false });
+  };
+
   return (
     <>
       {provincesLoading !== "loading" ? (
         <Wrapper>
           <SearchArea>
-            <div>
+            <div hidden={tabFlag.prov}>
               <SearchBar onSubmit={submitHandler}>
-                <SearchLabel>Find campsites in:</SearchLabel>
-                <Select defaultValue={"blank"} onChange={changeHandler}>
-                  <option disabled value={"blank"}>
-                    {" "}
-                  </option>
-                  {provinces.data.map((province, index) => {
-                    return (
-                      <option key={`${province.name}-${index}`}>
-                        {province.name}
-                      </option>
-                    );
-                  })}
-                </Select>
-                <SearchButton>
-                  <SearchIcon />
-                </SearchButton>
+                <SelectionTabs>
+                  <Tab onClick={tabHandlerProv}>By province</Tab>
+                  <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
+                </SelectionTabs>
+                <SearchField>
+                  <SearchLabel>Find campsites in:</SearchLabel>
+                  <Select defaultValue={"blank"} onChange={changeHandler}>
+                    <option disabled value={"blank"}>
+                      {" "}
+                    </option>
+                    {provinces.data.map((province, index) => {
+                      return (
+                        <option key={`${province.name}-${index}`}>
+                          {province.name}
+                        </option>
+                      );
+                    })}
+                  </Select>
+                  <SearchButton>
+                    <SearchIcon />
+                  </SearchButton>
+                </SearchField>
+              </SearchBar>
+            </div>
+            <div hidden={tabFlag.campsite}>
+              <SearchBar onSubmit={campsiteSearchHandler}>
+                <SelectionTabs>
+                  <Tab onClick={tabHandlerProv}>By province</Tab>
+                  <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
+                </SelectionTabs>
+                <SearchField>
+                  <SearchLabel>Find a campsite:</SearchLabel>
+                  <CampsiteInput></CampsiteInput>
+                  <SearchButton>
+                    <SearchIcon />
+                  </SearchButton>
+                </SearchField>
               </SearchBar>
             </div>
           </SearchArea>
+
           <MainBody>
             <BodyHeader>Camping made easy</BodyHeader>
             <BodyText>Browse top-rated campsites across Canada</BodyText>
@@ -107,6 +145,16 @@ const BodyText = styled.div`
   font-family: var(--font-body);
   font-size: 2rem;
   margin-bottom: 40px;
+`;
+
+const CampsiteInput = styled.input`
+  border: none;
+  border-bottom: 1px solid black;
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  margin: 0 10px;
+  padding: 2px;
+  width: 310px;
 `;
 
 const Feature = styled.div`
@@ -167,10 +215,12 @@ const SearchBar = styled.form`
   background-color: rgba(255, 255, 255, 0.92);
   border-radius: 50px;
   display: flex;
+  flex-direction: column;
   font-family: var(--font-body);
   font-size: 1.5rem;
   padding: 20px;
   transition: 200ms;
+  width: 630px;
 `;
 
 const SearchButton = styled.button`
@@ -179,6 +229,11 @@ const SearchButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const SearchField = styled.div`
+  align-items: center;
+  display: flex;
 `;
 
 const SearchIcon = styled(AiOutlineSearch)`
@@ -209,6 +264,29 @@ const Select = styled.select`
   text-align: center;
   width: fit-content;
   &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SelectionTabs = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+const Tab = styled.button`
+  background-color: inherit;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  padding: 0 30px;
+  transition: 200ms;
+  &:last-of-type {
+    border-left: 1px solid lightgray;
+  }
+  &:hover {
+    color: var(--color-dark-green);
     cursor: pointer;
   }
 `;
