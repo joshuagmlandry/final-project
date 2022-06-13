@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require("moment");
 const { MongoClient } = require("mongodb");
 const { v4: uuidv4 } = require("uuid");
 
@@ -10,7 +10,9 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const { mockData } = require('./data');
+const { mockData } = require("./data");
+
+// Batch import function used to move the mock data from the backend to the database
 
 const batchImport = async () => {
   try {
@@ -19,9 +21,11 @@ const batchImport = async () => {
     console.log("Successfully connected to MongoDB");
     const db = client.db("final-project");
 
-    const mockDataModified = mockData.map(entry => {
-      const newTime = moment(entry.time1 + ", " + entry.time2).format('MMMM Do YYYY, h:mm:ss a');
-      return {...entry, "_id": uuidv4(), "time": newTime};
+    const mockDataModified = mockData.map((entry) => {
+      const newTime = moment(entry.time1 + ", " + entry.time2).format(
+        "MMMM Do YYYY, h:mm:ss a"
+      );
+      return { ...entry, _id: uuidv4(), time: newTime };
     });
 
     const importReviews = await db

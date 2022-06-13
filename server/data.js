@@ -1,4 +1,4 @@
-// Small, regularly used data that doesn't necessarily needed to be added to the database
+// Data on the provinces/territories as well as all parks and places
 
 const provinces = [
   {
@@ -118,7 +118,7 @@ const provinces = [
   },
 ];
 
-//All place descriptions taken from the Parks Canada website - https://www.pc.gc.ca/en/voyage-travel/recherche-tous-parks-all
+//All images and place descriptions taken from the Parks Canada website - https://www.pc.gc.ca/en/voyage-travel/recherche-tous-parks-all
 
 const placeDescriptions = [
   {
@@ -426,6 +426,8 @@ const placeDescriptions = [
     parksCanLink: "https://www.pc.gc.ca/en/pn-np/yt/kluane",
   },
 ];
+
+// Mock data that will be batch imported into the database
 
 const mockData = [
   {
