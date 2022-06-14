@@ -66,6 +66,7 @@ const BioButton = styled.button`
   justify-content: center;
   margin: 5px 0px;
   padding: 5px;
+  transition: 200ms;
   width: 158px;
   &:hover {
     background-color: var(--color-green);

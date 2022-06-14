@@ -78,6 +78,7 @@ const ParkHeader = styled.a`
   font-size: 1.25rem;
   font-weight: bold;
   text-decoration: none;
+  transition: 200ms;
   &:hover {
     color: var(--color-green);
     cursor: pointer;

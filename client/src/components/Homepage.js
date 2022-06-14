@@ -148,6 +148,7 @@ const BodyText = styled.div`
 `;
 
 const CampsiteInput = styled.input`
+  background-color: transparent;
   border: none;
   border-bottom: 1px solid black;
   font-family: var(--font-body);
@@ -226,6 +227,7 @@ const SearchBar = styled.form`
 const SearchButton = styled.button`
   background: none;
   border: none;
+  transition: 200ms;
   &:hover {
     cursor: pointer;
   }

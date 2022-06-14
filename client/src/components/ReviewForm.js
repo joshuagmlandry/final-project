@@ -251,6 +251,7 @@ const SubmitButton = styled.button`
   font-size: 1rem;
   justify-content: center;
   padding: 10px;
+  transition: 200ms;
   width: 175px;
   &:hover {
     background-color: var(--color-green);

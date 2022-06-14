@@ -11,7 +11,7 @@ const About = () => {
       <AboutBody>
         Loon was created in June 2022 in Montreal, QC as both a web development
         course project and a potential tool for campers using the Canadian
-        national park system. After the repeated experience at arriving at a
+        national park system. After the repeated experience of arriving at a
         campsite and wishing that the photos and description of it online more
         accurately reflected the actual site, Loon founders envisioned a
         solution: an application showcasing user reviews of campsites across the

@@ -26,6 +26,7 @@ const UserImage = styled.img`
   border: 2px solid var(--color-light-beige);
   border-radius: 50%;
   height: 50px;
+  transition: 200ms;
   &:hover {
     cursor: pointer;
   }
@@ -34,6 +35,7 @@ const UserImage = styled.img`
 const Wrapper = styled.div`
   border-radius: 50%;
   padding: 10px;
+  transition: 200ms;
   &:hover {
     background-color: var(--color-green);
   }

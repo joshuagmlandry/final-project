@@ -264,6 +264,7 @@ const ResetButton = styled.button`
   font-size: 1rem;
   margin-top: 10px;
   padding: 10px;
+  transition: 200ms;
   width: 100px;
   &:hover {
     background-color: var(--color-green);

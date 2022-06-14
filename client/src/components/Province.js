@@ -137,7 +137,7 @@ const Province = () => {
               <Filter></Filter>
             </MapAndFilter>
             <ParksAndCampgrounds>
-              <TextHeader>All Parks and Places</TextHeader>
+              <TextHeader style={{fontWeight: "bold"}}>All Parks and Places</TextHeader>
               <SubHeader>(images and descriptions from Parks Canada)</SubHeader>
               {validProvince.prov.place.length === 0 ? (
                 <NoCampsites>

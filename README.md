@@ -2,7 +2,7 @@
 
 ![Loon homepage](https://res.cloudinary.com/dlfu6niut/image/upload/v1655145870/Screen_Shot_2022-06-13_at_14.42.19_PM_ny0jne.png)
 
-Loon was created in June 2022 in Montreal, QC as both a web development course project and a potential tool for campers using the Canadian national park system. After the repeated experience at arriving at a campsite and wishing that the photos and description of it online more accurately reflected the actual site, Loon founders envisioned a solution: an application showcasing user reviews of campsites across the Parks Canada network. Loon has been made possible with the integration of the ArcGIS API for JS, open Parks Canada data from the Government of Canada, Auth0, reCAPTCHA, Cloudinary, as well as park images/descriptions from the Parks Canada website and original photos by Nora St-Aubin.
+Loon was created in June 2022 in Montreal, QC as both a web development course project and a potential tool for campers using the Canadian national park system. After the repeated experience of arriving at a campsite and wishing that the photos and description of it online more accurately reflected the actual site, Loon founders envisioned a solution: an application showcasing user reviews of campsites across the Parks Canada network. Loon has been made possible with the integration of the ArcGIS API for JS, open Parks Canada data from the Government of Canada, Auth0, reCAPTCHA, Cloudinary, as well as park images/descriptions from the Parks Canada website and original photos by Nora St-Aubin.
 
 ## Main features
 
