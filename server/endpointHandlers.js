@@ -232,6 +232,11 @@ const addUser = async (req, res) => {
     const userToAdd = { ...req.body.user, _id: id, bio: null };
     if (existingUserCheck.length === 0) {
       const newUser = await db.collection("users").insertOne(userToAdd);
+      res.status(200).json({
+        status: 200,
+        data: newUser,
+        message: "New user added",
+      });
     } else {
       res.status(400).json({
         status: 400,
