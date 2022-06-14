@@ -10,7 +10,7 @@ The application has several key features, which include:
 
 ### Searching for campsites
 
-Users can search for campsites by province/territory or campsite ID.  Once queried, users can click on each campsite marker and see details for the site.  Each province/territory page lists of all parks/places and as well as their respective campgrounds.
+Users can search for campsites by province/territory or campsite ID.  Once queried, users can click on each campsite marker and see details for the site.  Each province/territory page lists all of its parks/places as well as their respective campgrounds.
 
 ![Search by province](https://res.cloudinary.com/dlfu6niut/image/upload/v1655144009/Screen_Shot_2022-06-13_at_14.11.05_PM_u5gbhn.png)
 
