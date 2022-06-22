@@ -1,5 +1,9 @@
 import FeaturedHomepage from "./FeaturedHomepage";
 import styled from "styled-components";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FilterContext } from "./FilterContext";
 import { GiCampfire, GiCampingTent, GiForestCamp } from "react-icons/gi";
@@ -53,9 +57,41 @@ const Homepage = () => {
                   <Tab onClick={tabHandlerProv}>By province/territory</Tab>
                   <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
                 </SelectionTabs>
-                <SearchField>
-                  <SearchLabel>Find campsites in:</SearchLabel>
-                  <Select defaultValue={"blank"} onChange={changeHandler}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ProvLabel>Find campsites in:</ProvLabel>
+                  <SearchField>
+                    <FormControl sx={{minWidth: 260}}>
+                      {/* <SearchLabel>Find campsites in:</SearchLabel> */}
+                      <InputLabel id="demo-simple-select-label">
+                        Province/Territory
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={selectedProvince}
+                        label="Province/Territory"
+                        onChange={changeHandler}
+                      >
+                        {provinces.data.map((province, index) => {
+                          return (
+                            <MenuItem
+                              value={province.name}
+                              key={`${province.name}-${index}`}
+                            >
+                              {province.name}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                    {/* <SearchLabel>Find campsites in:</SearchLabel>
+                  <StyledSelect defaultValue={"blank"} onChange={changeHandler}>
                     <option disabled value={"blank"}>
                       {" "}
                     </option>
@@ -66,11 +102,12 @@ const Homepage = () => {
                         </option>
                       );
                     })}
-                  </Select>
-                  <SearchButton>
-                    <SearchIcon />
-                  </SearchButton>
-                </SearchField>
+                  </StyledSelect> */}
+                    <SearchButton>
+                      <SearchIcon />
+                    </SearchButton>
+                  </SearchField>
+                </div>
               </SearchBar>
             </div>
             <div hidden={tabFlag.campsite}>
@@ -200,6 +237,11 @@ const MainFeatures = styled.div`
   margin: 100px 0;
 `;
 
+const ProvLabel = styled.div`
+  margin: 0 10px;
+  width: fit-content;
+`;
+
 const SearchArea = styled.div`
   align-items: center;
   background-image: url("https://res.cloudinary.com/dlfu6niut/image/upload/v1654815014/homepage-image_zhq6bw.jpg");
@@ -227,6 +269,7 @@ const SearchBar = styled.form`
 const SearchButton = styled.button`
   background: none;
   border: none;
+  margin: 0 10px;
   transition: 200ms;
   &:hover {
     cursor: pointer;
@@ -254,7 +297,7 @@ const SearchLabel = styled.label`
   padding-top: 2px;
 `;
 
-const Select = styled.select`
+const StyledSelect = styled.select`
   appearance: none;
   background-color: transparent;
   border: none;
