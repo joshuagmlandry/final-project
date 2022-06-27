@@ -88,7 +88,7 @@ const ReviewForm = ({ queriedCampsite }) => {
     e.preventDefault();
     setPostSending(true);
     setStatusMessage("");
-    fetch("/api/post-review", {
+    fetch("https://loon-camping.herokuapp.com/api/post-review", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

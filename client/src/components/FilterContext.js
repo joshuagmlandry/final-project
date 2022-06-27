@@ -51,7 +51,7 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(`/api/get-favourites/${user.sub}`)
+      fetch(`https://loon-camping.herokuapp.com/api/get-favourites/${user.sub}`)
         .then((res) => res.json())
         .then((data) => {
           setFavourites(data.data);
