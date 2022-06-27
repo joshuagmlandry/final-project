@@ -10,7 +10,7 @@ const UserBio = ({ bioUpdate, setBioUpdate, user }) => {
   };
   const submitBio = (e) => {
     e.preventDefault();
-    fetch("/api/post-bio", {
+    fetch("https://loon-camping.herokuapp.com/api/post-bio", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
