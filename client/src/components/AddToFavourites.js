@@ -15,7 +15,7 @@ const AddToFavourites = ({ user, queriedCampsite }) => {
 
   const favouriteHandler = (e) => {
     e.preventDefault();
-    fetch("https://loon-camping.herokuapp.com/api/add-to-favourites", {
+    fetch("/api/add-to-favourites", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

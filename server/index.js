@@ -2,7 +2,6 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const cors = require('cors')
 
 const {
   getProvinceData,
@@ -25,7 +24,6 @@ const {
 const PORT = 4000;
 
 express()
-  .use(cors())
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",
@@ -44,8 +42,6 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   // Endpoints
-
-  .get('/', (req, res) => { res.send('Hello from Express!')})
 
   .get("/api/provinces", getProvinceData)
 
@@ -77,4 +73,4 @@ express()
 
   .delete("/api/delete-favourite", deleteFavourite)
 
-  .listen(process.env.PORT || 4000, () => console.info(`Listening on port ${PORT}`));
+  .listen(PORT, () => console.info(`Listening on port ${PORT}`));
