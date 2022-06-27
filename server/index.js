@@ -43,6 +43,8 @@ express()
 
   // Endpoints
 
+  .get('/', (req, res) => { res.send('Hello from Express!')})
+
   .get("/api/provinces", getProvinceData)
 
   .get("/api/park-descriptions", getParkDescriptions)
