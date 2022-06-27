@@ -2,6 +2,7 @@
 
 const express = require("express");
 const morgan = require("morgan");
+const cors = require('cors')
 
 const {
   getProvinceData,
@@ -24,6 +25,7 @@ const {
 const PORT = 4000;
 
 express()
+  .use(cors())
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",
