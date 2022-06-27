@@ -24,7 +24,7 @@ const Profile = () => {
   } = useContext(FilterContext);
 
   useEffect(() => {
-    fetch(`https://loon-camping.herokuapp.com/api/get-user/${user.sub}`)
+    fetch(`/api/get-user/${user.sub}`)
       .then((res) => res.json())
       .then((data) => {
         setLoggedInUser(data.data);
@@ -33,7 +33,7 @@ const Profile = () => {
   }, [bioUpdate]);
 
   useEffect(() => {
-    fetch(`https://loon-camping.herokuapp.com/api/user-reviews/${user.sub}`)
+    fetch(`/api/user-reviews/${user.sub}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
@@ -70,7 +70,7 @@ const Profile = () => {
 
   const deleteHandler = (e, id) => {
     e.preventDefault();
-    fetch("https://loon-camping.herokuapp.com/api/delete-review", {
+    fetch("/api/delete-review", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const Profile = () => {
 
   const deleteFavHandler = (e, id) => {
     e.preventDefault();
-    fetch("https://loon-camping.herokuapp.com/api/delete-favourite", {
+    fetch("/api/delete-favourite", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
