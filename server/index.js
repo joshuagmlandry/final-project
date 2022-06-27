@@ -73,4 +73,4 @@ express()
 
   .delete("/api/delete-favourite", deleteFavourite)
 
-  .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+  .listen(process.env.PORT || 4000, () => console.info(`Listening on port ${PORT}`));
