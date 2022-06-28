@@ -2,6 +2,7 @@
 
 const express = require("express");
 const morgan = require("morgan");
+const cors = require('cors')
 
 const {
   getProvinceData,
@@ -35,6 +36,7 @@ express()
     );
     next();
   })
+  .use(cors())
   .use(morgan("tiny"))
   .use(express.static("./server/assets"))
   .use(express.json())
@@ -73,4 +75,4 @@ express()
 
   .delete("/api/delete-favourite", deleteFavourite)
 
-  .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+  .listen(process.env.PORT || PORT, () => console.info(`Listening on port ${PORT}`));
