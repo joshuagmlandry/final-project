@@ -15,7 +15,7 @@ const AddToFavourites = ({ user, queriedCampsite }) => {
 
   const favouriteHandler = (e) => {
     e.preventDefault();
-    fetch("/api/add-to-favourites", {
+    fetch("https://infinite-cove-65259.herokuapp.com/api/add-to-favourites", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

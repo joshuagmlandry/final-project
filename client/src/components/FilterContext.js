@@ -25,7 +25,7 @@ export const FilterProvider = ({ children }) => {
   const [campgrounds, setCampgrounds] = useState({ name: null, array: null });
 
   useEffect(() => {
-    fetch("/api/provinces")
+    fetch("https://infinite-cove-65259.herokuapp.com/api/provinces")
       .then((res) => res.json())
       .then((data) => {
         setProvinces(data);
@@ -35,7 +35,7 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch("/api/add-user", {
+      fetch("https://infinite-cove-65259.herokuapp.com/api/add-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(`/api/get-favourites/${user.sub}`)
+      fetch(`https://infinite-cove-65259.herokuapp.com/api/get-favourites/${user.sub}`)
         .then((res) => res.json())
         .then((data) => {
           setFavourites(data.data);
@@ -61,7 +61,7 @@ export const FilterProvider = ({ children }) => {
   }, [isAuthenticated, newFav, deletedFavStatus]);
 
   useEffect(() => {
-    fetch("/api/park-descriptions")
+    fetch("https://infinite-cove-65259.herokuapp.com/api/park-descriptions")
       .then((res) => res.json())
       .then((data) => {
         setParkDescriptions(data.data);
@@ -70,7 +70,7 @@ export const FilterProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    fetch("/api/all-reviews")
+    fetch("https://infinite-cove-65259.herokuapp.com/api/all-reviews")
       .then((res) => res.json())
       .then((data) => {
         setAllReviews(data.data);
