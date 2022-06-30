@@ -125,7 +125,7 @@ const Browse = () => {
       });
     }
 
-    map.add(campsites);
+    // map.add(campsites);
   }, [coord, zoom, provincesLoading, parkSelected, campsiteSelected]);
 
   return (
