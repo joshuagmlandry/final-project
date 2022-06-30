@@ -1,7 +1,6 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "https://infinite-cove-65259.herokuapp.com/",
   "dependencies": {
     "@arcgis/core": "^4.23.7",
     "@auth0/auth0-react": "^1.10.1",
