@@ -124,7 +124,21 @@ const Browse = () => {
         setAllCampsiteTypesLoading("idle");
       });
     }
-    view.when(map.add(campsites));
+
+    // const mapReady = async ()=>{
+    //   await map.add(campsites);
+    //   await console.log(view.ready);
+    // }
+
+    // mapReady();
+
+    view.when(()=>{
+      if (view.ready){
+        map.add(campsites);
+      };
+    });
+
+    // view.when(map.add(campsites));
   }, [coord, zoom, provincesLoading, parkSelected, campsiteSelected]);
 
   return (
