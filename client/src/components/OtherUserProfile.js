@@ -15,7 +15,7 @@ const OtherUserProfile = () => {
   const [bioUpdate, setBioUpdate] = useState(false);
 
   useEffect(() => {
-    fetch(`https://infinite-cove-65259.herokuapp.com/api/get-other-user/${userNickName.id}`)
+    fetch(`/api/get-other-user/${userNickName.id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 400) {
@@ -27,7 +27,7 @@ const OtherUserProfile = () => {
   }, [bioUpdate]);
 
   useEffect(() => {
-    fetch(`https://infinite-cove-65259.herokuapp.com/api/other-user-reviews/${userNickName.id}`)
+    fetch(`/api/other-user-reviews/${userNickName.id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
