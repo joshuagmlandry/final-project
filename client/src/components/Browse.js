@@ -132,11 +132,19 @@ const Browse = () => {
 
     // mapReady();
 
-    view.when(()=>{
+    // view.when(()=>{
+    //   if (view.ready){
+    //     map.add(campsites);
+    //   };
+    // });
+
+    view.when(async ()=>{
       if (view.ready){
-        map.add(campsites);
+        await console.log("ready");
+        await map.add(campsites);
       };
     });
+
 
     // view.when(map.add(campsites));
   }, [coord, zoom, provincesLoading, parkSelected, campsiteSelected]);
