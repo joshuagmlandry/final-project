@@ -138,13 +138,14 @@ const Browse = () => {
     //   };
     // });
 
-    view.when(async ()=>{
-      if (view.ready){
-        await console.log("ready");
-        await map.add(campsites);
-      };
-    });
+    // view.when(async ()=>{
+    //   if (view.ready){
+    //     await console.log("ready");
+    //     await map.add(campsites);
+    //   };
+    // });
 
+    map.add(campsites);
 
     // view.when(map.add(campsites));
   }, [coord, zoom, provincesLoading, parkSelected, campsiteSelected]);
