@@ -46,8 +46,14 @@ export default FeaturedHomepage;
 const FeaturedParkWrapper = styled.div`
   align-items: flex-start;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
+
+  @media only screen and (min-width: 768px) {
+    border-right: 2px solid lightgray;
+    flex-direction: row;
+  }
 `;
 
 const MainHeader = styled.div`
@@ -86,8 +92,12 @@ const ParkHeader = styled.a`
 `;
 
 const ParkWrapper = styled.div`
-  margin: 0 10px;
+  margin: 20px 10px;
   width: 250px;
+
+  @media only screen and (min-width: 768px) {
+    margin: 0 10px;
+  }
 `;
 
 const Subheader = styled.div`

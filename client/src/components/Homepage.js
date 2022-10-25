@@ -182,6 +182,7 @@ const BodyText = styled.div`
   font-family: var(--font-body);
   font-size: 2rem;
   margin-bottom: 40px;
+  text-align: center;
 `;
 
 const CampsiteInput = styled.input`
@@ -197,7 +198,6 @@ const CampsiteInput = styled.input`
 
 const Feature = styled.div`
   align-items: center;
-  border-right: 2px solid lightgray;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -205,6 +205,10 @@ const Feature = styled.div`
   width: 250px;
   &:last-of-type {
     border: none;
+  }
+
+  @media only screen and (min-width: 768px) {
+    border-right: 2px solid lightgray;
   }
 `;
 
@@ -234,7 +238,13 @@ const MainBody = styled.div`
 
 const MainFeatures = styled.div`
   display: flex;
-  margin: 100px 0;
+  flex-direction: column;
+  margin: 30px 0;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    margin: 100px 0;
+  }
 `;
 
 const ProvLabel = styled.div`
@@ -248,9 +258,13 @@ const SearchArea = styled.div`
   background-position: 0 -130px;
   background-size: 100%;
   display: flex;
-  height: 500px;
+  height: 300px;
   justify-content: center;
   width: 100vw;
+
+  @media only screen and (min-width: 768px) {
+    height: 500px;
+  }
 `;
 
 const SearchBar = styled.form`
