@@ -10,7 +10,7 @@ const UserBio = ({ bioUpdate, setBioUpdate, user }) => {
   };
   const submitBio = (e) => {
     e.preventDefault();
-    fetch("/api/post-bio", {
+    fetch("https://infinite-cove-65259.herokuapp.com/api/post-bio", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

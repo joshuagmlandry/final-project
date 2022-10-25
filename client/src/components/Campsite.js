@@ -56,7 +56,7 @@ const Campsite = () => {
     // Get all user submitted reviews for the requested campsite
 
     if (queriedCampsiteLoading !== "loading" && queriedCampsite !== null) {
-      fetch(`/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
+      fetch(`https://infinite-cove-65259.herokuapp.com/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.status === 200) {
