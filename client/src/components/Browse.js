@@ -92,7 +92,7 @@ const Browse = () => {
                 <h4>Accommodation Type Con't:</h4> {Accommodation_Type}<br>
                 <h4>Site Number:</h4> {Site_Num_Site}<br>
                 <h4>Reviews:</h4> Highly rated (10 reviews) <br>
-                <h4>Campsite Page:</h4><a href='http://localhost:3000/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
+                <h4>Campsite Page:</h4><a href='https://looncamping.netlify.app/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
     };
 
     const campsites = new FeatureLayer({
@@ -125,29 +125,8 @@ const Browse = () => {
       });
     }
 
-    // const mapReady = async ()=>{
-    //   await map.add(campsites);
-    //   await console.log(view.ready);
-    // }
-
-    // mapReady();
-
-    // view.when(()=>{
-    //   if (view.ready){
-    //     map.add(campsites);
-    //   };
-    // });
-
-    // view.when(async ()=>{
-    //   if (view.ready){
-    //     await console.log("ready");
-    //     await map.add(campsites);
-    //   };
-    // });
-
     map.add(campsites);
 
-    // view.when(map.add(campsites));
   }, [coord, zoom, provincesLoading, parkSelected, campsiteSelected]);
 
   return (

@@ -95,7 +95,7 @@ const Province = () => {
                   <h4>Accommodation Type Con't:</h4> {Accommodation_Type}<br>
                   <h4>Site Number:</h4> {Site_Num_Site}<br>
                   <h4>Reviews:</h4> Poorly rated (17 reviews)<br>
-                  <h4>Campsite Page:</h4><a href='http://localhost:3000/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
+                  <h4>Campsite Page:</h4><a href='https://looncamping.netlify.app/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
       };
 
       const campsites = new FeatureLayer({
