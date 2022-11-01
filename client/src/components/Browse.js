@@ -4,6 +4,10 @@ import Locate from "@arcgis/core/widgets/Locate";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import styled from "styled-components";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { FilterContext } from "./FilterContext";
 import { useContext, useEffect, useState } from "react";
 const { REACT_APP_ARCGIS_API } = process.env;
@@ -92,7 +96,7 @@ const Browse = () => {
                 <h4>Accommodation Type Con't:</h4> {Accommodation_Type}<br>
                 <h4>Site Number:</h4> {Site_Num_Site}<br>
                 <h4>Reviews:</h4> Highly rated (10 reviews) <br>
-                <h4>Campsite Page:</h4><a href='https://looncamping.netlify.app/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
+                <h4>Campsite Page:</h4><a href='https://looncamping.com/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
     };
 
     const campsites = new FeatureLayer({
@@ -126,7 +130,7 @@ const Browse = () => {
     }
 
     map.add(campsites);
-
+    console.log(provinceSelected.prov);
   }, [coord, zoom, provincesLoading, parkSelected, campsiteSelected]);
 
   return (
@@ -142,7 +146,7 @@ const Browse = () => {
             <Filter>
               <StyledForm onChange={changeHandler}>
                 <BothFilters>
-                  <FilterOptions>
+                  {/* <FilterOptions>
                     <label>Province/Territory: </label>
                     <StyledSelect defaultValue={"blank"}>
                       <option disabled value="blank"></option>
@@ -154,46 +158,118 @@ const Browse = () => {
                         );
                       })}
                     </StyledSelect>
+                  </FilterOptions> */}
+                  <FilterOptions>
+                    <FormControl sx={{ minWidth: 260 }}>
+                      <InputLabel id="demo-simple-select-label">
+                        Province/Territory
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={provinceSelected.prov.name}
+                        label="Province/Territory"
+                        onChange={changeHandler}
+                      >
+                        {provinces.data.map((province, index) => {
+                          return (
+                            <MenuItem
+                              value={province.name}
+                              key={`${province.name}-${index}`}
+                            >
+                              {province.name}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
                   </FilterOptions>
                   <FilterOptions>
-                    {provinceSelectedLoading !== "loading" ? (
-                      <ParkSelector>
-                        <label>Place/Park: </label>
-                        <StyledSelect
-                          defaultValue={"blank2"}
-                          disabled={!provinceSelected.flag}
-                          onChange={parkHandler}
-                        >
-                          <option disabled value="blank2"></option>
-                          {provinceSelected.prov.place.map((park, index) => {
-                            return (
-                              <option key={`${index}${park}`}>{park}</option>
-                            );
-                          })}
-                        </StyledSelect>
-                      </ParkSelector>
-                    ) : (
-                      ""
-                    )}
-                    {allCampsiteTypesLoading !== "loading" ? (
-                      <ParkSelector>
-                        <label>Campsite Type: </label>
-                        <StyledSelect
-                          defaultValue={"blank2"}
-                          disabled={!provinceSelected.flag}
-                          onChange={campsiteHandler}
-                        >
-                          <option disabled value="blank2"></option>
-                          {allCampsiteTypes.map((type, index) => {
-                            return (
-                              <option key={`${index}${type}`}>{type}</option>
-                            );
-                          })}
-                        </StyledSelect>
-                      </ParkSelector>
-                    ) : (
-                      " "
-                    )}
+                    <ParkSelector>
+                      {provinceSelectedLoading !== "loading" ? (
+                        <FormControl sx={{ minWidth: 260 }}>
+                          <InputLabel id="demo-simple-select-label">
+                            Place/Park
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={parkSelected}
+                            label="Place/Park"
+                            onChange={parkHandler}
+                            disabled={!provinceSelected.flag}
+                          >
+                            {provinceSelected.prov.place.map((park, index) => {
+                              return (
+                                <MenuItem value={park} key={`${index}${park}`}>
+                                  {park}
+                                </MenuItem>
+                              );
+                            })}
+                          </Select>
+                        </FormControl>
+                      ) : (
+                        // <ParkSelector>
+                        //   <label>Place/Park: </label>
+                        //   <StyledSelect
+                        //     defaultValue={"blank2"}
+                        //     disabled={!provinceSelected.flag}
+                        //     onChange={parkHandler}
+                        //   >
+                        //     <option disabled value="blank2"></option>
+                        // {provinceSelected.prov.place.map((park, index) => {
+                        //   return (
+                        //     <option key={`${index}${park}`}>{park}</option>
+                        //   );
+                        // })}
+                        //   </StyledSelect>
+                        // </ParkSelector>
+                        ""
+                      )}
+                    </ParkSelector>
+                    <ParkSelector>
+                      {allCampsiteTypesLoading !== "loading" ? (
+                        <FormControl sx={{ minWidth: 260 }}>
+                          <InputLabel id="demo-simple-select-label">
+                            Campsite Type
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={parkSelected != null ? campsiteSelected : ''}
+                            defaultValue=''
+                            label="Campsite Type"
+                            onChange={campsiteHandler}
+                            disabled={!provinceSelected.flag}
+                          >
+                            {allCampsiteTypes.map((type, index) => {
+                              return (
+                                <MenuItem value={type} key={`${index}${type}`}>
+                                  {type}
+                                </MenuItem>
+                              );
+                            })}
+                          </Select>
+                        </FormControl>
+                      ) : (
+                        // <ParkSelector>
+                        //   <label>Campsite Type: </label>
+                        //   <StyledSelect
+                        //     defaultValue={"blank2"}
+                        //     disabled={!provinceSelected.flag}
+                        //     onChange={campsiteHandler}
+                        //   >
+                        //     <option disabled value="blank2"></option>
+                        // {allCampsiteTypes.map((type, index) => {
+                        //   return (
+                        //     <option key={`${index}${type}`}>{type}</option>
+                        //   );
+                        // })}
+                        //   </StyledSelect>
+                        // </ParkSelector>
+                        " "
+                      )}
+                    </ParkSelector>
                   </FilterOptions>
                 </BothFilters>
 
