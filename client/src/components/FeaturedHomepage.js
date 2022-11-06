@@ -51,7 +51,6 @@ const FeaturedParkWrapper = styled.div`
   text-align: center;
 
   @media only screen and (min-width: 768px) {
-    border-right: 2px solid lightgray;
     flex-direction: row;
   }
 `;

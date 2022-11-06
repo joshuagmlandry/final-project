@@ -40,7 +40,7 @@ const Browse = () => {
   const changeHandler = (e) => {
     setParkSelected(null);
     if (provincesLoading !== "loading") {
-      const selectedProvince = provinces.data.filter((province) => {
+      const selectedProvince = provinces.filter((province) => {
         return province.name === e.target.value;
       });
       if (selectedProvince.length !== 0) {
@@ -150,7 +150,7 @@ const Browse = () => {
                     <label>Province/Territory: </label>
                     <StyledSelect defaultValue={"blank"}>
                       <option disabled value="blank"></option>
-                      {provinces.data.map((province, index) => {
+                      {provinces.map((province, index) => {
                         return (
                           <option key={`${index}${province.name}`}>
                             {province.name}
@@ -171,7 +171,7 @@ const Browse = () => {
                         label="Province/Territory"
                         onChange={changeHandler}
                       >
-                        {provinces.data.map((province, index) => {
+                        {provinces.map((province, index) => {
                           return (
                             <MenuItem
                               value={province.name}

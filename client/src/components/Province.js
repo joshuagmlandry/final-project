@@ -53,7 +53,7 @@ const Province = () => {
 
   useEffect(() => {
     if (provincesLoading !== "loading") {
-      const provinceToDisplay = provinces.data.filter((province) => {
+      const provinceToDisplay = provinces.filter((province) => {
         return province.abbr === params.abbr;
       });
       if (provinceToDisplay.length !== 0) {

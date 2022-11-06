@@ -25,7 +25,7 @@ const Homepage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const searchedProvince = provinces.data.filter((province) => {
+    const searchedProvince = provinces.filter((province) => {
       return province.name === selectedProvince;
     });
     navigate(`/province/${searchedProvince[0].abbr}`);
@@ -78,7 +78,7 @@ const Homepage = () => {
                         label="Province/Territory"
                         onChange={changeHandler}
                       >
-                        {provinces.data.map((province, index) => {
+                        {provinces.map((province, index) => {
                           return (
                             <MenuItem
                               value={province.name}
@@ -95,7 +95,7 @@ const Homepage = () => {
                     <option disabled value={"blank"}>
                       {" "}
                     </option>
-                    {provinces.data.map((province, index) => {
+                    {provinces.map((province, index) => {
                       return (
                         <option key={`${province.name}-${index}`}>
                           {province.name}
