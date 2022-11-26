@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const About = () => {
   return (
-    <div>
+    <AboutWrapper>
       <ImageWrapper>
         <AboutHeader>About Loon </AboutHeader>
       </ImageWrapper>
@@ -21,18 +21,23 @@ const About = () => {
         images/descriptions from the Parks Canada website and original photos by
         Nora St-Aubin.
       </AboutBody>
-    </div>
+    </AboutWrapper>
   );
 };
 
 export default About;
 
 const AboutBody = styled.div`
+  align-items: center;
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.5;
   margin: 40px 60px;
   text-align: center;
+
+  @media only screen and (min-width: 768px) {
+  font-size: 1.25rem;
+  }
 `;
 
 const AboutHeader = styled.div`
@@ -42,17 +47,29 @@ const AboutHeader = styled.div`
   display: flex;
   justify-content: center;
   font-family: var(--font-body);
+  font-size: 1.5rem;
+  padding: 10px;
+
+  @media only screen and (min-width: 768px) {
   font-size: 2rem;
   padding: 20px;
+  }
+`;
+
+const AboutWrapper = styled.div`
+  min-height: 100vh;
 `;
 
 const ImageWrapper = styled.div`
   align-items: center;
   background-image: url("https://res.cloudinary.com/dlfu6niut/image/upload/v1654815011/about-image_cteguy.jpg");
-  background-position: 0 -130px;
   background-size: 100%;
   display: flex;
-  height: 540px;
+  height: 250px;
   justify-content: center;
   width: 100vw;
+
+  @media only screen and (min-width: 768px) {
+    height: 500px;
+  }
 `;

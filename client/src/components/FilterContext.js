@@ -458,7 +458,7 @@ export const FilterProvider = ({ children }) => {
     setProvincesLoading("idle");
     setParkDescriptions(placeDescriptionsData);
     setParkDescriptionsLoading("idle");
-    // fetch("https://infinite-cove-65259.herokuapp.com/api/provinces")
+    // fetch("https://loon-backend.onrender.com/api/provinces")
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setProvinces(data);
@@ -468,7 +468,7 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch("https://infinite-cove-65259.herokuapp.com/api/add-user", {
+      fetch("https://loon-backend.onrender.com/api/add-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -485,7 +485,7 @@ export const FilterProvider = ({ children }) => {
   useEffect(() => {
     if (isAuthenticated) {
       fetch(
-        `https://infinite-cove-65259.herokuapp.com/api/get-favourites/${user.sub}`
+        `https://loon-backend.onrender.com/api/get-favourites/${user.sub}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -496,7 +496,7 @@ export const FilterProvider = ({ children }) => {
   }, [isAuthenticated, newFav, deletedFavStatus]);
 
   // useEffect(() => {
-  //   fetch("https://infinite-cove-65259.herokuapp.com/api/park-descriptions")
+  //   fetch("https://loon-backend.onrender.com/api/park-descriptions")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setParkDescriptions(data.data);
@@ -505,7 +505,7 @@ export const FilterProvider = ({ children }) => {
   // }, []);
 
   useEffect(() => {
-    fetch("https://infinite-cove-65259.herokuapp.com/api/all-reviews")
+    fetch("https://loon-backend.onrender.com/api/all-reviews")
       .then((res) => res.json())
       .then((data) => {
         setAllReviews(data.data);
