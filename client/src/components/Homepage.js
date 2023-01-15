@@ -61,7 +61,11 @@ const Homepage = () => {
                   <Tab onClick={tabHandlerProv}>By province/territory</Tab>
                   <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
                 </SelectionTabs>
-                {!isDesktopOrLaptop ? <ProvLabel>Find campsites in:</ProvLabel> : ''}
+                {!isDesktopOrLaptop ? (
+                  <ProvLabel>Find campsites in:</ProvLabel>
+                ) : (
+                  ""
+                )}
                 <div
                   style={{
                     display: "flex",
@@ -69,9 +73,13 @@ const Homepage = () => {
                     justifyContent: "center",
                   }}
                 >
-                  {isDesktopOrLaptop ? <ProvLabel>Find campsites in:</ProvLabel> : ''}
+                  {isDesktopOrLaptop ? (
+                    <ProvLabel>Find campsites in:</ProvLabel>
+                  ) : (
+                    ""
+                  )}
                   <SearchField>
-                    <FormControl sx={{minWidth: 260}}>
+                    <FormControl sx={{ minWidth: 260 }}>
                       {/* <SearchLabel>Find campsites in:</SearchLabel> */}
                       <InputLabel id="demo-simple-select-label">
                         Province/Territory
@@ -121,8 +129,9 @@ const Homepage = () => {
                   <Tab onClick={tabHandlerProv}>By province/territory</Tab>
                   <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
                 </SelectionTabs>
+                {!isDesktopOrLaptop ? <SearchLabel>Find a campsite:</SearchLabel> : ''}
                 <SearchField>
-                  <SearchLabel>Find a campsite:</SearchLabel>
+                  {isDesktopOrLaptop ? <SearchLabel>Find a campsite:</SearchLabel> : ''}
                   <CampsiteInput></CampsiteInput>
                   <SearchButton>
                     <SearchIcon />
@@ -179,15 +188,21 @@ export default Homepage;
 const BodyHeader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin: 40px 0 20px;
+  @media only screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const BodyText = styled.div`
   font-family: var(--font-body);
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 40px;
   text-align: center;
+  @media only screen and (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const CampsiteInput = styled.input`
@@ -208,21 +223,33 @@ const Feature = styled.div`
   padding: 20px;
   text-align: center;
   width: 250px;
+  &:first-of-type {
+    border-top: 2px solid lightgray;
+  }
   &:last-of-type {
-    border: none;
+    border-bottom: 2px solid lightgray;
   }
 
   @media only screen and (min-width: 768px) {
     border-right: 2px solid lightgray;
+    &:first-of-type {
+      border-top: none;
+    }
+    &:last-of-type {
+      border-bottom: none;
+    }
   }
 `;
 
 const FeatureHeader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   padding-bottom: 20px;
+  @media only screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const FeatureIcon = styled.div`
@@ -244,8 +271,7 @@ const MainBody = styled.div`
 const MainFeatures = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 30px 0;
-
+  margin: 10px 0;
   @media only screen and (min-width: 768px) {
     flex-direction: row;
     margin: 100px 0;
@@ -284,7 +310,7 @@ const SearchBar = styled.form`
   font-size: 1rem;
   padding: 20px;
   transition: 200ms;
-  width: 80vw;
+  width: 86vw;
 
   @media only screen and (min-width: 768px) {
     font-size: 1.5rem;
@@ -324,6 +350,10 @@ const SearchIcon = styled(AiOutlineSearch)`
 
 const SearchLabel = styled.label`
   padding-top: 2px;
+  margin: 20px 0 10px 0;
+  @media only screen and (min-width: 768px) {
+    margin: 0;
+  }
 `;
 
 const StyledSelect = styled.select`
@@ -367,7 +397,6 @@ const Tab = styled.button`
   @media only screen and (min-width: 768px) {
     font-size: 1.25rem;
   }
-  
 `;
 
 const Wrapper = styled.div`

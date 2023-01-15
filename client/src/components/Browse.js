@@ -352,12 +352,16 @@ const ResetButton = styled.button`
   font-family: var(--font-body);
   font-size: 1rem;
   margin-top: 10px;
+  margin-bottom: 100px;
   padding: 10px;
   transition: 200ms;
   width: 100px;
   &:hover {
     background-color: var(--color-green);
     cursor: pointer;
+  }
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 0;
   }
 `;
 

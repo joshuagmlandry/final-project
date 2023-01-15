@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { FilterContext } from "./FilterContext";
+import { useMediaQuery } from "react-responsive";
+
 
 // Shows photos and descriptions (from Parks Canada) for various parks and places.  Links to the Parks Canada webpages are also included.
 
@@ -8,10 +10,14 @@ const FeaturedHomepage = () => {
   const { parkDescriptions, parkDescriptionsLoading } =
     useContext(FilterContext);
   const featuredParks = [];
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
 
   if (parkDescriptionsLoading !== "loading") {
     const parkDescriptionsCopy = [...parkDescriptions];
-    for (let i = 0; i < 5; i++) {
+    let numberParksToDisplay = isDesktopOrLaptop ? 5 : 3;
+    for (let i = 0; i < numberParksToDisplay; i++) {
       let randomIndex = Math.floor(parkDescriptionsCopy.length * Math.random());
       featuredParks.push(parkDescriptionsCopy[randomIndex]);
       parkDescriptionsCopy.splice(randomIndex, 1);
@@ -58,9 +64,12 @@ const FeaturedParkWrapper = styled.div`
 const MainHeader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 5px;
+  @media only screen and (min-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const ParkDescription = styled.div`
@@ -102,9 +111,13 @@ const ParkWrapper = styled.div`
 const Subheader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  @media only screen and (min-width: 768px) {
+    font-size: 1.25rem;
+    margin-bottom: 50px;
+  }
 `;
 
 const Wrapper = styled.div`
