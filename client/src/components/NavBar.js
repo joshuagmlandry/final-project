@@ -38,7 +38,10 @@ const NavBar = () => {
     },
     bmCrossButton: {
       height: '24px',
-      width: '24px'
+      width: '24px',
+      position: 'absolute',
+      top: '80px',
+      right: '20px'
     },
     bmCross: {
       background: '#bdc3c7'
@@ -49,7 +52,7 @@ const NavBar = () => {
     },
     bmMenu: {
       background: 'var(--color-dark-green)',
-      padding: '40px 1.5em 0',
+      padding: '20px 0 0',
       fontSize: '1.15em',
       position: 'absolute',
       top: '50px',
@@ -98,13 +101,13 @@ const NavBar = () => {
       ) : (
         <Menu isOpen={menuState} onOpen={handleIsOpen} onClose={handleIsOpen} right styles={ styles } width={ '100%' }>
         <Links>
-        <div>
+        <MobileLink>
           <NavBarLink onClick={closeMenu} className="menu-item" to="/about">About</NavBarLink>
-        </div>
-        <div>
+        </MobileLink>
+        <MobileLink>
           <NavBarLink onClick={closeMenu} className="menu-item" to="/browse">Browse</NavBarLink>
-        </div>
-        <div>
+        </MobileLink>
+        <MobileLink>
           {!isAuthenticated ? (
             <LoginButton onClick={closeMenu} className="menu-item"/>
           ) : (
@@ -115,7 +118,7 @@ const NavBar = () => {
               <LogoutButton onClick={closeMenu} className="menu-item"/>
             </LoggedInOptions>
           )}
-        </div>
+        </MobileLink>
       </Links>
       </Menu>
       )}
@@ -151,17 +154,26 @@ const Links = styled.div`
   justify-content: center;
 `;
 
+const MobileLink = styled.div`
+  margin-bottom: 40px;
+`;
+
 const NavBarLink = styled(Link)`
   border-radius: 20px;
   color: var(--color-light-beige);
   font-family: var(--font-body);
-  font-size: 1.25rem;
-  margin: 8px;
+  font-size: 1.75rem;
+  margin: 20px;
   padding: 12px;
   text-decoration: none;
   transition: 200ms;
   &:hover {
     background-color: var(--color-green);
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 1.25rem;
+    margin: 8px;
+    padding: 12px;
   }
 `;
 

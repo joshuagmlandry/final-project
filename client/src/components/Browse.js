@@ -319,6 +319,10 @@ const MapAndFilter = styled.div`
   align-items: flex-start;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const MapContainer = styled.div`
@@ -326,8 +330,12 @@ const MapContainer = styled.div`
   border-radius: 4px;
   padding: 0;
   margin-bottom: 50px;
-  height: 500px;
-  width: 900px;
+  height: 300px;
+  width: 80vw;
+  @media only screen and (min-width: 768px) {
+    height: 500px;
+    width: 900px;
+  }
 `;
 
 const ParkSelector = styled.div`
@@ -367,8 +375,11 @@ const StyledSelect = styled.select`
 
 const TextHeader = styled.div`
   font-family: var(--font-body);
-  font-size: 2rem;
+  font-size: 1rem;
   margin: 40px;
+  @media only screen and (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const Wrapper = styled.div`

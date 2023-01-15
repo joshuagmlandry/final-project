@@ -8,6 +8,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FilterContext } from "./FilterContext";
 import { GiCampfire, GiCampingTent, GiForestCamp } from "react-icons/gi";
 import { useContext } from "react";
+import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -45,6 +46,9 @@ const Homepage = () => {
     e.preventDefault();
     setTabFlag({ prov: true, campsite: false });
   };
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
 
   return (
     <>
@@ -57,6 +61,7 @@ const Homepage = () => {
                   <Tab onClick={tabHandlerProv}>By province/territory</Tab>
                   <Tab onClick={tabHandlerCampsite}>By campsite</Tab>
                 </SelectionTabs>
+                {!isDesktopOrLaptop ? <ProvLabel>Find campsites in:</ProvLabel> : ''}
                 <div
                   style={{
                     display: "flex",
@@ -64,7 +69,7 @@ const Homepage = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <ProvLabel>Find campsites in:</ProvLabel>
+                  {isDesktopOrLaptop ? <ProvLabel>Find campsites in:</ProvLabel> : ''}
                   <SearchField>
                     <FormControl sx={{minWidth: 260}}>
                       {/* <SearchLabel>Find campsites in:</SearchLabel> */}
@@ -248,8 +253,11 @@ const MainFeatures = styled.div`
 `;
 
 const ProvLabel = styled.div`
-  margin: 0 10px;
+  margin: 20px 0 10px 0;
   width: fit-content;
+  @media only screen and (min-width: 768px) {
+    margin: 0 10px;
+  }
 `;
 
 const SearchArea = styled.div`
@@ -273,10 +281,15 @@ const SearchBar = styled.form`
   display: flex;
   flex-direction: column;
   font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 20px;
   transition: 200ms;
-  width: 630px;
+  width: 80vw;
+
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5rem;
+    width: 630px;
+  }
 `;
 
 const SearchButton = styled.button`
@@ -298,11 +311,14 @@ const SearchIcon = styled(AiOutlineSearch)`
   background-color: var(--color-dark-green);
   border-radius: 50%;
   color: var(--color-light-beige);
-  font-size: 2rem;
+  font-size: 1rem;
   padding: 10px;
   transition: 200ms;
   &:hover {
     background-color: var(--color-green);
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 2rem;
   }
 `;
 
@@ -337,7 +353,7 @@ const Tab = styled.button`
   background-color: inherit;
   border: none;
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding: 0 30px;
   transition: 200ms;
   &:last-of-type {
@@ -347,6 +363,11 @@ const Tab = styled.button`
     color: var(--color-dark-green);
     cursor: pointer;
   }
+
+  @media only screen and (min-width: 768px) {
+    font-size: 1.25rem;
+  }
+  
 `;
 
 const Wrapper = styled.div`
