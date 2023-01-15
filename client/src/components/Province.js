@@ -36,15 +36,15 @@ const Province = () => {
     setSelectedIndex(index);
     esriConfig.apiKey = REACT_APP_ARCGIS_API;
     const campsitesToQuery = new FeatureLayer({
-      url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
+      url: "https://services5.arcgis.com/07vUVKCTnBBHddyU/arcgis/rest/services/accommodation_hebergementgdb/FeatureServer/0",
     });
     const query = campsitesToQuery.createQuery();
-    query.where = `place_name = '${e.target.innerText}'`;
-    query.outFields = ["area_name"];
+    query.where = `Park_Name = '${e.target.innerText}'`;
+    query.outFields = ["Name_e"];
     query.returnDistinctValues = true;
     campsitesToQuery.queryFeatures(query).then((data) => {
       const campgroundsArray = data.features.map((entry) => {
-        return entry.attributes.area_name;
+        return entry.attributes.Name_e;
       });
       const uniqueCampgrounds = [...new Set(campgroundsArray)];
       setCampgrounds({ name: e.target.innerText, array: uniqueCampgrounds });
@@ -87,28 +87,32 @@ const Province = () => {
 
       const popupCampsites = {
         title: "Campsites",
-        content: `<h4>Province/Territory:</h4> {region_name}<br>
-                  <h4>Park/Location:</h4> {place_name}<br>
-                  <h4>Campground/Site:</h4> {area_name}<br>
-                  <h4>Campground/Site Con't:</h4> {facility_name}<br>
-                  <h4>Accommodation Type:</h4> {unit_type_name}<br>
-                  <h4>Accommodation Type Con't:</h4> {Accommodation_Type}<br>
+        content: `<h4>Province/Territory:</h4> {Province}<br>
+                  <h4>Park/Location:</h4> {Park_Name}<br>
+                  <h4>Campground/Site:</h4> {Name_e}<br>
+                  <h4>Accommodation Type:</h4> {Accommodation_Type}<br>
                   <h4>Site Number:</h4> {Site_Num_Site}<br>
                   <h4>Reviews:</h4> Poorly rated (17 reviews)<br>
-                  <h4>Campsite Page:</h4><a href='https://looncamping.com/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
+                  <h4>Campsite Page:</h4><a href='https://looncamping.com/campsite/{URL_f}'> {URL_f}</a>`,
       };
 
       const campsites = new FeatureLayer({
-        url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
+        url: "https://services5.arcgis.com/07vUVKCTnBBHddyU/arcgis/rest/services/accommodation_hebergementgdb/FeatureServer/0",
         outFields: [
-          "Accommodation_Type",
-          "region_name",
-          "place_name",
-          "area_name",
-          "facility_name",
-          "unit_type_name",
-          "Unique_Site_ID",
+          // "Accommodation_Type",
+          // "region_name",
+          // "place_name",
+          // "area_name",
+          // "facility_name",
+          // "unit_type_name",
+          // "Unique_Site_ID",
+          // "Site_Num_Site",
+          "Name_e",
+          "URL_f",
           "Site_Num_Site",
+          "Accommodation_Type",
+          "Park_Name",
+          "Province",
         ],
         popupTemplate: popupCampsites,
       });
@@ -137,7 +141,9 @@ const Province = () => {
               <Filter></Filter>
             </MapAndFilter>
             <ParksAndCampgrounds>
-              <TextHeader style={{fontWeight: "bold"}}>All Parks and Places</TextHeader>
+              <TextHeader style={{ fontWeight: "bold" }}>
+                All Parks and Places
+              </TextHeader>
               <SubHeader>(images and descriptions from Parks Canada)</SubHeader>
               {validProvince.prov.place.length === 0 ? (
                 <NoCampsites>

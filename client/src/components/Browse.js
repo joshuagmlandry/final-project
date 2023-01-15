@@ -31,8 +31,8 @@ const Browse = () => {
   let defEx =
     parkSelected !== null
       ? campsiteSelected !== null
-        ? `place_name = '${parkSelected}' AND unit_type_name = '${campsiteSelected}'`
-        : `place_name = '${parkSelected}'`
+        ? `Park_Name = '${parkSelected}' AND Accommodation_Type = '${campsiteSelected}'`
+        : `Park_Name = '${parkSelected}'`
       : "1=1";
 
   const { provinces, provincesLoading } = useContext(FilterContext);
@@ -88,28 +88,32 @@ const Browse = () => {
 
     const popupCampsites = {
       title: "Campsites",
-      content: `<h4>Province/Territory:</h4> {region_name}<br>
-                <h4>Park/Location:</h4> {place_name}<br>
-                <h4>Campground/Site:</h4> {area_name}<br>
-                <h4>Campground/Site Con't:</h4> {facility_name}<br>
-                <h4>Accommodation Type:</h4> {unit_type_name}<br>
-                <h4>Accommodation Type Con't:</h4> {Accommodation_Type}<br>
+      content: `<h4>Province/Territory:</h4> {Province}<br>
+                <h4>Park/Location:</h4> {Park_Name}<br>
+                <h4>Campground/Site:</h4> {Name_e}<br>
+                <h4>Accommodation Type:</h4> {Accommodation_Type}<br>
                 <h4>Site Number:</h4> {Site_Num_Site}<br>
                 <h4>Reviews:</h4> Highly rated (10 reviews) <br>
-                <h4>Campsite Page:</h4><a href='https://looncamping.com/campsite/{Unique_Site_ID}'> {Unique_Site_ID}</a>`,
+                <h4>Campsite Page:</h4><a href='https://looncamping.com/campsite/{URL_f}'> {URL_f}</a>`,
     };
 
     const campsites = new FeatureLayer({
-      url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
+      url: "https://services5.arcgis.com/07vUVKCTnBBHddyU/arcgis/rest/services/accommodation_hebergementgdb/FeatureServer/0",
       outFields: [
-        "Accommodation_Type",
-        "region_name",
-        "place_name",
-        "area_name",
-        "facility_name",
-        "unit_type_name",
-        "Unique_Site_ID",
+        // "Accommodation_Type",
+        // "region_name",
+        // "place_name",
+        // "area_name",
+        // "facility_name",
+        // "unit_type_name",
+        // "Unique_Site_ID",
+        // "Site_Num_Site",
+        "Name_e",
+        "URL_f",
         "Site_Num_Site",
+        "Accommodation_Type",
+        "Park_Name",
+        "Province",
       ],
       popupTemplate: popupCampsites,
       definitionExpression: defEx,
@@ -117,12 +121,12 @@ const Browse = () => {
 
     if (parkSelected !== null) {
       const query = campsites.createQuery();
-      query.where = `place_name = '${parkSelected}'`;
-      query.outFields = ["unit_type_name"];
+      query.where = `Park_Name = '${parkSelected}'`;
+      query.outFields = ["Accommodation_Type"];
       query.returnDistinctValues = true;
       campsites.queryFeatures(query).then((data) => {
         const allAttributes = data.features.map((entry) => {
-          return entry.attributes.unit_type_name;
+          return entry.attributes.Accommodation_Type;
         });
         setAllCampsiteTypes([...new Set(allAttributes)]);
         setAllCampsiteTypesLoading("idle");
@@ -236,8 +240,8 @@ const Browse = () => {
                           <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={parkSelected != null ? campsiteSelected : ''}
-                            defaultValue=''
+                            value={parkSelected != null ? campsiteSelected : ""}
+                            defaultValue=""
                             label="Campsite Type"
                             onChange={campsiteHandler}
                             disabled={!provinceSelected.flag}

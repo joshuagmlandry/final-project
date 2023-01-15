@@ -25,26 +25,32 @@ const Campsite = () => {
   const userReviewArray = [];
   const params = useParams();
   const { user, isAuthenticated } = useAuth0();
-  const {postAdded} = useContext(FilterContext);
+  const { postAdded } = useContext(FilterContext);
 
   useEffect(() => {
     // Query the feature layer for the details of the requested campsite
 
     esriConfig.apiKey = REACT_APP_ARCGIS_API;
     const campsites = new FeatureLayer({
-      url: "https://services2.arcgis.com/wCOMu5IS7YdSyPNx/ArcGIS/rest/services/Campsites_Join/FeatureServer/0",
+      url: "https://services5.arcgis.com/07vUVKCTnBBHddyU/arcgis/rest/services/accommodation_hebergementgdb/FeatureServer/0",
     });
     const query = campsites.createQuery();
-    query.where = `Unique_Site_ID = '${params.id}'`;
+    query.where = `URL_f = '${params.id}'`;
     query.outFields = [
-      "Accommodation_Type",
-      "region_name",
-      "place_name",
-      "area_name",
-      "facility_name",
-      "unit_type_name",
-      "Unique_Site_ID",
+      // "Accommodation_Type",
+      // "region_name",
+      // "place_name",
+      // "area_name",
+      // "facility_name",
+      // "unit_type_name",
+      // "Unique_Site_ID",
+      // "Site_Num_Site",
+      "Name_e",
+      "URL_f",
       "Site_Num_Site",
+      "Accommodation_Type",
+      "Park_Name",
+      "Province",
     ];
     campsites.queryFeatures(query).then((data) => {
       setQueriedCampsiteLoading("idle");
@@ -56,7 +62,9 @@ const Campsite = () => {
     // Get all user submitted reviews for the requested campsite
 
     if (queriedCampsiteLoading !== "loading" && queriedCampsite !== null) {
-      fetch(`https://loon-backend.onrender.com/api/campsite-reviews/${queriedCampsite.Unique_Site_ID}`)
+      fetch(
+        `https://loon-backend.onrender.com/api/campsite-reviews/${queriedCampsite.URL_f}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.status === 200) {
@@ -82,25 +90,17 @@ const Campsite = () => {
                 <MainHeader>{params.id}</MainHeader>
                 <CampsiteSubHeader>Province/Territory:</CampsiteSubHeader>{" "}
                 <CampsiteSubHeaderText>
-                  {queriedCampsite.region_name}
+                  {queriedCampsite.Province}
                 </CampsiteSubHeaderText>
                 <CampsiteSubHeader>Park/Location:</CampsiteSubHeader>{" "}
                 <CampsiteSubHeaderText>
-                  {queriedCampsite.place_name}
+                  {queriedCampsite.Park_Name}
                 </CampsiteSubHeaderText>
                 <CampsiteSubHeader>Campground/Site:</CampsiteSubHeader>{" "}
                 <CampsiteSubHeaderText>
-                  {queriedCampsite.area_name}
-                </CampsiteSubHeaderText>
-                <CampsiteSubHeader>Campground/Site Con't:</CampsiteSubHeader>{" "}
-                <CampsiteSubHeaderText>
-                  {queriedCampsite.facility_name}
+                  {queriedCampsite.Name_e}
                 </CampsiteSubHeaderText>
                 <CampsiteSubHeader>Accommodation Type:</CampsiteSubHeader>{" "}
-                <CampsiteSubHeaderText>
-                  {queriedCampsite.unit_type_name}
-                </CampsiteSubHeaderText>
-                <CampsiteSubHeader>Accommodation Type Con't:</CampsiteSubHeader>{" "}
                 <CampsiteSubHeaderText>
                   {queriedCampsite.Accommodation_Type}
                 </CampsiteSubHeaderText>
