@@ -21,13 +21,18 @@ const StyledButton = styled.button`
   border-radius: 20px;
   color: var(--color-light-beige);
   font-family: var(--font-body);
-  font-size: 1.25rem;
-  margin: 8px;
+  font-size: 1.75rem;
+  margin: 0 20px;
   padding: 12px;
   text-decoration: none;
   transition: 200ms;
   &:hover {
     background-color: var(--color-green);
     cursor: pointer;
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 1.25rem;
+    margin: 8px;
+    padding: 12px;
   }
 `;

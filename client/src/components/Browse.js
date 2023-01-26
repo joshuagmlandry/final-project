@@ -334,7 +334,7 @@ const MapContainer = styled.div`
   width: 80vw;
   @media only screen and (min-width: 768px) {
     height: 500px;
-    width: 900px;
+    width: 60vw;
   }
 `;
 
@@ -352,7 +352,7 @@ const ResetButton = styled.button`
   font-family: var(--font-body);
   font-size: 1rem;
   margin-top: 10px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   padding: 10px;
   transition: 200ms;
   width: 100px;
@@ -390,6 +390,5 @@ const Wrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   justify-content: center;
 `;

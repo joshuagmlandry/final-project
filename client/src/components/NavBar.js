@@ -107,7 +107,6 @@ const NavBar = () => {
         <MobileLink>
           <NavBarLink onClick={closeMenu} className="menu-item" to="/browse">Browse</NavBarLink>
         </MobileLink>
-        <MobileLink>
           {!isAuthenticated ? (
             <LoginButton onClick={closeMenu} className="menu-item"/>
           ) : (
@@ -118,7 +117,6 @@ const NavBar = () => {
               <LogoutButton onClick={closeMenu} className="menu-item"/>
             </LoggedInOptions>
           )}
-        </MobileLink>
       </Links>
       </Menu>
       )}
@@ -133,6 +131,7 @@ const LoggedInOptions = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+  margin: 0 20px;
 `;
 
 const LoonLogo = styled(Link)`
@@ -155,7 +154,10 @@ const Links = styled.div`
 `;
 
 const MobileLink = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 52px;
+  &:last-of-type {
+    margin-bottom: 40px;
+  }
 `;
 
 const NavBarLink = styled(Link)`
@@ -163,7 +165,7 @@ const NavBarLink = styled(Link)`
   color: var(--color-light-beige);
   font-family: var(--font-body);
   font-size: 1.75rem;
-  margin: 20px;
+  margin: 0 20px;
   padding: 12px;
   text-decoration: none;
   transition: 200ms;

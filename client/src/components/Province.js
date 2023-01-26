@@ -214,8 +214,11 @@ const AllPlaces = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px;
-  text-align: left;
+  text-align: center;
   width: 300px;
+  @media only screen and (min-width: 768px) {
+    text-align: left;
+  }
 `;
 
 const Bold = styled.span`
@@ -223,8 +226,13 @@ const Bold = styled.span`
 `;
 
 const BottomWrapper = styled.div`
-  align-items: flex-start;
+  align-items: center;
   display: flex;
+  flex-direction: column;
+  @media only screen and (min-width: 768px) {
+    align-items: flex-start;
+    flex-direction: row;
+  }
 `;
 
 const CampgroundName = styled.div`
@@ -258,8 +266,12 @@ const MapContainer = styled.div`
   padding: 0;
   position: relative;
   margin-bottom: 50px;
-  height: 600px;
-  width: 1000px;
+  height: 300px;
+  width: 80vw;
+  @media only screen and (min-width: 768px) {
+    height: 500px;
+    width: 60vw;
+  }
 `;
 
 const NoCampsites = styled.div`
@@ -286,6 +298,10 @@ const ParkButton = styled.div`
 
 const ParksAndCampgrounds = styled.div`
   border: 3px solid var(--color-dark-green);
+  width: 90vw;
+  @media only screen and (min-width: 768px) {
+    width: 80vw;
+  }
 `;
 
 const SubHeader = styled.div`
