@@ -118,7 +118,7 @@ const FeaturedPark = styled.div`
 const FeaturedParkDescription = styled.div`
   font-family: var(--font-body);
   text-align: center;
-  width: 400px;
+  width: 300px;
   @media only screen and (min-width: 768px) {
     text-align: left;
     width: 600px;
@@ -127,9 +127,12 @@ const FeaturedParkDescription = styled.div`
 
 const FeaturedParkHeader = styled.div`
   font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   margin: 10px 0;
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const FeaturedParkImg = styled.img`
@@ -143,13 +146,18 @@ const FeaturedParkImg = styled.img`
 const FeaturedParkLink = styled.a`
   color: black;
   font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   margin: 10px 0;
   text-decoration: none;
   &:hover {
     color: var(--color-green);
     cursor: pointer;
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5rem;
+    text-align: left;
+    width: 600px;
   }
 `;
 
@@ -168,10 +176,14 @@ const NoCampsites = styled.div`
 
 const ReviewAuthor = styled.div`
   margin: 5px 0;
+  text-align: center;
+  width: 300px;
 `;
 
 const ReviewBody = styled.div`
   margin: 10px 0;
+  text-align: center;
+  width: 300px;
   word-wrap: break-word;
 `;
 
@@ -183,4 +195,6 @@ const ReviewTitle = styled.div`
   font-weight: bold;
   font-size: 1.1rem;
   margin-top: 10px;
+  text-align: center;
+  width: 300px;
 `;

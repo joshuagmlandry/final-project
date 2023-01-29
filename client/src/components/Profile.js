@@ -219,8 +219,11 @@ const Profile = () => {
 export default Profile;
 
 const Bio = styled.div`
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 10px 0;
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const DeleteButton = styled.button`
@@ -244,7 +247,10 @@ const DeleteButton = styled.button`
 `;
 
 const Email = styled.div`
-  font-size: 1.5rem;
+  font-size: 1rem;
+  @media only screen and (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const FavSectionWrapper = styled.div`
@@ -256,28 +262,44 @@ const FavSectionWrapper = styled.div`
 const Greeting = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 3rem;
+  font-size: 2.5rem;
+  @media only screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const ImageAndGreeting = styled.div`
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 20px;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    font-size: 2rem;
+  }
 `;
 
 const IndividualReview = styled.div`
-  align-items: center;
-  display: flex;
+  align-items: flex-start;
   border-bottom: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 20px 0;
+  @media only screen and (min-width: 768px) {
+    align-items: center;
+    flex-direction: row;
+  }
 `;
 
 const Name = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin: 10px 0;
+  @media only screen and (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const NoReviews = styled.div`
@@ -285,9 +307,12 @@ const NoReviews = styled.div`
 `;
 
 const ReviewsAndFavourites = styled.div`
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-top: 50px;
+  @media only screen and (min-width: 768px) {
+    font-size: 1.75rem;
+  }
 `;
 
 const ReviewAuthor = styled.div`
@@ -297,12 +322,18 @@ const ReviewAuthor = styled.div`
 const ReviewBody = styled.div`
   margin: 40px 0 5px 0;
   word-wrap: break-word;
-  width: 800px;
+  width: 300px;
+  @media only screen and (min-width: 768px) {
+    width: 800px;
+  }
 `;
 
 const ReviewImg = styled.img`
   margin: 10px 0;
-  max-width: 300px;
+  max-width: 200px;
+  @media only screen and (min-width: 768px) {
+    max-width: 300px;
+  }
 `;
 
 const ReviewLocation = styled.div`

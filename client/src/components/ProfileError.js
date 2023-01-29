@@ -21,15 +21,19 @@ const ErrorMessage = styled.div`
   display: flex;
   justify-content: center;
   font-family: var(--font-body);
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding: 20px;
+  text-align: center;
+  width: 80vw;
+  @media only screen and (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const Wrapper = styled.div`
   align-items: center;
   background-image: url("https://res.cloudinary.com/dlfu6niut/image/upload/v1654815014/profile-error_cijhyy.jpg");
-  background-position: 0 -130px;
-  background-size: 100%;
+  background-size: cover;
   display: flex;
   height: 540px;
   justify-content: center;
