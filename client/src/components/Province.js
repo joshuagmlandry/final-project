@@ -218,6 +218,7 @@ const AllPlaces = styled.div`
   width: 300px;
   @media only screen and (min-width: 768px) {
     text-align: left;
+    width: 400px;
   }
 `;
 
@@ -311,9 +312,12 @@ const SubHeader = styled.div`
 
 const TextHeader = styled.div`
   font-family: var(--font-body);
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 40px 0 20px;
   text-align: center;
+  @media only screen and (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const Wrapper = styled.div`

@@ -105,14 +105,24 @@ const Bold = styled.span`
 `;
 
 const FeaturedPark = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
   width: 500px;
+  @media only screen and (min-width: 768px) {
+    align-items: flex-start;
+  }
 `;
 
 const FeaturedParkDescription = styled.div`
   font-family: var(--font-body);
+  text-align: center;
+  width: 400px;
+  @media only screen and (min-width: 768px) {
+    text-align: left;
+    width: 600px;
+  }
 `;
 
 const FeaturedParkHeader = styled.div`

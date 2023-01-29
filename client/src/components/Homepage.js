@@ -79,7 +79,7 @@ const Homepage = () => {
                     ""
                   )}
                   <SearchField>
-                    <FormControl sx={{ minWidth: 260 }}>
+                    <FormControl sx={{ minWidth: isDesktopOrLaptop ? 260 : 190 }}>
                       {/* <SearchLabel>Find campsites in:</SearchLabel> */}
                       <InputLabel id="demo-simple-select-label">
                         Province/Territory
@@ -188,7 +188,7 @@ export default Homepage;
 const BodyHeader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin: 40px 0 20px;
   @media only screen and (min-width: 768px) {
     font-size: 3rem;
@@ -197,7 +197,7 @@ const BodyHeader = styled.div`
 
 const BodyText = styled.div`
   font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-bottom: 40px;
   text-align: center;
   @media only screen and (min-width: 768px) {
@@ -213,7 +213,10 @@ const CampsiteInput = styled.input`
   font-size: 1.5rem;
   margin: 0 10px;
   padding: 2px;
-  width: 310px;
+  width: 200px;
+  @media only screen and (min-width: 768px) {
+    width: 310px;
+  }
 `;
 
 const Feature = styled.div`
@@ -244,7 +247,7 @@ const Feature = styled.div`
 const FeatureHeader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: bold;
   padding-bottom: 20px;
   @media only screen and (min-width: 768px) {
@@ -266,6 +269,7 @@ const MainBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100vw;
 `;
 
 const MainFeatures = styled.div`
@@ -279,7 +283,7 @@ const MainFeatures = styled.div`
 `;
 
 const ProvLabel = styled.div`
-  margin: 20px 0 10px 0;
+  margin: 20px 0 20px 0;
   width: fit-content;
   @media only screen and (min-width: 768px) {
     margin: 0 10px;
@@ -310,7 +314,7 @@ const SearchBar = styled.form`
   font-size: 1rem;
   padding: 20px;
   transition: 200ms;
-  width: 86vw;
+  width: 82vw;
 
   @media only screen and (min-width: 768px) {
     font-size: 1.5rem;
@@ -401,4 +405,5 @@ const Tab = styled.button`
 
 const Wrapper = styled.div`
   height: fit-content;
+  width: 100vw;
 `;

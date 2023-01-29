@@ -64,7 +64,7 @@ const FeaturedParkWrapper = styled.div`
 const MainHeader = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
   margin-bottom: 5px;
   @media only screen and (min-width: 768px) {

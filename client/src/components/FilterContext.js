@@ -1,18 +1,23 @@
 import { createContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useMediaQuery } from "react-responsive";
 
 // Creates the state/state loading variables as well as runs several useEffects to prepare the data that will be needed throughout the application.
 
 export const FilterContext = createContext(null);
 
 export const FilterProvider = ({ children }) => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
+
   // Data on the provinces/territories as well as all parks and places
 
   const provincesData = [
     {
       name: "Alberta",
       coord: [-115.0, 55.0],
-      zoom: 5,
+      zoom: isDesktopOrLaptop ? 5 : 4,
       abbr: "ab",
       place: [
         "Banff",
@@ -26,7 +31,7 @@ export const FilterProvider = ({ children }) => {
     {
       name: "British Columbia",
       coord: [-125.647621, 54.726669],
-      zoom: 5,
+      zoom: isDesktopOrLaptop ? 5 : 4,
       abbr: "bc",
       place: [
         "Fort Langley",
@@ -41,49 +46,49 @@ export const FilterProvider = ({ children }) => {
     {
       name: "Manitoba",
       coord: [-98.739075, 54.415211],
-      zoom: 5,
+      zoom: isDesktopOrLaptop ? 5 : 4,
       abbr: "mb",
       place: ["Riding Mountain"],
     },
     {
       name: "New Brunswick",
       coord: [-66.159668, 46.49839],
-      zoom: 7,
+      zoom: isDesktopOrLaptop ? 7 : 6,
       abbr: "nb",
       place: ["Fort Beauséjour - Fort Cumberland", "Fundy", "Kouchibouguac"],
     },
     {
       name: "Newfoundland and Labrador",
       coord: [-55.660435, 49.135509],
-      zoom: 6,
+      zoom: isDesktopOrLaptop ? 6 : 5,
       abbr: "nl",
       place: ["Gros Morne", "Terra Nova"],
     },
     {
       name: "Northwest Territories",
       coord: [-124.8457, 64.8255],
-      zoom: 4,
+      zoom: isDesktopOrLaptop ? 4 : 3,
       abbr: "nt",
       place: [],
     },
     {
       name: "Nova Scotia",
       coord: [-63.0, 45.3],
-      zoom: 7,
+      zoom: isDesktopOrLaptop ? 7 : 6,
       abbr: "ns",
       place: ["Cape Breton Highlands", "Grand Pré", "Kejimkujik"],
     },
     {
       name: "Nunavut",
       coord: [-86.798981, 70.453262],
-      zoom: 3,
+      zoom: isDesktopOrLaptop ? 3 : 2,
       abbr: "nu",
       place: [],
     },
     {
       name: "Ontario",
       coord: [-85.0, 48.0],
-      zoom: 5,
+      zoom: isDesktopOrLaptop ? 5 : 4,
       abbr: "on",
       place: [
         "Bruce Peninsula",
@@ -99,28 +104,28 @@ export const FilterProvider = ({ children }) => {
     {
       name: "Prince Edward Island",
       coord: [-63.0, 46.25],
-      zoom: 8,
+      zoom: isDesktopOrLaptop ? 8 : 7,
       abbr: "pe",
       place: ["Prince Edward Island"],
     },
     {
       name: "Quebec",
       coord: [-70.0, 51.0],
-      zoom: 5,
+      zoom: isDesktopOrLaptop ? 5 : 4,
       abbr: "qc",
       place: ["Forillon", "La Mauricie", "Mingan Archipelago", "St-Ours Canal"],
     },
     {
       name: "Saskatchewan",
       coord: [-106.0, 55.0],
-      zoom: 5,
+      zoom: isDesktopOrLaptop ? 5 : 4,
       abbr: "sk",
       place: ["Grasslands", "Prince Albert"],
     },
     {
       name: "Yukon",
       coord: [-135.0, 65.0],
-      zoom: 4,
+      zoom: isDesktopOrLaptop ? 4 : 3,
       abbr: "yt",
       place: ["Kluane"],
     },
@@ -484,9 +489,7 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetch(
-        `https://loon-backend.onrender.com/api/get-favourites/${user.sub}`
-      )
+      fetch(`https://loon-backend.onrender.com/api/get-favourites/${user.sub}`)
         .then((res) => res.json())
         .then((data) => {
           setFavourites(data.data);

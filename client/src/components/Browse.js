@@ -316,11 +316,12 @@ const FilterOptions = styled.div`
 `;
 
 const MapAndFilter = styled.div`
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   @media only screen and (min-width: 768px) {
+    align-items: flex-start;
     flex-direction: row;
   }
 `;
@@ -366,9 +367,13 @@ const ResetButton = styled.button`
 `;
 
 const StyledForm = styled.form`
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 0;
+  }
 `;
 
 const StyledSelect = styled.select`
