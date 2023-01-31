@@ -263,8 +263,10 @@ const Greeting = styled.div`
   color: var(--color-dark-green);
   font-family: var(--font-header);
   font-size: 2.5rem;
+  margin-top: 10px;
   @media only screen and (min-width: 768px) {
     font-size: 3rem;
+    margin-top: 0;
   }
 `;
 
@@ -337,7 +339,10 @@ const ReviewImg = styled.img`
 `;
 
 const ReviewLocation = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 5px;
+  }
 `;
 
 const ReviewRating = styled.div`
@@ -375,5 +380,8 @@ const UserImage = styled.img`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px 75px;
+  margin: 50px 30px;
+  @media only screen and (min-width: 768px) {
+    margin: 50px 75px;
+  }
 `;
