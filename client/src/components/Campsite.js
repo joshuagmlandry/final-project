@@ -180,12 +180,19 @@ const CampsiteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: var(--font-body);
-  margin: 50px 75px;
+  margin: 50px 50px;
+  @media only screen and (min-width: 768px) {
+    margin: 50px 75px;
+  }
 `;
 
 const FeaturedWrapper = styled.div`
-  text-align: right;
-  margin: 50px 75px;
+  text-align: left;
+  margin: 30px 50px;
+  @media only screen and (min-width: 768px) {
+    margin: 50px 75px;
+    text-align: right;
+  }
 `;
 
 const MainHeader = styled.div`
@@ -206,5 +213,9 @@ const StyledImageGallery = styled.div`
 
 const TopWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;

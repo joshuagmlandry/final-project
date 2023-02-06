@@ -219,7 +219,10 @@ const ReviewText = styled.textarea`
   font-family: var(--font-body);
   height: 400px;
   margin: 10px 0;
-  width: 700px;
+  width: 90%;
+  @media only screen and (min-width: 768px) {
+    width: 700px;
+  }
 `;
 
 const ReviewWrapper = styled.div`
@@ -274,12 +277,19 @@ const SubmitMessage = styled.div`
 const TitleInput = styled.input`
   font-family: var(--font-body);
   margin: 10px 0;
-  width: 700px;
+  width: 90%;
+  @media only screen and (min-width: 768px) {
+    width: 700px;
+  }
 `;
 
 const Wrapper = styled.div`
   border: 2px solid black;
-  margin: 40px 75px;
+  margin: 40px 50px;
   padding-right: 40px;
-  width: 80%;
+  width: 70%;
+  @media only screen and (min-width: 768px) {
+    margin: 40px 75px;
+    width: 80%;
+  }
 `;

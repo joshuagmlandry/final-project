@@ -152,7 +152,11 @@ const StyledLink = styled(Link)`
 
 const Wrapper = styled.div`
   border: 2px solid black;
-  margin: 10px 75px;
+  margin: 30px 50px;
   padding: 30px 20px 0 20px;
-  width: 80%;
+  width: 70%;
+  @media only screen and (min-width: 768px) {
+    margin: 10px 75px;
+    width: 80%;
+  }
 `;
