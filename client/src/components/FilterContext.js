@@ -11,6 +11,164 @@ export const FilterProvider = ({ children }) => {
     query: "(min-width: 768px)",
   });
 
+    // Arcade province and park code
+
+    // if (Left($feature["URL_f"],3) == 'BAN'){
+    //   return 'Banff';
+    // } else if (Left($feature["URL_f"],3) == 'BNP'){
+    //   return 'Banff';
+    // } else if (Left($feature["URL_f"],3) == 'BPF'){
+    //   return 'Bruce Peninsula';
+    // } else if (Left($feature["URL_f"],3) == 'CBH'){
+    //   return 'Cape Breton Highlands';
+    // } else if (Left($feature["URL_f"],2) == 'EI'){
+    //   return 'Elk Island';
+    // } else if (Left($feature["URL_f"],3) == 'FBE'){
+    //   return 'Fort Beauséjour - Fort Cumberland';
+    // } else if (Left($feature["URL_f"],2) == 'FF'){
+    //   return 'Fathom Five';
+    // } else if (Left($feature["URL_f"],3) == 'FNP'){
+    //   return 'Fundy';
+    // } else if (Left($feature["URL_f"],3) == 'FOR'){
+    //   return 'Forillon';
+    // } else if (Left($feature["URL_f"],3) == 'FRH'){
+    //   return 'Fort Rodd Hill';
+    // } else if (Left($feature["URL_f"],3) == 'FTL'){
+    //   return 'Fort Langley';
+    // } else if (Left($feature["URL_f"],3) == 'GBI'){
+    //   return 'Georgian Bay Islands';
+    // } else if (Left($feature["URL_f"],5) == 'GINPR'){
+    //   return 'Gulf Islands';
+    // } else if (Left($feature["URL_f"],3) == 'GLA'){
+    //   return 'Glacier';
+    // } else if (Left($feature["URL_f"],3) == 'GMP'){
+    //   return 'Gros Morne';
+    // } else if (Left($feature["URL_f"],2) == 'GP'){
+    //   return 'Grand Pré';
+    // } else if (Left($feature["URL_f"],3) == 'GRA'){
+    //   return 'Grasslands';
+    // } else if (Left($feature["URL_f"],3) == 'JNP'){
+    //   return 'Jasper';
+    // } else if (Left($feature["URL_f"],3) == 'KLU'){
+    //   return 'Kluane';
+    // } else if (Left($feature["URL_f"],5) == 'KOONP'){
+    //   return 'Banff, Kootenay & Yoho';
+    // } else if (Left($feature["URL_f"],3) == 'KOU'){
+    //   return 'Kouchibouguac';
+    // } else if (Left($feature["URL_f"],3) == 'MAU'){
+    //   return 'La Mauricie';
+    // } else if (Left($feature["URL_f"],3) == 'MIN'){
+    //   return 'Mingan Archipelago';
+    // } else if (Left($feature["URL_f"],3) == 'MRG'){
+    //   return 'Mount Revelstoke';
+    // } else if (Left($feature["URL_f"],2) == 'PA'){
+    //   return 'Prince Albert';
+    // } else if (Left($feature["URL_f"],3) == 'PEI'){
+    //   return 'Prince Edward Island';
+    // } else if (Left($feature["URL_f"],3) == 'PRN'){
+    //   return 'Pacific Rim';
+    // } else if (Left($feature["URL_f"],3) == 'PUK'){
+    //   return 'Pukaskwa';
+    // } else if (Left($feature["URL_f"],3) == 'RIC'){
+    //   return 'Rideau Canal';
+    // } else if (Left($feature["URL_f"],3) == 'RMH'){
+    //   return 'Rocky Mountain House';
+    // } else if (Left($feature["URL_f"],4) == 'RMNP'){
+    //   return 'Riding Mountain';
+    // } else if (Left($feature["URL_f"],4) == 'SOCW'){
+    //   return 'St-Ours Canal';
+    // } else if (Left($feature["URL_f"],2) == 'TI'){
+    //   return 'Thousand Islands';
+    // } else if (Left($feature["URL_f"],3) == 'TNP'){
+    //   return 'Terra Nova';
+    // } else if (Left($feature["URL_f"],3) == 'TSW'){
+    //   return 'Trent-Severn Waterway';
+    // } else if (Left($feature["URL_f"],2) == 'WL'){
+    //   return 'Waterton Lakes';
+    // } else if (Left($feature["URL_f"],3) == 'YNP'){
+    //   return 'Yoho';
+    // } else {
+    //   return 'Other';
+    // }
+
+    // if (Left($feature["URL_f"],3) == 'BAN'){
+    //   return 'Alberta';
+    // } else if (Left($feature["URL_f"],3) == 'BNP'){
+    //   return 'Alberta';
+    // } else if (Left($feature["URL_f"],3) == 'BPF'){
+    //   return 'Ontario';
+    // } else if (Left($feature["URL_f"],3) == 'CBH'){
+    //   return 'Nova Scotia';
+    // } else if (Left($feature["URL_f"],2) == 'EI'){
+    //   return 'Alberta';
+    // } else if (Left($feature["URL_f"],3) == 'FBE'){
+    //   return 'New Brunswick';
+    // } else if (Left($feature["URL_f"],2) == 'FF'){
+    //   return 'Ontario';
+    // } else if (Left($feature["URL_f"],3) == 'FNP'){
+    //   return 'New Brunswick';
+    // } else if (Left($feature["URL_f"],3) == 'FOR'){
+    //   return 'Quebec';
+    // } else if (Left($feature["URL_f"],3) == 'FRH'){
+    //   return 'British Columbia';
+    // } else if (Left($feature["URL_f"],3) == 'FTL'){
+    //   return 'British Columbia';
+    // } else if (Left($feature["URL_f"],3) == 'GBI'){
+    //   return 'Ontario';
+    // } else if (Left($feature["URL_f"],5) == 'GINPR'){
+    //   return 'British Columbia';
+    // } else if (Left($feature["URL_f"],3) == 'GLA'){
+    //   return 'British Columbia';
+    // } else if (Left($feature["URL_f"],3) == 'GMP'){
+    //   return 'Newfoundland and Labrador';
+    // } else if (Left($feature["URL_f"],2) == 'GP'){
+    //   return 'Nova Scotia';
+    // } else if (Left($feature["URL_f"],3) == 'GRA'){
+    //   return 'Saskatchewan';
+    // } else if (Left($feature["URL_f"],3) == 'JNP'){
+    //   return 'Alberta';
+    // } else if (Left($feature["URL_f"],3) == 'KLU'){
+    //   return 'Yukon';
+    // } else if (Left($feature["URL_f"],5) == 'KOONP'){
+    //   return 'British Columbia';
+    // } else if (Left($feature["URL_f"],3) == 'KOU'){
+    //   return 'New Brunswick';
+    // } else if (Left($feature["URL_f"],3) == 'MAU'){
+    //   return 'Quebec';
+    // } else if (Left($feature["URL_f"],3) == 'MIN'){
+    //   return 'Quebec';
+    // } else if (Left($feature["URL_f"],3) == 'MRG'){
+    //   return 'British Columbia';
+    // } else if (Left($feature["URL_f"],2) == 'PA'){
+    //   return 'Saskatchewan';
+    // } else if (Left($feature["URL_f"],3) == 'PEI'){
+    //   return 'Prince Edward Island';
+    // } else if (Left($feature["URL_f"],3) == 'PRN'){
+    //   return 'British Columbia';
+    // } else if (Left($feature["URL_f"],3) == 'PUK'){
+    //   return 'Ontario';
+    // } else if (Left($feature["URL_f"],3) == 'RIC'){
+    //   return 'Ontario';
+    // } else if (Left($feature["URL_f"],3) == 'RMH'){
+    //   return 'Alberta';
+    // } else if (Left($feature["URL_f"],4) == 'RMNP'){
+    //   return 'Manitoba';
+    // } else if (Left($feature["URL_f"],4) == 'SOCW'){
+    //   return 'Quebec';
+    // } else if (Left($feature["URL_f"],2) == 'TI'){
+    //   return 'Ontario';
+    // } else if (Left($feature["URL_f"],3) == 'TNP'){
+    //   return 'Newfoundland and Labrador';
+    // } else if (Left($feature["URL_f"],3) == 'TSW'){
+    //   return 'Ontario';
+    // } else if (Left($feature["URL_f"],2) == 'WL'){
+    //   return 'Alberta';
+    // } else if (Left($feature["URL_f"],3) == 'YNP'){
+    //   return 'British Columbia';
+    // } else {
+    //   return 'Other';
+    // }
+
   // Data on the provinces/territories as well as all parks and places
 
   const provincesData = [
@@ -131,7 +289,7 @@ export const FilterProvider = ({ children }) => {
     },
   ];
 
-  //All images and place descriptions taken from the Parks Canada website - https://www.pc.gc.ca/en/voyage-travel/recherche-tous-parks-all
+  // All images and place descriptions taken from the Parks Canada website - https://www.pc.gc.ca/en/voyage-travel/recherche-tous-parks-all
 
   const placeDescriptionsData = [
     {
